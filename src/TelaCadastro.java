@@ -1,4 +1,5 @@
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,24 +15,22 @@ import java.awt.event.FocusListener;
 public class TelaCadastro extends JFrame implements ActionListener{
 
     // imagens
-    ImageIcon i1 = new ImageIcon(getClass().getResource("imagem1.jpg"));
+    ImageIcon i1 = new ImageIcon(getClass().getResource("Group20.jpg"));
 
      // caixa de texto
-     JTextField caixa1 = new JTextField("Usuario", 30);
-     JTextField caixa2 = new JTextField("e-mail", 30);
-     JTextField caixa3 = new JTextField("senha", 30);
-     JTextField caixa4 = new JTextField("confirmar senha", 30);
-     JTextField caixa5 = new JTextField("CPF", 30);
-     JTextField caixa6 = new JTextField("Nome Completo", 30);
-     JTextField caixa7 = new JTextField("CEP", 30);
-     JTextField caixa8 = new JTextField("Usuario", 30);
+     JTextField caixaPrimeiroNome = new JTextField("", 30);
+     JTextField caixaSegundoNome = new JTextField("", 30);
+     JTextField caixaEmail = new JTextField("", 30);
+     JTextField caixaSenha = new JTextField("", 30);
+     JTextField caixaConfirmaSenha = new JTextField("", 30);
+     JTextField caixaCpf = new JTextField("", 30);
+     JTextField caixaDataDeNascimento = new JTextField("", 30);
+     JTextField caixaNumeroTelefone = new JTextField("", 30);
 
-    //configuração da ação do botão
-    public void actionPerformed (ActionEvent e) {
+     JButton botaoVoltar = new JButton("Ja tenho conta");
 
-        
 
-    }
+    
 
 
     // painel para a imagem de fundo
@@ -56,6 +55,18 @@ public class TelaCadastro extends JFrame implements ActionListener{
         }
     }
 
+    //configuração da ação do botão
+    public void actionPerformed (ActionEvent e) {
+
+        if (e.getSource()==botaoVoltar) {
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+            // Fecha a tela anterior
+            dispose();
+        }
+        
+    }
+
     public TelaCadastro() {
         setLayout(new FlowLayout());
 
@@ -63,14 +74,15 @@ public class TelaCadastro extends JFrame implements ActionListener{
         ImagePanel imagePanel = new ImagePanel(i1.getImage());
 
         // adicionar botões e caixas de texto no painel da imagem
-        imagePanel.add(caixa1);
-        imagePanel.add(caixa2);
-        imagePanel.add(caixa3);
-        imagePanel.add(caixa4);
-        imagePanel.add(caixa5);
-        imagePanel.add(caixa6);
-        imagePanel.add(caixa7);
-        imagePanel.add(caixa8);
+        imagePanel.add(caixaPrimeiroNome);
+        imagePanel.add(caixaSegundoNome);
+        imagePanel.add(caixaEmail);
+        imagePanel.add(caixaSenha);
+        imagePanel.add(caixaConfirmaSenha);
+        imagePanel.add(caixaCpf);
+        imagePanel.add(caixaDataDeNascimento);
+        imagePanel.add(caixaNumeroTelefone);
+        imagePanel.add(botaoVoltar);
 
 
         // adicionar o painel com a imagem de fundo ao JFrame
@@ -83,179 +95,187 @@ public class TelaCadastro extends JFrame implements ActionListener{
         setVisible(true);
 
         //caixa de texto
-        caixa1.setText("Usuario");
-        System.out.println(caixa1.getText());
-        caixa1.setBounds(0, 0, 230, 30);
+        caixaPrimeiroNome.setText("Primeiro nome");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaPrimeiroNome.setBounds(0, 0, 100, 30);
         setLayout(null);
-        caixa1.setLocation(20, 40);
+        caixaPrimeiroNome.setLocation(20, 110);
 
-        caixa2.setText("E-mail");
-        System.out.println(caixa1.getText());
-        caixa2.setBounds(0, 0, 230, 30);
+        caixaSegundoNome.setText("Segundo nome");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaSegundoNome.setBounds(0, 0, 100, 30);
         setLayout(null);
-        caixa2.setLocation(20, 120);
+        caixaSegundoNome.setLocation(130, 110);
 
-        caixa3.setText("Senha");
-        System.out.println(caixa1.getText());
-        caixa3.setBounds(0, 0, 230, 30);
+        caixaEmail.setText("E-mail");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaEmail.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa3.setLocation(20, 210);
+        caixaEmail.setLocation(20, 160);
 
-        caixa4.setText("Confirme sua senha");
-        System.out.println(caixa1.getText());
-        caixa4.setBounds(0, 0, 230, 30);
+        caixaSenha.setText("Senha");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaSenha.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa4.setLocation(20, 290);
+        caixaSenha.setLocation(20, 210);
 
-        caixa5.setText("Nome completo");
-        System.out.println(caixa1.getText());
-        caixa5.setBounds(0, 0, 230, 30);
+        caixaConfirmaSenha.setText("Confirme a senha");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaConfirmaSenha.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa5.setLocation(320, 40);
+        caixaConfirmaSenha.setLocation(20, 260);
 
-        caixa6.setText("CPF");
-        System.out.println(caixa1.getText());
-        caixa6.setBounds(0, 0, 230, 30);
+        caixaCpf.setText("CPF");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaCpf.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa6.setLocation(320, 120);
+        caixaCpf.setLocation(250, 110);
 
-        caixa7.setText("Data de nascimento");
-        System.out.println(caixa1.getText());
-        caixa7.setBounds(0, 0, 230, 30);
+        caixaDataDeNascimento.setText("Data de nascimento");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaDataDeNascimento.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa7.setLocation(320, 210);
+        caixaDataDeNascimento.setLocation(250, 160);
 
-        caixa8.setText("Numero de Telefone");
-        System.out.println(caixa1.getText());
-        caixa8.setBounds(0, 0, 230, 30);
+        caixaNumeroTelefone.setText("Numero de telefone");
+        System.out.println(caixaPrimeiroNome.getText());
+        caixaNumeroTelefone.setBounds(0, 0, 210, 30);
         setLayout(null);
-        caixa8.setLocation(320, 290);
+        caixaNumeroTelefone.setLocation(250, 210);
+
+        //configuraçoes dos botoes
+        botaoVoltar.setBounds(0, 0, 160, 40);
+        setLayout(null);
+        botaoVoltar.setLocation(10, 13);
+
+        // adicionar botões e caixas de texto no painel da imagem
+        botaoVoltar.addActionListener(this);
 
         // Configuração de auto-apagável para caixas
-        caixa1.addFocusListener(new FocusListener() {
+        caixaPrimeiroNome.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa1.getText().equals("Usuario")) {
-                    caixa1.setText("");
+                if (caixaPrimeiroNome.getText().equals("Primeiro nome")) {
+                    caixaPrimeiroNome.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa1.getText().isEmpty()) {
-                    caixa1.setText("Usuario");
+                if (caixaPrimeiroNome.getText().isEmpty()) {
+                    caixaPrimeiroNome.setText("Primeiro nome");
                 }
             }
         });
 
-        caixa2.addFocusListener(new FocusListener() {
+        caixaSegundoNome.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa2.getText().equals("E-mail")) {
-                    caixa2.setText("");
+                if (caixaSegundoNome.getText().equals("Segundo nome")) {
+                    caixaSegundoNome.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa2.getText().isEmpty()) {
-                    caixa2.setText("E-mail");
+                if (caixaSegundoNome.getText().isEmpty()) {
+                    caixaSegundoNome.setText("Segundo nome");
                 }
             }
         });
 
-        caixa3.addFocusListener(new FocusListener() {
+        caixaEmail.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa3.getText().equals("Senha")) {
-                    caixa3.setText("");
+                if (caixaEmail.getText().equals("E-MAIL")) {
+                    caixaEmail.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa3.getText().isEmpty()) {
-                    caixa3.setText("Senha");
+                if (caixaEmail.getText().isEmpty()) {
+                    caixaEmail.setText("E-MAIL");
                 }
             }
         });
 
-        caixa4.addFocusListener(new FocusListener() {
+        caixaSenha.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa4.getText().equals("Confirme sua senha")) {
-                    caixa4.setText("");
+                if (caixaSenha.getText().equals("Senha")) {
+                    caixaSenha.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa4.getText().isEmpty()) {
-                    caixa4.setText("Confirme sua senha");
+                if (caixaSenha.getText().isEmpty()) {
+                    caixaSenha.setText("Senha");
                 }
             }
         });
 
-        caixa5.addFocusListener(new FocusListener() {
+        caixaConfirmaSenha.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa5.getText().equals("Nome completo")) {
-                    caixa5.setText("");
+                if (caixaConfirmaSenha.getText().equals("Confirme a Senha")) {
+                    caixaConfirmaSenha.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa5.getText().isEmpty()) {
-                    caixa5.setText("Nome completo");
+                if (caixaConfirmaSenha.getText().isEmpty()) {
+                    caixaConfirmaSenha.setText("Confirme a Senha");
                 }
             }
         });
 
-        caixa6.addFocusListener(new FocusListener() {
+        caixaCpf.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa6.getText().equals("CPF")) {
-                    caixa6.setText("");
+                if (caixaCpf.getText().equals("CPF")) {
+                    caixaCpf.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa6.getText().isEmpty()) {
-                    caixa6.setText("CPF");
+                if (caixaCpf.getText().isEmpty()) {
+                    caixaCpf.setText("CPF");
                 }
             }
         });
 
-        caixa7.addFocusListener(new FocusListener() {
+        caixaDataDeNascimento.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa7.getText().equals("Data de nascimento")) {
-                    caixa7.setText("");
+                if (caixaDataDeNascimento.getText().equals("Data de nascimento")) {
+                    caixaDataDeNascimento.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa7.getText().isEmpty()) {
-                    caixa7.setText("Data de nascimento");
+                if (caixaDataDeNascimento.getText().isEmpty()) {
+                    caixaDataDeNascimento.setText("Data de nascimento");
                 }
             }
         });
 
-        caixa8.addFocusListener(new FocusListener() {
+        caixaNumeroTelefone.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixa8.getText().equals("Numero de Telefone")) {
-                    caixa8.setText("");
+                if (caixaNumeroTelefone.getText().equals("Numero de Telefone")) {
+                    caixaNumeroTelefone.setText("");
                 }
             }
 
             
             public void focusLost(FocusEvent e) {
-                if (caixa8.getText().isEmpty()) {
-                    caixa8.setText("Numero de Telefone");
+                if (caixaNumeroTelefone.getText().isEmpty()) {
+                    caixaNumeroTelefone.setText("Numero de Telefone");
                 }
             }
         });
