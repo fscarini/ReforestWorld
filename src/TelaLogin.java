@@ -3,6 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,15 +18,16 @@ import java.awt.event.FocusListener;
 public class TelaLogin extends JFrame implements ActionListener{
 
     // imagens
-    ImageIcon i1 = new ImageIcon(getClass().getResource("Group10.jpg"));
+    ImageIcon i1 = new ImageIcon(getClass().getResource("Group14.jpg"));
 
     // botões
     JButton b1 =  new JButton("Criar usuario");    
     JButton b2 =  new JButton("LOGIN");
+    JButton showPasswordButton = new JButton("Mostrar Senha");
 
     // caixa de texto
     JTextField caixa1 = new JTextField("Usuario", 30);
-    JTextField caixa2 = new JTextField("Senha", 30);
+    JPasswordField caixa2 = new JPasswordField(30);
 
     //configuração da ação do botão
     public void actionPerformed (ActionEvent e) {
@@ -39,13 +41,16 @@ public class TelaLogin extends JFrame implements ActionListener{
         if (e.getSource()==b2) {
             JOptionPane.showMessageDialog(null, "Usuario não encontrado");
         }
-
-        
-
+        if (e.getSource() == showPasswordButton) {
+            if (caixa2.getEchoChar() == (char) 0) {
+                caixa2.setEchoChar('*');
+                showPasswordButton.setText("mostrar");
+            } else {
+                caixa2.setEchoChar((char) 0);
+                showPasswordButton.setText("ocultar");
+            }
+        }
     }
-
-        
-
 
     // painel para a imagem de fundo
     private class ImagePanel extends JPanel {
@@ -78,11 +83,12 @@ public class TelaLogin extends JFrame implements ActionListener{
         imagePanel.add(b2);
         imagePanel.add(caixa1);
         imagePanel.add(caixa2);
+        imagePanel.add(showPasswordButton);
 
         b1.addActionListener(this);
         b2.addActionListener(this);
+        showPasswordButton.addActionListener(this);
 
-        
         // adicionar o painel com a imagem de fundo ao JFrame
         add(imagePanel);
 
@@ -114,12 +120,25 @@ public class TelaLogin extends JFrame implements ActionListener{
         setLayout(null);
         caixa1.setLocation(193, 160);
 
+        // Configuração inicial para caixa2 (senha)
+        caixa2.setEchoChar((char) 0); // Mostra o texto padrão
         caixa2.setText("Senha");
-        caixa2.setOpaque(false); // torna a caixa de texto transparente
-        caixa2.setForeground(Color.WHITE); // define a cor do texto como branco
-        caixa2.setBounds(0, 0, 230, 30);
-        setLayout(null);
-        caixa2.setLocation(193, 220);
+        caixa2.setForeground(Color.WHITE);
+        caixa2.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+                caixa2.setEchoChar('*'); // Quando o campo ganha foco, exibe asteriscos
+                if (new String(caixa2.getPassword()).equals("Senha")) {
+                    caixa2.setText("");
+                }
+            }
+
+            public void focusLost(FocusEvent e) {
+                if (caixa2.getPassword().length == 0) { // Se nada foi digitado
+                    caixa2.setEchoChar((char) 0); // Mostra o texto padrão
+                    caixa2.setText("Senha");
+                }
+            }
+        });
 
         // Configuração de auto-apagável para caixa1 (usuário)
         caixa1.addFocusListener(new FocusListener() {
@@ -138,26 +157,22 @@ public class TelaLogin extends JFrame implements ActionListener{
             }
         });
 
-        // Configuração de auto-apagável para caixa2 (senha)
-        caixa2.addFocusListener(new FocusListener() {
-            
-            public void focusGained(FocusEvent e) {
-                if (caixa2.getText().equals("Senha")) {
-                    caixa2.setText("");
-                }
-            }
+        caixa2.setOpaque(false); // torna a caixa de texto transparente
+        caixa2.setBounds(0, 0, 230, 30);
+        setLayout(null);
+        caixa2.setLocation(193, 220);
 
-            
-            public void focusLost(FocusEvent e) {
-                if (caixa2.getText().isEmpty()) {
-                    caixa2.setText("Senha");
-                }
-            }
-        });
+        // Botão para mostrar/esconder senha
+        showPasswordButton.setOpaque(false); // torna o botão transparente
+        showPasswordButton.setContentAreaFilled(false); // torna a área de conteúdo do botão transparente
+        showPasswordButton.setBorderPainted(false); // remove a pintura da borda do botão
+        showPasswordButton.setForeground(Color.WHITE); // define a cor do texto como branco
+        showPasswordButton.setBounds(0, 0, 90, 30);
+        setLayout(null);
+        showPasswordButton.setLocation(410, 220);
     }
 
     public static void main(String[] args) {
         new TelaLogin();
-
     }
-} 
+}
