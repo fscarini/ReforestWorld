@@ -28,6 +28,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
      JTextField caixaNumeroTelefone = new JTextField("", 30);
 
      JButton botaoVoltar = new JButton("Ja tenho conta");
+     JButton botaoCadastrar = new JButton("Cadastrar");
 
 
     
@@ -64,8 +65,17 @@ public class TelaCadastro extends JFrame implements ActionListener{
             // Fecha a tela anterior
             dispose();
         }
+
+        if (e.getSource()==botaoCadastrar) {
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+            // Fecha a tela anterior
+            dispose();
+        }
         
     }
+
+    
 
     public TelaCadastro() {
         setLayout(new FlowLayout());
@@ -83,6 +93,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
         imagePanel.add(caixaDataDeNascimento);
         imagePanel.add(caixaNumeroTelefone);
         imagePanel.add(botaoVoltar);
+        imagePanel.add(botaoCadastrar);
 
 
         // adicionar o painel com a imagem de fundo ao JFrame
@@ -148,8 +159,13 @@ public class TelaCadastro extends JFrame implements ActionListener{
         setLayout(null);
         botaoVoltar.setLocation(10, 13);
 
+        botaoCadastrar.setBounds(0, 0, 210, 30);
+        setLayout(null);
+        botaoCadastrar.setLocation(250, 260);
+
         // adicionar botões e caixas de texto no painel da imagem
         botaoVoltar.addActionListener(this);
+        botaoCadastrar.addActionListener(this);
 
         // Configuração de auto-apagável para caixas
         caixaPrimeiroNome.addFocusListener(new FocusListener() {
@@ -187,7 +203,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
         caixaEmail.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixaEmail.getText().equals("E-MAIL")) {
+                if (caixaEmail.getText().equals("E-mail")) {
                     caixaEmail.setText("");
                 }
             }
@@ -195,7 +211,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
             
             public void focusLost(FocusEvent e) {
                 if (caixaEmail.getText().isEmpty()) {
-                    caixaEmail.setText("E-MAIL");
+                    caixaEmail.setText("E-mail");
                 }
             }
         });
@@ -219,7 +235,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
         caixaConfirmaSenha.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixaConfirmaSenha.getText().equals("Confirme a Senha")) {
+                if (caixaConfirmaSenha.getText().equals("Confirme a senha")) {
                     caixaConfirmaSenha.setText("");
                 }
             }
@@ -227,7 +243,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
             
             public void focusLost(FocusEvent e) {
                 if (caixaConfirmaSenha.getText().isEmpty()) {
-                    caixaConfirmaSenha.setText("Confirme a Senha");
+                    caixaConfirmaSenha.setText("Confirme a senha");
                 }
             }
         });
@@ -267,7 +283,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
         caixaNumeroTelefone.addFocusListener(new FocusListener() {
             
             public void focusGained(FocusEvent e) {
-                if (caixaNumeroTelefone.getText().equals("Numero de Telefone")) {
+                if (caixaNumeroTelefone.getText().equals("Numero de telefone")) {
                     caixaNumeroTelefone.setText("");
                 }
             }
@@ -275,7 +291,7 @@ public class TelaCadastro extends JFrame implements ActionListener{
             
             public void focusLost(FocusEvent e) {
                 if (caixaNumeroTelefone.getText().isEmpty()) {
-                    caixaNumeroTelefone.setText("Numero de Telefone");
+                    caixaNumeroTelefone.setText("Numero de telefone");
                 }
             }
         });
