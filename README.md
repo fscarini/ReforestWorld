@@ -1,18 +1,30 @@
 # Reforest World
 
-<img src="imagem.png" alt="Exemplo imagem">
+![](src/imagem1.jpg)
 
-> Esse projeto serve para apresentarmos a Universidade São Judas, em 2024/1, para entrega do projeto A3, onde desenvolveremos uma solução tecnologica para abordar uma das ODS definidas pela ONU. O projeto em questão trata-se de uma plataforma para reflorestamento do país, onde o objetivo é possibilitar que as pessoas que querem doar, as pessoas que cultivam as árvores e as pessoas que tem disponibilidade para fazer o plantil possam se encontrar. O projeto é desenvolvido na linguagem de programação JAVA.
+> Este projeto está sendo desenvolvido como uma solução tecnológica em linguagem Java para apresentarmos à Universidade São Judas Tadeu no primeiro semestre do ano de 2024, onde estamos abordando o tema de duas ODS (Objetivos de Desenvolvimento Sustentável) definidas pela ONU.
+
+### Objetivo do Projeto
+
+O objetivo do projeto é criar uma solução em desktop que contribua em ações contra a mudança climática global, juntamente com apoio à vida terrestre.
+Ações essas, que fazem parte dos Objetivos de Desenvolvimento Sustentável (ODS) propostos pela ONU, são elas:
+
+![ODS](src/ods13-15.jpg)
+
+### Propósito do Projeto
+
+Utilizando a linguagem de programação Java, temos como propósito o desenvolvimento de uma solução que contribua com reflorestamento mundial. No momento, o desenvolvimento está com foco no Brasil! 
 
 ### Etapas do Projeto
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Gui de login sem funcionalidades
+- [ ] Script do banco de dados
+- [ ] Login funcional
+- [ ] Cadastro de eventos
+- [ ] Criação de contas
+- [ ] Listagem de eventos
 
 ## 💻 Pré-requisitos
 
