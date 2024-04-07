@@ -1,6 +1,6 @@
 # Reforest World
 
-![](src/imagem1.jpg)
+![](src/Group43.jpg)
 
 > Este projeto está sendo desenvolvido como uma solução tecnológica em linguagem Java para apresentarmos à Universidade São Judas Tadeu no primeiro semestre do ano de 2024, onde estamos abordando o tema de duas ODS (Objetivos de Desenvolvimento Sustentável) definidas pela ONU.
 
