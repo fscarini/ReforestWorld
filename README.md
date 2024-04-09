@@ -20,7 +20,7 @@ Utilizando a linguagem de programação Java, temos como propósito o desenvolvi
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Gui de login sem funcionalidades
-- [ ] Script do banco de dados
+- [x] Script do banco de dados
 - [ ] Login funcional
 - [ ] Cadastro de eventos
 - [ ] Criação de contas
@@ -30,9 +30,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-- Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-- Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-- Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+- Você instalou a versão mais recente do `Java 22`
 
 ## 🚀 Instalando Reforest World
 
