@@ -4,6 +4,7 @@
  */
 package com.mycompany.reforestworld;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -33,6 +34,14 @@ public class LoginTela extends javax.swing.JFrame {
         senhaPasswordField.setBackground(new java.awt.Color(0,0,0,1));
         jLabel2.setFocusable(true);
         
+        cadastrarButton.setOpaque(false);
+        cadastrarButton.setContentAreaFilled(false);
+        cadastrarButton.setForeground(Color.WHITE);
+        
+        loginButton.setOpaque(false);
+        loginButton.setContentAreaFilled(false);
+        loginButton.setForeground(Color.WHITE);
+        
     }
 
     /**
@@ -55,29 +64,27 @@ public class LoginTela extends javax.swing.JFrame {
 
         loginButton.setBackground(new java.awt.Color(255, 255, 255));
         loginButton.setForeground(new java.awt.Color(0, 0, 0));
-        loginButton.setText("Login");
         loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
+        getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 150, 50));
 
         cadastrarButton.setBackground(new java.awt.Color(255, 255, 255));
         cadastrarButton.setForeground(new java.awt.Color(0, 0, 0));
-        cadastrarButton.setText("Cadastrar-se");
         cadastrarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cadastrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(cadastrarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 110, -1));
+        getContentPane().add(cadastrarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 130, 20));
 
-        loginTextField.setForeground(new java.awt.Color(255, 255, 255));
+        loginTextField.setForeground(new java.awt.Color(0, 0, 0));
         loginTextField.setText("CPF");
-        loginTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        loginTextField.setBorder(null);
         loginTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         loginTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -92,11 +99,11 @@ public class LoginTela extends javax.swing.JFrame {
                 loginTextFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(loginTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 240, 30));
+        getContentPane().add(loginTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 300, 50));
 
-        senhaPasswordField.setForeground(new java.awt.Color(255, 255, 255));
+        senhaPasswordField.setForeground(new java.awt.Color(0, 0, 0));
         senhaPasswordField.setText("Senha");
-        senhaPasswordField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        senhaPasswordField.setBorder(null);
         senhaPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 senhaPasswordFieldFocusGained(evt);
@@ -110,12 +117,12 @@ public class LoginTela extends javax.swing.JFrame {
                 senhaPasswordFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(senhaPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 240, 30));
+        getContentPane().add(senhaPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 240, 50));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ImagemLogin.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Group 45.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 450, -1));
 
-        setSize(new java.awt.Dimension(631, 435));
+        setSize(new java.awt.Dimension(450, 660));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
