@@ -4,6 +4,11 @@
  */
 package com.mycompany.reforestworld;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.DefaultFormatterFactory;
+
 /**
  *
  * @author Guilherme Quiller
@@ -15,9 +20,36 @@ public class CadastroTela2 extends javax.swing.JFrame {
      */
     public CadastroTela2() {
         initComponents();
+        nomeTextField1.setBackground(new java.awt.Color(0,0,0,1));
+        emailTextField1.setBackground(new java.awt.Color(0,0,0,1));
         SenhaPasswordField.setBackground(new java.awt.Color(0,0,0,1));
-        ConfirmaSenhaPasswordField1.setBackground(new java.awt.Color(0,0,0,1));
+       
+        
+        jaTenhoContaButton.setOpaque(false);
+        jaTenhoContaButton.setContentAreaFilled(false);
+        jaTenhoContaButton.setForeground(Color.WHITE);
+        
+        cadastrarButton.setOpaque(false);
+        cadastrarButton.setContentAreaFilled(false);
+        cadastrarButton.setForeground(Color.WHITE);
+        
         jLabel1.setFocusable(true);
+        
+        // Configuração do editor de texto da senha
+        SenhaPasswordField.setEchoChar((char) 0);
+        SenhaPasswordField.setText("Senha");
+        
+        
+        
+        
+        
+       
+        
+       
+
+        
+        
+       
         
     }
 
@@ -30,39 +62,25 @@ public class CadastroTela2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ConfirmaSenhaPasswordField1 = new javax.swing.JPasswordField();
-        SenhaPasswordField = new javax.swing.JPasswordField();
-        CadastrarButton = new javax.swing.JButton();
-        jaTenhoContaButton = new javax.swing.JButton();
         categoriacontaComboBox = new javax.swing.JComboBox<>();
+        SenhaPasswordField = new javax.swing.JPasswordField();
+        nomeTextField1 = new javax.swing.JTextField();
+        emailTextField1 = new javax.swing.JTextField();
+        jaTenhoContaButton = new javax.swing.JButton();
+        cadastrarButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        categoriacontaComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        categoriacontaComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        categoriacontaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo da conta:", "Doador", "Agricultor", "Ambos" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Cadastro - Reforest World");
         getContentPane().setLayout(null);
 
-        ConfirmaSenhaPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
-        ConfirmaSenhaPasswordField1.setText("Confirme a Senha");
-        ConfirmaSenhaPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        ConfirmaSenhaPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ConfirmaSenhaPasswordField1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ConfirmaSenhaPasswordField1FocusLost(evt);
-            }
-        });
-        ConfirmaSenhaPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmaSenhaPasswordField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ConfirmaSenhaPasswordField1);
-        ConfirmaSenhaPasswordField1.setBounds(30, 200, 240, 30);
-
-        SenhaPasswordField.setForeground(new java.awt.Color(255, 255, 255));
+        SenhaPasswordField.setForeground(new java.awt.Color(0, 0, 0));
         SenhaPasswordField.setText("Senha");
-        SenhaPasswordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        SenhaPasswordField.setBorder(null);
         SenhaPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 SenhaPasswordFieldFocusGained(evt);
@@ -77,90 +95,170 @@ public class CadastroTela2 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SenhaPasswordField);
-        SenhaPasswordField.setBounds(30, 140, 240, 30);
+        SenhaPasswordField.setBounds(100, 470, 240, 50);
 
-        CadastrarButton.setBackground(new java.awt.Color(255, 255, 255));
-        CadastrarButton.setForeground(new java.awt.Color(0, 0, 0));
-        CadastrarButton.setText("Cadastrar-se");
-        CadastrarButton.setToolTipText("");
-        CadastrarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarButtonActionPerformed(evt);
+        nomeTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        nomeTextField1.setText("Nome");
+        nomeTextField1.setBorder(null);
+        nomeTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nomeTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nomeTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nomeTextField1FocusLost(evt);
             }
         });
-        getContentPane().add(CadastrarButton);
-        CadastrarButton.setBounds(320, 200, 140, 30);
+        nomeTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nomeTextField1);
+        nomeTextField1.setBounds(100, 340, 300, 50);
+
+        emailTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        emailTextField1.setText("E-mail");
+        emailTextField1.setBorder(null);
+        emailTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        emailTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailTextField1FocusLost(evt);
+            }
+        });
+        emailTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(emailTextField1);
+        emailTextField1.setBounds(100, 410, 300, 50);
 
         jaTenhoContaButton.setBackground(new java.awt.Color(255, 255, 255));
         jaTenhoContaButton.setForeground(new java.awt.Color(0, 0, 0));
-        jaTenhoContaButton.setText("Já Tenho Conta");
         jaTenhoContaButton.setToolTipText("");
+        jaTenhoContaButton.setBorder(null);
+        jaTenhoContaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jaTenhoContaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jaTenhoContaButtonActionPerformed(evt);
             }
         });
         getContentPane().add(jaTenhoContaButton);
-        jaTenhoContaButton.setBounds(20, 10, 140, 40);
+        jaTenhoContaButton.setBounds(30, 560, 60, 20);
 
-        categoriacontaComboBox.setBackground(new java.awt.Color(255, 255, 255));
-        categoriacontaComboBox.setForeground(new java.awt.Color(0, 0, 0));
-        categoriacontaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo da conta:", "Doador", "Agricultor", "Ambos" }));
-        getContentPane().add(categoriacontaComboBox);
-        categoriacontaComboBox.setBounds(320, 140, 140, 26);
+        cadastrarButton.setBackground(new java.awt.Color(255, 255, 255));
+        cadastrarButton.setForeground(new java.awt.Color(0, 0, 0));
+        cadastrarButton.setToolTipText("");
+        cadastrarButton.setBorder(null);
+        cadastrarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cadastrarButton);
+        cadastrarButton.setBounds(150, 530, 140, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ImagemCadastro.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Group 46.png"))); // NOI18N
         jLabel1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jLabel1FocusGained(evt);
             }
         });
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 643, 395);
+        jLabel1.setBounds(0, 0, 450, 620);
 
-        setSize(new java.awt.Dimension(659, 427));
+        setSize(new java.awt.Dimension(449, 639));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    
+    private void nomeTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextField1FocusGained
+String login = nomeTextField1.getText();
+        if (login.equals("Nome")) {
+            nomeTextField1.setText("");
+        }
+    }//GEN-LAST:event_nomeTextField1FocusGained
+
+    private void nomeTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeTextField1FocusLost
+String login = nomeTextField1.getText();
+        if (login.equals("")) {
+            nomeTextField1.setText("Nome");
+        }
+    }//GEN-LAST:event_nomeTextField1FocusLost
+
+    private void nomeTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeTextField1ActionPerformed
+
+    private void emailTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextField1FocusGained
+String login = emailTextField1.getText();
+        if (login.equals("E-mail")) {
+            emailTextField1.setText("");
+        }       // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextField1FocusGained
+
+    private void emailTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextField1FocusLost
+String login = emailTextField1.getText();
+        if (login.equals("")) {
+            emailTextField1.setText("E-mail");
+        }
+    }//GEN-LAST:event_emailTextField1FocusLost
+
+    private void emailTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextField1ActionPerformed
 
     private void jLabel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1FocusGained
 
-    private void jaTenhoContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaTenhoContaButtonActionPerformed
-LoginTela loginTela = new LoginTela(); 
-    loginTela.setVisible(true);
-    dispose();        
-    }//GEN-LAST:event_jaTenhoContaButtonActionPerformed
+    private void SenhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SenhaPasswordFieldFocusGained
+     String login = SenhaPasswordField.getText();
+        if (login.equals("Senha")) {
+            SenhaPasswordField.setText("");
+        }
+        
+        
+            SenhaPasswordField.setEchoChar('*'); 
+           
+           
+        
+    }//GEN-LAST:event_SenhaPasswordFieldFocusGained
 
-    private void CadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarButtonActionPerformed
-    LoginTela loginTela = new LoginTela(); 
-    loginTela.setVisible(true);
-    dispose();      // TODO add your handling code here:
-    }//GEN-LAST:event_CadastrarButtonActionPerformed
+    private void SenhaPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SenhaPasswordFieldFocusLost
+    String login = SenhaPasswordField.getText();
+        if (login.equals("")) {
+            SenhaPasswordField.setText("Senha");
+            SenhaPasswordField.setEchoChar((char) 0); // Remove o caractere de visualização de senha
+        }
+        
+         
+        
+            
+        
+    }//GEN-LAST:event_SenhaPasswordFieldFocusLost
 
     private void SenhaPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SenhaPasswordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SenhaPasswordFieldActionPerformed
 
-    private void SenhaPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SenhaPasswordFieldFocusGained
-     SenhaPasswordField.setText("");    // TODO add your handling code here:
-    }//GEN-LAST:event_SenhaPasswordFieldFocusGained
+    private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
+        JOptionPane.showMessageDialog(null, "Cadastro criado com Sucesso.");
+        
+    LoginTela loginTela = new LoginTela(); 
+    loginTela.setVisible(true);
+    dispose();         // TODO add your handling code here:
+    }//GEN-LAST:event_cadastrarButtonActionPerformed
 
-    private void SenhaPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SenhaPasswordFieldFocusLost
-    SenhaPasswordField.setText("Senha");          // TODO add your handling code here:
-    }//GEN-LAST:event_SenhaPasswordFieldFocusLost
-
-    private void ConfirmaSenhaPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ConfirmaSenhaPasswordField1FocusGained
+    private void jaTenhoContaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jaTenhoContaButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ConfirmaSenhaPasswordField1FocusGained
-
-    private void ConfirmaSenhaPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ConfirmaSenhaPasswordField1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConfirmaSenhaPasswordField1FocusLost
-
-    private void ConfirmaSenhaPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmaSenhaPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConfirmaSenhaPasswordField1ActionPerformed
+    }//GEN-LAST:event_jaTenhoContaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,21 +287,32 @@ LoginTela loginTela = new LoginTela();
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CadastroTela2().setVisible(true);
             }
+         
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastrarButton;
-    private javax.swing.JPasswordField ConfirmaSenhaPasswordField1;
     private javax.swing.JPasswordField SenhaPasswordField;
+    private javax.swing.JButton cadastrarButton;
     private javax.swing.JComboBox<String> categoriacontaComboBox;
+    private javax.swing.JTextField emailTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jaTenhoContaButton;
+    private javax.swing.JTextField nomeTextField1;
     // End of variables declaration//GEN-END:variables
 }
