@@ -9,11 +9,15 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.util.UIScale;
 import RW.forms.HomeTela;
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import uk.co.caprica.vlcj.binding.lib.LibVlc;
+import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 
 /**
@@ -52,6 +56,9 @@ public class Main extends JFrame {
 
 
     public static void main(String[] args) {
+        String userDir = System.getProperty("user.dir");
+        //System.out.println(userDir);
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("raven.themes");
         FlatMacDarkLaf.setup();
