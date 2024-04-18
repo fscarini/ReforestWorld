@@ -20,11 +20,12 @@ public class LoginController {
         Connection conexao = new Conexao().getConnection();
         LoginDAO cadastro = new LoginDAO();
         cadastro.cadastrarUsuario(
-                view.getSexoTextField().getText(),
+                
                 view.getNomeUsuarioTextField().getText(),
-                view.getIdadeTextField().getText(),
-                view.getCpfTextField().getText(),
                 view.getEmailTextField().getText(),
-                view.getSenhaPasswordField().getText());
+                view.getSenhaPasswordField().getText(),
+                view.getIdadeTextField().getText(),
+                view.getSexoTextField().getText(),
+                view.getCpfTextField().getText());
     }
 }

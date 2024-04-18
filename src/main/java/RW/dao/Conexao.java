@@ -14,7 +14,7 @@ public class Conexao {
 
     public Connection getConnection() throws SQLException{
     Connection conexao = DriverManager.getConnection(
-    "jdbc:mysql://:/","","");
+    "jdbc:mysql://mysql-260935f7-dartvader.b.aivencloud.com:16916/db_rwc","avnadmin","AVNS_vwM_kVHzcyVDkeI8bb5");
         return conexao;
         
     }

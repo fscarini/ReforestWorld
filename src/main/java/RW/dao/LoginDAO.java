@@ -20,7 +20,7 @@ public class LoginDAO {
     Connection conexao = new Conexao().getConnection();
     String sql = 
     "INSERT INTO users(id, nome, email, senha, dt_nascimento, sexo, cpf) "
-            + "values (null,'"+nome+"','"+email+"','"+senha+"','"+dt_nascimento+"','"+sexo+"','"+cpf+"');";
+            + "values (null,'"+nome+"','"+email+"','"+senha+"','"+sexo+"','"+dt_nascimento+"','"+cpf+"');";
     System.out.println(sql);
     PreparedStatement statment = conexao.prepareStatement(sql);
     statment.execute();
@@ -28,3 +28,4 @@ public class LoginDAO {
     }
     
 }
+
