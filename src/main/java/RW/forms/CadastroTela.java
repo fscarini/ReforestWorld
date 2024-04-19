@@ -21,6 +21,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.MaskFormatter;
 
 public class CadastroTela extends JPanel {
 
@@ -40,7 +41,7 @@ public class CadastroTela extends JPanel {
         //cria botões e campos
         JLabel title = new JLabel("Crie sua conta", SwingConstants.CENTER);
         nomeUsuarioTextField = new JTextField();
-        dtNascimentoTextField = new JTextField();
+        dtNascimentoTextField = new JFormattedTextField(createDateMaskFormatter()); // Usa a máscara de data
         sexoTextField = new JTextField();
         emailTextField = new JTextField();
         cpfTextField = new JTextField();
@@ -48,6 +49,17 @@ public class CadastroTela extends JPanel {
         confirmaSenhaPasswordField = new JPasswordField();
         JButton CadastrarButton = new JButton("Cadastrar");
         StatusForcaSenha = new StatusForcaSenha();
+        
+        
+        
+        
+
+        // Adiciona formatação automática para o CPF
+        cpfTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formatarCPF(cpfTextField);
+            }
+        });
         
         //personaliza os campos
         title.putClientProperty(FlatClientProperties.STYLE, "" +
@@ -189,6 +201,35 @@ public class CadastroTela extends JPanel {
             }
             return mensagemErro.toString();
         }
+        
+        // Função para formatar automaticamente o CPF
+    private void formatarCPF(JTextField campo) {
+        String cpf = campo.getText().replaceAll("[^0-9]", "");
+        if (cpf.length() > 11) {
+            cpf = cpf.substring(0, 11);
+        }
+        StringBuilder cpfFormatado = new StringBuilder();
+        for (int i = 0; i < cpf.length(); i++) {
+            cpfFormatado.append(cpf.charAt(i));
+            if ((i + 1) % 3 == 0 && i < 8) {
+                cpfFormatado.append('.');
+            } else if (i == 8) {
+                cpfFormatado.append('-');
+            }
+        }
+        campo.setText(cpfFormatado.toString());
+    }
+    
+        // Cria um formatador de máscara de data
+    private MaskFormatter createDateMaskFormatter() {
+        try {
+            return new MaskFormatter("##/##/####");
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     
         //geters e seters
         public JTextField getSexoTextField() {

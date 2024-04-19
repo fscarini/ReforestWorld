@@ -17,6 +17,8 @@ import java.sql.SQLException;
 public class LoginController {
     
     public void cadastroUsuario(CadastroTela view) throws SQLException{
+        
+        //leitura do properties
         Connection conexao = new Conexao().getConnection();
         LoginDAO cadastro = new LoginDAO();
         cadastro.cadastrarUsuario(

@@ -10,11 +10,16 @@ import java.sql.SQLException;
 
 public class Conexao {
 
+    private String usuario;
+    
+    public Conexao (String usuario){
+        this.usuario = usuario;
+    }
 
 
     public Connection getConnection() throws SQLException{
     Connection conexao = DriverManager.getConnection(
-    "jdbc:mysql://mysql-260935f7-dartvader.b.aivencloud.com:16916/db_rwc","avnadmin","AVNS_vwM_kVHzcyVDkeI8bb5");
+    "jdbc:mysql://mysql-260935f7-dartvader.b.aivencloud.com:16916/db_rwc", usuario,"AVNS_vwM_kVHzcyVDkeI8bb5");
         return conexao;
         
     }

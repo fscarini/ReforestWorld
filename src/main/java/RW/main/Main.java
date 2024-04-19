@@ -17,6 +17,10 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import uk.co.caprica.vlcj.binding.lib.LibVlc;
+import java.util.Properties;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 
@@ -30,6 +34,16 @@ public class Main extends JFrame {
     private HomeTela home;
 
     public Main() {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream (new File ("config.properties")));
+            String u = p.getProperty("usuario");
+            String senha = 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         init();
     }
 

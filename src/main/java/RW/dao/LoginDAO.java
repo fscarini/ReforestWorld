@@ -14,10 +14,16 @@ import java.sql.SQLException;
  */
 public class LoginDAO {
     
+    private String usuario;
+    
+    public LoginDAO(String usuario){
+        this.usuario = usuario;
+    }
+    
     public void cadastrarUsuario(String nome, String email, String senha, 
                                  String sexo, String dt_nascimento, String cpf )
             throws SQLException{
-    Connection conexao = new Conexao().getConnection();
+    Connection conexao = new Conexao(usuario).getConnection();
     String sql = 
     "INSERT INTO users(id, nome, email, senha, dt_nascimento, sexo, cpf) "
             + "values (null,'"+nome+"','"+email+"','"+senha+"','"+sexo+"','"+dt_nascimento+"','"+cpf+"');";

@@ -4,7 +4,7 @@
  */
 package RW.config;
 
-/*import javax.crypto.Cipher;
+import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -51,8 +51,8 @@ public class ReadConexao {
         
     }
     
-}*/
-import javax.crypto.Cipher;
+}
+/*import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -94,3 +94,4 @@ public class ReadConexao {
     }
     
 }
+*/
