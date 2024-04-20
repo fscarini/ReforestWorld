@@ -27,7 +27,7 @@ public class LoginController {
                 view.getEmailTextField().getText(),
                 view.getSenhaPasswordField().getText(),
                 view.getIdadeTextField().getText(),
-                view.getSexoTextField().getText(),
+                (String) view.getSexoComboBox().getSelectedItem(),
                 view.getCpfTextField().getText());
     }
 }

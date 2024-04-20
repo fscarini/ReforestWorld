@@ -42,14 +42,14 @@ public class CadastroTela extends JPanel {
         JLabel title = new JLabel("Crie sua conta", SwingConstants.CENTER);
         nomeUsuarioTextField = new JTextField();
         dtNascimentoTextField = new JFormattedTextField(createDateMaskFormatter()); // Usa a máscara de data
-        sexoTextField = new JTextField();
         emailTextField = new JTextField();
         cpfTextField = new JTextField();
         senhaPasswordField = new JPasswordField();
         confirmaSenhaPasswordField = new JPasswordField();
         JButton CadastrarButton = new JButton("Cadastrar");
         StatusForcaSenha = new StatusForcaSenha();
-        
+        String[] itens = {"","M","F"};
+        sexoComboBox = new JComboBox<>(itens);
         
         
         
@@ -87,10 +87,11 @@ public class CadastroTela extends JPanel {
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
                 "innerFocusWidth:0");
-        sexoTextField.putClientProperty(FlatClientProperties.STYLE, "" +
+        sexoComboBox.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
-                "innerFocusWidth:0");
+                "innerFocusWidth:0;" +
+                "background:$Component.accentColor;");
         emailTextField.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
@@ -103,7 +104,7 @@ public class CadastroTela extends JPanel {
         senhaPasswordField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira sua senha");
         confirmaSenhaPasswordField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Confirme sua senha");
         dtNascimentoTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira sua data de nascimento");
-        sexoTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Selecione seu sexo");
+        sexoComboBox.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Selecione seu sexo");
         emailTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira seu e-mail");
         cpfTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira seu CPF");
         
@@ -125,7 +126,7 @@ public class CadastroTela extends JPanel {
         add(new JLabel("Data de Nascimento"), "gapy 20");
         add(dtNascimentoTextField);
         add(new JLabel("Sexo"), "gapy 10");
-        add(sexoTextField);
+        add(sexoComboBox);
         add(new JLabel("E-mail"), "gapy 10");
         add(emailTextField);
         add(new JLabel("CPF"), "gapy 10");
@@ -139,7 +140,10 @@ public class CadastroTela extends JPanel {
         add(confirmaSenhaPasswordField);
         add(CadastrarButton, "gapy 30");
         
+        ((JComponent) sexoComboBox.getRenderer()).setOpaque(false);
+        sexoComboBox.setForeground(Color.WHITE);
     }
+    
     
         //tratativa na tela para criar efeito no painel
         @Override
@@ -184,7 +188,7 @@ public class CadastroTela extends JPanel {
             if (dtNascimentoTextField.getText().isEmpty()) {
                 mensagemErro.append("Por favor, preencha o campo Data de Nascimento.\n");
             }
-            if (sexoTextField.getText().isEmpty()) {
+            if (sexoComboBox.getItemCount() == 0) {
                 mensagemErro.append("Por favor, preencha o campo Sexo.\n");
             }
             if (emailTextField.getText().isEmpty()) {
@@ -232,14 +236,6 @@ public class CadastroTela extends JPanel {
 
     
         //geters e seters
-        public JTextField getSexoTextField() {
-            return sexoTextField;
-        }
-
-        public void setSexoTextField(JTextField sexoTextField) {
-            this.sexoTextField = sexoTextField;
-        }
-
         public JTextField getEmailTextField() {
             return emailTextField;
         }
@@ -286,14 +282,22 @@ public class CadastroTela extends JPanel {
         public void setConfirmaSenhaPasswordField(JPasswordField confirmaSenhaPasswordField) {
             this.confirmaSenhaPasswordField = confirmaSenhaPasswordField;
         }
+        public JComboBox getSexoComboBox() {
+            return sexoComboBox;
+        }
+
+        public void setSexoComboBox(JComboBox sexoComboBox) {
+            this.sexoComboBox = sexoComboBox;
+        }
     
     //declaração dos objetos
     private JTextField dtNascimentoTextField;
-    private JTextField sexoTextField;
+    private JComboBox sexoComboBox;
     private JTextField emailTextField;
     private JTextField cpfTextField;
     private JTextField nomeUsuarioTextField;
     private JPasswordField senhaPasswordField;
     private JPasswordField confirmaSenhaPasswordField;
     private StatusForcaSenha StatusForcaSenha;
+
 };

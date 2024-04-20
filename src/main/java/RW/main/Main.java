@@ -34,16 +34,7 @@ public class Main extends JFrame {
     private HomeTela home;
 
     public Main() {
-        Properties p = new Properties();
-        try {
-            p.load(new FileInputStream (new File ("config.properties")));
-            String u = p.getProperty("usuario");
-            String senha = 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         init();
     }
 
