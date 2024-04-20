@@ -14,17 +14,18 @@ import java.security.Key;
 public class ConfigConexao {
 
     private static final String AES = "AES";
-    private static final String SECRET_KEY = "";
+    private static final String SECRET_KEY = "adsusjt123moocaa";
     private static final String FILE_PATH = "config.properties";
 
     public static void main(String[] args) throws Exception {
 
-        String host = "";
-        String port = "";
-        String user = "";
-        String password = "";
-        String database = "";
-
+        String host = "mysql-260935f7-dartvader.b.aivencloud.com";
+        String port = "16916";
+        String user = "avnadmin";
+        String password = "AVNS_vwM_kVHzcyVDkeI8bb5";
+        String database = "db_rwc";
+        //"jdbc:mysql://mysql-260935f7-dartvader.b.aivencloud.com:16916/db_rwc","avnadmin","AVNS_vwM_kVHzcyVDkeI8bb5");
+    
         // Concatenando login e senha em uma string
         String dados = host + ":" + port + ":" + user + ":" + password + ":" + database;
 
