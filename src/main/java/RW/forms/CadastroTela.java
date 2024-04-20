@@ -87,11 +87,9 @@ public class CadastroTela extends JPanel {
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
                 "innerFocusWidth:0");
-        sexoComboBox.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0;" +
-                "background:$Component.accentColor;");
+        sexoComboBox.setOpaque(false);
+        sexoComboBox.setForeground(Color.WHITE);
+        sexoComboBox.setBackground(UIManager.getColor("TextField.background")); // Define a cor de fundo como a cor padrão dos campos de texto
         emailTextField.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
@@ -160,12 +158,8 @@ public class CadastroTela extends JPanel {
         
         //função cadastrar
         private void cadastrar() {
-        try {
             LoginController cadastro = new LoginController();
             cadastro.cadastroUsuario(this);
-            } catch (SQLException sql) {
-            Logger.getLogger(CadastroTela.class.getName()).log(Level.SEVERE, null, sql);
-            }
         } 
         
         //função confirmar senha
@@ -202,6 +196,9 @@ public class CadastroTela extends JPanel {
             }
             if (confirmaSenhaPasswordField.getPassword().length == 0) {
                 mensagemErro.append("Por favor, preencha o campo Confirmação da Senha.\n");
+            }
+            if (confirmaSenhaPasswordField.getPassword() != senhaPasswordField.getPassword()){
+                mensagemErro.append("Por favor, verifique as senhas digitadas, pois são diferentes.\n");
             }
             return mensagemErro.toString();
         }

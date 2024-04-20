@@ -8,7 +8,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.util.UIScale;
-import RW.forms.HomeTela;
+import RW.forms.InicioTela;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
@@ -31,7 +31,7 @@ import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 public class Main extends JFrame {
 
-    private HomeTela home;
+    private InicioTela home;
 
     public Main() {
 
@@ -43,7 +43,7 @@ public class Main extends JFrame {
         setUndecorated(true);
         setSize(UIScale.scale(new Dimension(1365, 768)));
         setLocationRelativeTo(null);
-        home = new HomeTela();
+        home = new InicioTela();
         setContentPane(home);
         addWindowListener(new WindowAdapter() {
             @Override

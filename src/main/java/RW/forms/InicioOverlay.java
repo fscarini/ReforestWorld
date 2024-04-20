@@ -23,7 +23,7 @@ import java.util.List;
  * @author Guilherme Quiller
  */
 
-public class HomeOverlay extends JWindow {
+public class InicioOverlay extends JWindow {
 
     public PanelOverlay getOverlay() {
         return overlay;
@@ -32,7 +32,7 @@ public class HomeOverlay extends JWindow {
     private PanelOverlay overlay;
     private List<ModelLocation> locations;
 
-    public HomeOverlay(JFrame frame, List<ModelLocation> locations) {
+    public InicioOverlay(JFrame frame, List<ModelLocation> locations) {
         super(frame);
         this.locations = locations;
         init();

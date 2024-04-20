@@ -18,16 +18,16 @@ import java.util.List;
  * @author Guilherme Quiller
  */
 
-public class HomeTela extends JPanel {
+public class InicioTela extends JPanel {
 
     private List<ModelLocation> locations;
     private int index = 0;
-    private HomeOverlay homeOverlay;
+    private InicioOverlay homeOverlay;
 
     private MediaPlayerFactory factory;
     private EmbeddedMediaPlayer mediaPlayer;
 
-    public HomeTela() {
+    public InicioTela() {
         init();
         testData();
     }
@@ -65,7 +65,7 @@ public class HomeTela extends JPanel {
     }
 
     public void initOverlay(JFrame frame) {
-        homeOverlay = new HomeOverlay(frame, locations);
+        homeOverlay = new InicioOverlay(frame, locations);
         homeOverlay.getOverlay().setEventHomeOverlay(index1 -> {
             play(index1);
         });
