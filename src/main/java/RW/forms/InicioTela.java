@@ -20,7 +20,7 @@ import java.util.List;
 
 public class InicioTela extends JPanel {
 
-    private List<ModelLocation> locations;
+    private List<VideosOverlay> locations;
     private int index = 0;
     private InicioOverlay homeOverlay;
 
@@ -51,15 +51,15 @@ public class InicioTela extends JPanel {
 
     private void testData() {
         locations = new ArrayList<>();
-        locations.add(new ModelLocation("",
+        locations.add(new VideosOverlay("",
                 "Onde cada árvore é um novo começo.",            
                 "src/main/resources/imagens/video1.mp4"));
 
-        locations.add(new ModelLocation("Whispering Pines\nRetreat",
+        locations.add(new VideosOverlay("Whispering Pines\nRetreat",
                 "Semeando mudança para um amanhã sustentável.",
                 "src/main/resources/imagens/video2.mp4"));
 
-        locations.add(new ModelLocation("Serenity Cove\nResort",
+        locations.add(new VideosOverlay("Serenity Cove\nResort",
                 "A cada árvore, um legado de esperança.",
                 "src/main/resources/imagens/video3.mp4"));
     }
@@ -75,7 +75,7 @@ public class InicioTela extends JPanel {
 
     public void play(int index) {
         this.index = index;
-        ModelLocation location = locations.get(index);
+        VideosOverlay location = locations.get(index);
         if (mediaPlayer.status().isPlaying()) {
             mediaPlayer.controls().stop();
         }

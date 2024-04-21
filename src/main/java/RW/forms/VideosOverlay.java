@@ -1,16 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.forms;
 
-/**
- *
- * @author rauls
- */
 
-
-public class ModelLocation {
+public class VideosOverlay {
 
     public String getTitle() {
         return title;
@@ -36,7 +27,7 @@ public class ModelLocation {
         this.videoPath = videoPath;
     }
 
-    public ModelLocation(String title, String description, String videoPath) {
+    public VideosOverlay(String title, String description, String videoPath) {
         this.title = title;
         this.description = description;
         this.videoPath = videoPath;

@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.main;
 
 
-public class Login {
+public class Cadastro {
 
-    public Login(String nome, String email, String senha, String dt_nascimento, String sexo, String cpf) {
+    public Cadastro(String nome, String email, String senha, String dt_nascimento, String sexo, String cpf) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;

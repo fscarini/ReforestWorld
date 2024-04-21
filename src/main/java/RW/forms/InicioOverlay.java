@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.forms;
 
 import com.formdev.flatlaf.FlatClientProperties;
@@ -18,23 +14,20 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
-/**
- *
- * @author Guilherme Quiller
- */
-
 public class InicioOverlay extends JWindow {
+    
 
     public PanelOverlay getOverlay() {
         return overlay;
     }
     
     private PanelOverlay overlay;
-    private List<ModelLocation> locations;
+    private List<VideosOverlay> videosOverlay;
 
-    public InicioOverlay(JFrame frame, List<ModelLocation> locations) {
+
+    public InicioOverlay(JFrame frame, List<VideosOverlay> locations) {
         super(frame);
-        this.locations = locations;
+        this.videosOverlay = locations;
         init();
     }
 
@@ -66,7 +59,7 @@ public class InicioOverlay extends JWindow {
 
         public void setIndex(int index) {
             this.index = index;
-            ModelLocation location = locations.get(index);
+            VideosOverlay location = videosOverlay.get(index);
             textTitle.setText(location.getTitle());
             textDescription.setText(location.getDescription());
         }
@@ -187,6 +180,7 @@ public class InicioOverlay extends JWindow {
             loginAnimator.setInterpolator(CubicBezierEasing.EASE);
             cadastroAnimator.setInterpolator(CubicBezierEasing.EASE);
             recuperarSenhaAnimator.setInterpolator(CubicBezierEasing.EASE);
+            
         }
 
         private void sleep(long l) {
@@ -265,7 +259,7 @@ public class InicioOverlay extends JWindow {
         private void createPageButton() {
             JPanel panel = new JPanel(new MigLayout("gapx 20"));
             panel.setOpaque(false);
-            for (int i = 0; i < locations.size(); i++) {
+            for (int i = 0; i < videosOverlay.size(); i++) {
                 JButton cmd = new JButton("");
                 cmd.putClientProperty(FlatClientProperties.STYLE, "" +
                         "margin:5,5,5,5;" +
@@ -327,7 +321,7 @@ public class InicioOverlay extends JWindow {
             }
         }
         
-         private void runCadastroAnimation(boolean show) {
+         public void runCadastroAnimation(boolean show) {
             if (showCadastro != show) {
                 if (!cadastroAnimator.isRunning()) {
                     showCadastro = show;
