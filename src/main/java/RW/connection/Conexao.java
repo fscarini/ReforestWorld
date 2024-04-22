@@ -1,4 +1,4 @@
-package RW.dao;
+package RW.connection;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class Conexao {
     private static final String SECRET_KEY = "adsusjt123moocaa";
     private static final String FILE_PATH = "config.properties";
 
-    public Connection getConnection() {
+    public Connection conectar() {
         try {
             // Ler os dados criptografados do arquivo
             byte[] encryptedData = Files.readAllBytes(Paths.get(FILE_PATH));
@@ -46,13 +46,6 @@ public class Conexao {
             String user = partes[2];
             String password = partes[3];
             String database = partes[4];
-
-            // Exibir os valores descriptografados
-            System.out.println("host: " + host);
-            System.out.println("port: " + port);
-            System.out.println("user: " + user);
-            System.out.println("password: " + password);
-            System.out.println("database: " + database);
 
             // Construir a URL de conexão
             String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
