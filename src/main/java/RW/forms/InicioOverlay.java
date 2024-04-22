@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.forms;
 
 import com.formdev.flatlaf.FlatClientProperties;
@@ -10,6 +6,7 @@ import com.formdev.flatlaf.util.CubicBezierEasing;
 import net.miginfocom.swing.MigLayout;
 import RW.components.EventHomeOverlay;
 import RW.components.HeaderButton;
+import RW.components.LoadingPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -18,34 +15,46 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
-/**
- *
- * @author Guilherme Quiller
- */
-
-public class HomeOverlay extends JWindow {
-
+public class InicioOverlay extends JWindow {
+    
+    private JFrame mainWindow;
+    private InicioTela inicioTela;
+    private LoadingPanel loadingPanel;
     public PanelOverlay getOverlay() {
         return overlay;
     }
     
     private PanelOverlay overlay;
-    private List<ModelLocation> locations;
+    private List<VideosOverlay> videosOverlay;
 
-    public HomeOverlay(JFrame frame, List<ModelLocation> locations) {
+
+    public InicioOverlay(JFrame frame, InicioTela inicioTela, List<VideosOverlay> locations) {
         super(frame);
-        this.locations = locations;
+        this.mainWindow = frame;
+        this.inicioTela = inicioTela;
+        this.videosOverlay = locations;
         init();
+    }
+    public void closeMainWindow() {
+        mainWindow.dispose();
     }
 
     private void init() {
+        loadingPanel = new LoadingPanel();
+        add(loadingPanel, BorderLayout.CENTER);
+        loadingPanel.setVisible(false); // Começa invisível
         setBackground(new Color(35, 96, 135, 10));
         setLayout(new BorderLayout());
         overlay = new PanelOverlay();
+        overlay.setInicioTela(inicioTela);
         add(overlay);
     }
 
     public class PanelOverlay extends JPanel {
+        private InicioTela inicioTela;
+        public void setInicioTela(InicioTela inicioTela) {
+        this.inicioTela = inicioTela;
+    }
 
         public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
             this.eventHomeOverlay = eventHomeOverlay;
@@ -66,7 +75,7 @@ public class HomeOverlay extends JWindow {
 
         public void setIndex(int index) {
             this.index = index;
-            ModelLocation location = locations.get(index);
+            VideosOverlay location = videosOverlay.get(index);
             textTitle.setText(location.getTitle());
             textDescription.setText(location.getDescription());
         }
@@ -76,6 +85,7 @@ public class HomeOverlay extends JWindow {
         }
 
         private void init() {
+            
             setOpaque(false);
             migLayout = new MigLayout("fill,insets 10 180 10 180", "fill", "[grow 0][]");
             setLayout(migLayout);
@@ -187,6 +197,7 @@ public class HomeOverlay extends JWindow {
             loginAnimator.setInterpolator(CubicBezierEasing.EASE);
             cadastroAnimator.setInterpolator(CubicBezierEasing.EASE);
             recuperarSenhaAnimator.setInterpolator(CubicBezierEasing.EASE);
+            
         }
 
         private void sleep(long l) {
@@ -221,6 +232,7 @@ public class HomeOverlay extends JWindow {
             
 
             entrarHeaderButton.addActionListener(e -> {
+                panelLogin.setInicioTela(inicioTela);
                 runLoginAnimation(true);
                 runCadastroAnimation(false);
                 runRecuperarSenhaAnimation(false);
@@ -237,7 +249,8 @@ public class HomeOverlay extends JWindow {
                 
             });
             sairHeaderButton.addActionListener(e->{
-                System.exit(0);              
+                //System.exit(0);
+                inicioTela.dispose();
             });
 
             header.add(title);
@@ -250,6 +263,7 @@ public class HomeOverlay extends JWindow {
 
         private void createLogin() {
             panelLogin = new LoginTela();
+            panelLogin.setInicioTela(inicioTela);
             add(panelLogin, "pos 100% 0.5al,w 350");
         }
         
@@ -265,7 +279,7 @@ public class HomeOverlay extends JWindow {
         private void createPageButton() {
             JPanel panel = new JPanel(new MigLayout("gapx 20"));
             panel.setOpaque(false);
-            for (int i = 0; i < locations.size(); i++) {
+            for (int i = 0; i < videosOverlay.size(); i++) {
                 JButton cmd = new JButton("");
                 cmd.putClientProperty(FlatClientProperties.STYLE, "" +
                         "margin:5,5,5,5;" +
@@ -327,7 +341,7 @@ public class HomeOverlay extends JWindow {
             }
         }
         
-         private void runCadastroAnimation(boolean show) {
+         public void runCadastroAnimation(boolean show) {
             if (showCadastro != show) {
                 if (!cadastroAnimator.isRunning()) {
                     showCadastro = show;

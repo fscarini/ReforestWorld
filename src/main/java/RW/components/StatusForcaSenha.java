@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.components;
 
-/**
- *
- * @author rauls
- */
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
 import RW.utils.MethodUtil;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -34,6 +25,7 @@ public class StatusForcaSenha extends JPanel {
     private void init() {
         putClientProperty(FlatClientProperties.STYLE, "" +
                 "background:null");
+        setBackground(UIManager.getColor("TextField.background"));
         setLayout(new MigLayout("fill,insets 0", "3[100,fill,grow0][]", "[fill,grow 0]"));
         label = new JLabel("none");
         label.setVisible(false);
@@ -43,11 +35,11 @@ public class StatusForcaSenha extends JPanel {
 
     private Color getStrengthColor(int type) {
         if (type == 1) {
-            return Color.decode("#FF4D4D");
+            return Color.decode("#1C6672");
         } else if (type == 2) {
-            return Color.decode("#FFB04D");
+            return Color.decode("#6BACA4");
         } else {
-            return Color.decode("#58C359");
+            return Color.decode("#12D473");
         }
     }
 
@@ -70,30 +62,30 @@ public class StatusForcaSenha extends JPanel {
         repaint();
     }
 
-    public void initPasswordField(JPasswordField txt) {
+    public void initPasswordField(JPasswordField valorSenha) {
         if (documentListener == null) {
             documentListener = new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    checkPassword(String.valueOf(txt.getPassword()));
+                    checkPassword(String.valueOf(valorSenha.getPassword()));
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    checkPassword(String.valueOf(txt.getPassword()));
+                    checkPassword(String.valueOf(valorSenha.getPassword()));
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    checkPassword(String.valueOf(txt.getPassword()));
+                    checkPassword(String.valueOf(valorSenha.getPassword()));
                 }
             };
         }
         if (StatusForcaSenha != null) {
             StatusForcaSenha.getDocument().removeDocumentListener(documentListener);
         }
-        txt.getDocument().addDocumentListener(documentListener);
-        StatusForcaSenha = txt;
+        valorSenha.getDocument().addDocumentListener(documentListener);
+        StatusForcaSenha = valorSenha;
     }
 
     private class LabelStatus extends JLabel {

@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Key;
+import java.util.Random;
 
 public class ReadConexao {
 
@@ -48,7 +49,9 @@ public class ReadConexao {
         System.out.println("password: " + password);
         System.out.println("database: " + database);
         String url = "jdbc:mysql://" + host + ":" + port + "/" + database + " , " + user + " , " + password;
-        
+        Random random = new Random();
+        String x = String.format("%04d", random.nextInt(10000)); // Gera um token de 4 dígitos
+        System.out.println("cod: " + x);
     }
     
 }

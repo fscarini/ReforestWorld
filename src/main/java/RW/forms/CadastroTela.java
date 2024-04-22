@@ -1,38 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.forms;
 
-/**
- *
- * @author Guilherme Quiller
- */
 import RW.components.StatusForcaSenha;
-import RW.controller.LoginController;
+import RW.controller.CadastroController;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.text.MaskFormatter;
+import RW.components.LoadingPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroTela extends JPanel {
+    private LoadingPanel loadingPanel;
 
-  
     public CadastroTela() {
         init();
-        
     }
 
     private void init() {
         
+                
         //configura o painel
         setOpaque(false);
         addMouseListener(new MouseAdapter() {});
@@ -46,16 +38,14 @@ public class CadastroTela extends JPanel {
         cpfTextField = new JTextField();
         senhaPasswordField = new JPasswordField();
         confirmaSenhaPasswordField = new JPasswordField();
-        JButton CadastrarButton = new JButton("Cadastrar");
+        JButton cadastrarButton = new JButton("Cadastrar");
         StatusForcaSenha = new StatusForcaSenha();
         String[] itens = {"","M","F"};
         sexoComboBox = new JComboBox<>(itens);
-        
-        
-        
 
         // Adiciona formatação automática para o CPF
         cpfTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formatarCPF(cpfTextField);
             }
@@ -78,7 +68,7 @@ public class CadastroTela extends JPanel {
                 "focusWidth:1;" +
                 "innerFocusWidth:0;" +
                 "showRevealButton:true");
-        CadastrarButton.putClientProperty(FlatClientProperties.STYLE, "" +
+        cadastrarButton.putClientProperty(FlatClientProperties.STYLE, "" +
                 "background:$Component.accentColor;" +
                 "borderWidth:0;" +
                 "focusWidth:0;" +
@@ -87,11 +77,9 @@ public class CadastroTela extends JPanel {
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
                 "innerFocusWidth:0");
-        sexoComboBox.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0;" +
-                "background:$Component.accentColor;");
+        sexoComboBox.setOpaque(false);
+        sexoComboBox.setForeground(Color.WHITE);
+        sexoComboBox.setBackground(UIManager.getColor("TextField.background"));
         emailTextField.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
@@ -109,16 +97,46 @@ public class CadastroTela extends JPanel {
         cpfTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira seu CPF");
         
         //chama a ação do botão cadastrar
-        CadastrarButton.addActionListener(e -> {
-            String mensagemErro = verificarCampos();
+        cadastrarButton.addActionListener(e -> {
+
+            String mensagemErro = verificarCamposCadastro();
             if (mensagemErro.isEmpty()) {
                 cadastrar();
+                
             } else {
                 JOptionPane.showMessageDialog(null,mensagemErro);
             }
         });
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cria uma nova janela para exibir o painel de loading
+                JFrame loadingFrame = new JFrame("Loading");
+                loadingFrame.setSize(200, 100);
+                loadingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                loadingFrame.setLocationRelativeTo(null); // Centraliza a janela
+
+                // Cria uma instância do painel de loading
+                LoadingPanel loadingPanel = new LoadingPanel();
+                loadingPanel.setLayout(new BorderLayout());
+                loadingPanel.setBackground(Color.WHITE); // Defina a cor de fundo conforme necessário
+
+                // Adiciona o painel de loading à nova janela
+                loadingFrame.add(loadingPanel);
+
+                // Torna a janela visível
+                loadingFrame.setVisible(true);
+
+                // Realiza o cadastro (simulando uma operação demorada)
+                realizarCadastro();
+
+                // Fecha a janela de loading após o término do cadastro
+                loadingFrame.dispose();
+            }
+        });
         
-        //chama a ação da validação da senha
+        
+        //chama o validador da senha
         StatusForcaSenha.initPasswordField(senhaPasswordField);
         
         //adiciona os botões e campos ao painel
@@ -138,75 +156,75 @@ public class CadastroTela extends JPanel {
         add(StatusForcaSenha, "gapy 0");
         add(new JLabel("Confirmação da Senha"), "gapy 10");
         add(confirmaSenhaPasswordField);
-        add(CadastrarButton, "gapy 30");
-        
-        ((JComponent) sexoComboBox.getRenderer()).setOpaque(false);
-        sexoComboBox.setForeground(Color.WHITE);
+        add(cadastrarButton, "gapy 30");
     }
     
-    
-        //tratativa na tela para criar efeito no painel
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g.create();
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            int arc = UIScale.scale(20);
-            g2.setColor(getBackground());
-            g2.setComposite(AlphaComposite.SrcOver.derive(0.6f));
-            g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
-            g2.dispose();
-            super.paintComponent(g);
-        }
-        
-        //função cadastrar
-        private void cadastrar() {
+    private void realizarCadastro() {
         try {
-            LoginController cadastro = new LoginController();
+            // Simula uma operação demorada
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //tratativa na tela para criar efeito no painel
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int arc = UIScale.scale(20);
+        g2.setColor(getBackground());
+        g2.setComposite(AlphaComposite.SrcOver.derive(0.6f));
+        g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
+        g2.dispose();
+        super.paintComponent(g);
+    }
+        
+    //função cadastrar
+    private void cadastrar() {
+        CadastroController cadastro = new CadastroController();
+        try {
             cadastro.cadastroUsuario(this);
-            } catch (SQLException sql) {
-            Logger.getLogger(CadastroTela.class.getName()).log(Level.SEVERE, null, sql);
-            }
-        } 
-        
-        //função confirmar senha
-        public boolean senhaValida() {
-        String password = String.valueOf(senhaPasswordField.getPassword());
-        String confirmPassword = String.valueOf(confirmaSenhaPasswordField.getPassword());
-        return password.equals(confirmPassword);
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
         }
-        public boolean emailValido() {
-        String email = String.valueOf(emailTextField.getText());
-        //;
-        return emailTextField.equals(null);
-        }
+    } 
         
-        private String verificarCampos() {
-            StringBuilder mensagemErro = new StringBuilder();
-            if (nomeUsuarioTextField.getText().isEmpty()) {
-                mensagemErro.append("Por favor, preencha o campo Nome.\n");
-            }
-            if (dtNascimentoTextField.getText().isEmpty()) {
-                mensagemErro.append("Por favor, preencha o campo Data de Nascimento.\n");
-            }
-            if (sexoComboBox.getItemCount() == 0) {
-                mensagemErro.append("Por favor, preencha o campo Sexo.\n");
-            }
-            if (emailTextField.getText().isEmpty()) {
-                mensagemErro.append("Por favor, preencha o campo E-mail.\n");
-            }
-            if (cpfTextField.getText().isEmpty()) {
-                mensagemErro.append("Por favor, preencha o campo CPF.\n");
-            }
-            if (senhaPasswordField.getPassword().length == 0) {
-                mensagemErro.append("Por favor, preencha o campo Senha.\n");
-            }
-            if (confirmaSenhaPasswordField.getPassword().length == 0) {
-                mensagemErro.append("Por favor, preencha o campo Confirmação da Senha.\n");
-            }
-            return mensagemErro.toString();
+    //Validar preenchimento dos campos do cadastro
+    private String verificarCamposCadastro() {
+        StringBuilder mensagemErro = new StringBuilder();
+        if (nomeUsuarioTextField.getText().isEmpty()) {
+            mensagemErro.append("Por favor, preencha o campo Nome.\n");
         }
+        if (dtNascimentoTextField.getText().isEmpty()) {
+            mensagemErro.append("Por favor, preencha o campo Data de Nascimento.\n");
+        }
+        if (sexoComboBox.getItemCount() == 0) {
+            mensagemErro.append("Por favor, preencha o campo Sexo.\n");
+        }
+        if (emailTextField.getText().isEmpty()) {
+            mensagemErro.append("Por favor, preencha o campo E-mail.\n");
+        }
+        if (cpfTextField.getText().isEmpty()) {
+            mensagemErro.append("Por favor, preencha o campo CPF.\n");
+        }
+        if (senhaPasswordField.getPassword().length == 0) {
+            mensagemErro.append("Por favor, preencha o campo Senha.\n");
+        }
+        if (confirmaSenhaPasswordField.getPassword().length == 0) {
+            mensagemErro.append("Por favor, preencha o campo Confirmação da Senha.\n");
+        }
+        //String contraSenha = String.valueOf(confirmaSenhaPasswordField.getPassword());
+        //String senha = String.valueOf(senhaPasswordField.getPassword());
+        //if ( senha != contraSenha){
+        //    mensagemErro.append("As senhas fornecidas não coincidem. Por favor, verifique e tente novamente.\n");
+        //}
+        return mensagemErro.toString();
+    }
         
-        // Função para formatar automaticamente o CPF
+    // Função para formatar automaticamente o CPF
     private void formatarCPF(JTextField campo) {
         String cpf = campo.getText().replaceAll("[^0-9]", "");
         if (cpf.length() > 11) {
@@ -235,60 +253,60 @@ public class CadastroTela extends JPanel {
     }
 
     
-        //geters e seters
-        public JTextField getEmailTextField() {
-            return emailTextField;
-        }
+    //geters e seters
+    public JTextField getEmailTextField() {
+        return emailTextField;
+    }
 
-        public void setEmailTextField(JTextField emailTextField) {
-            this.emailTextField = emailTextField;
-        }
+    public void setEmailTextField(JTextField emailTextField) {
+        this.emailTextField = emailTextField;
+    }
 
-        public JTextField getCpfTextField() {
-            return cpfTextField;
-        }
+    public JTextField getCpfTextField() {
+        return cpfTextField;
+    }
 
-        public void setCpfTextField(JTextField cpfTextField) {
-            this.cpfTextField = cpfTextField;
-        }
+    public void setCpfTextField(JTextField cpfTextField) {
+        this.cpfTextField = cpfTextField;
+    }
 
-        public JTextField getNomeUsuarioTextField() {
-            return nomeUsuarioTextField;
-        }
+    public JTextField getNomeUsuarioTextField() {
+        return nomeUsuarioTextField;
+    }
 
-        public void setNomeUsuarioTextField(JTextField nomeUsuarioTextField) {
-            this.nomeUsuarioTextField = nomeUsuarioTextField;
-        }
+    public void setNomeUsuarioTextField(JTextField nomeUsuarioTextField) {
+        this.nomeUsuarioTextField = nomeUsuarioTextField;
+    }
 
-        public JPasswordField getSenhaPasswordField() {
-            return senhaPasswordField;
-        }
+    public JPasswordField getSenhaPasswordField() {
+        return senhaPasswordField;
+    }
 
-        public void setSenhaPasswordField(JPasswordField senhaPasswordField) {
-            this.senhaPasswordField = senhaPasswordField;
-        }
+    public void setSenhaPasswordField(JPasswordField senhaPasswordField) {
+        this.senhaPasswordField = senhaPasswordField;
+    }
 
-        public JTextField getIdadeTextField() {
-            return dtNascimentoTextField;
-        }
+    public JTextField getIdadeTextField() {
+        return dtNascimentoTextField;
+    }
 
-        public void setIdadeTextField(JTextField dtNascimentoTextField) {
-            this.dtNascimentoTextField = dtNascimentoTextField;
-        }
-        public JPasswordField getConfirmaSenhaPasswordField() {
-            return confirmaSenhaPasswordField;
-        }
+    public void setIdadeTextField(JTextField dtNascimentoTextField) {
+        this.dtNascimentoTextField = dtNascimentoTextField;
+    }
+    public JPasswordField getConfirmaSenhaPasswordField() {
+        return confirmaSenhaPasswordField;
+    }
 
-        public void setConfirmaSenhaPasswordField(JPasswordField confirmaSenhaPasswordField) {
-            this.confirmaSenhaPasswordField = confirmaSenhaPasswordField;
-        }
-        public JComboBox getSexoComboBox() {
-            return sexoComboBox;
-        }
+    public void setConfirmaSenhaPasswordField(JPasswordField confirmaSenhaPasswordField) {
+        this.confirmaSenhaPasswordField = confirmaSenhaPasswordField;
+    }
+    public JComboBox getSexoComboBox() {
+        return sexoComboBox;
+    }
 
-        public void setSexoComboBox(JComboBox sexoComboBox) {
-            this.sexoComboBox = sexoComboBox;
-        }
+    public void setSexoComboBox(JComboBox sexoComboBox) {
+        this.sexoComboBox = sexoComboBox;
+    }
     
     //declaração dos objetos
     private JTextField dtNascimentoTextField;

@@ -1,23 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package RW.forms;
 
-/**
- *
- * @author Guilherme Quiller
- */
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 
 public class LoginTela extends JPanel {
+    private InicioTela inicioTela; 
+    public void setInicioTela(InicioTela inicioTela) {
+        this.inicioTela = inicioTela; // Implemente este método para definir a referência inicioTela
+    }
 
     public LoginTela() {
         init();
@@ -32,7 +28,7 @@ public class LoginTela extends JPanel {
         JTextField txtUsername = new JTextField();
         JPasswordField txtPassword = new JPasswordField();
         JCheckBox chRememberMe = new JCheckBox("Lembrar");
-        JButton cmdLogin = new JButton("Entrar");
+        JButton loginButton = new JButton("Entrar");
         title.putClientProperty(FlatClientProperties.STYLE, "" +
                 "font:montserrat +10");
         txtUsername.putClientProperty(FlatClientProperties.STYLE, "" +
@@ -44,13 +40,19 @@ public class LoginTela extends JPanel {
                 "focusWidth:1;" +
                 "innerFocusWidth:0;" +
                 "showRevealButton:true");
-        cmdLogin.putClientProperty(FlatClientProperties.STYLE, "" +
+        loginButton.putClientProperty(FlatClientProperties.STYLE, "" +
                 "background:$Component.accentColor;" +
                 "borderWidth:0;" +
                 "focusWidth:0;" +
                 "innerFocusWidth:0");
         txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite seu usuário");
         txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite sua senha");
+        loginButton.addActionListener(e -> {
+            inicioTela.dispose();
+            SwingUtilities.getWindowAncestor(this).dispose();
+            HomeTela homeTela = new HomeTela();
+            homeTela.setVisible(true);
+        });
 
         add(title);
         add(new JLabel("Usuário"), "gapy 20");
@@ -58,7 +60,7 @@ public class LoginTela extends JPanel {
         add(new JLabel("Senha"), "gapy 10");
         add(txtPassword);
         add(chRememberMe);
-        add(cmdLogin, "gapy 30");
+        add(loginButton, "gapy 30");
     }
 
     @Override
