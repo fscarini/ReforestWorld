@@ -10,11 +10,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.text.MaskFormatter;
+import RW.components.LoadingPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroTela extends JPanel {
+    private LoadingPanel loadingPanel;
 
     public CadastroTela() {
         init();
@@ -22,6 +24,7 @@ public class CadastroTela extends JPanel {
 
     private void init() {
         
+                
         //configura o painel
         setOpaque(false);
         addMouseListener(new MouseAdapter() {});
@@ -95,6 +98,7 @@ public class CadastroTela extends JPanel {
         
         //chama a ação do botão cadastrar
         cadastrarButton.addActionListener(e -> {
+
             String mensagemErro = verificarCamposCadastro();
             if (mensagemErro.isEmpty()) {
                 cadastrar();
@@ -103,6 +107,34 @@ public class CadastroTela extends JPanel {
                 JOptionPane.showMessageDialog(null,mensagemErro);
             }
         });
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cria uma nova janela para exibir o painel de loading
+                JFrame loadingFrame = new JFrame("Loading");
+                loadingFrame.setSize(200, 100);
+                loadingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                loadingFrame.setLocationRelativeTo(null); // Centraliza a janela
+
+                // Cria uma instância do painel de loading
+                LoadingPanel loadingPanel = new LoadingPanel();
+                loadingPanel.setLayout(new BorderLayout());
+                loadingPanel.setBackground(Color.WHITE); // Defina a cor de fundo conforme necessário
+
+                // Adiciona o painel de loading à nova janela
+                loadingFrame.add(loadingPanel);
+
+                // Torna a janela visível
+                loadingFrame.setVisible(true);
+
+                // Realiza o cadastro (simulando uma operação demorada)
+                realizarCadastro();
+
+                // Fecha a janela de loading após o término do cadastro
+                loadingFrame.dispose();
+            }
+        });
+        
         
         //chama o validador da senha
         StatusForcaSenha.initPasswordField(senhaPasswordField);
@@ -127,6 +159,14 @@ public class CadastroTela extends JPanel {
         add(cadastrarButton, "gapy 30");
     }
     
+    private void realizarCadastro() {
+        try {
+            // Simula uma operação demorada
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     
     //tratativa na tela para criar efeito no painel
     @Override
@@ -146,6 +186,7 @@ public class CadastroTela extends JPanel {
         CadastroController cadastro = new CadastroController();
         try {
             cadastro.cadastroUsuario(this);
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
         }
