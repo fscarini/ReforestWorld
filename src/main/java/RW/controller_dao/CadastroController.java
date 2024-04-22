@@ -1,7 +1,7 @@
-package RW.controller;
+package RW.controller_dao;
 
 import RW.forms.CadastroTela;
-import RW.dao.CadastroDAO;
+import RW.controller_dao.CadastroDAO;
 import java.sql.SQLException;
 
 public class CadastroController {

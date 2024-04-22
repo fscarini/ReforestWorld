@@ -1,6 +1,8 @@
 
 package RW.forms;
 
+import RW.controller_dao.LoginController;
+import RW.controller_dao.LoginDAO;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
@@ -12,7 +14,7 @@ import java.awt.geom.RoundRectangle2D;
 public class LoginTela extends JPanel {
     private InicioTela inicioTela; 
     public void setInicioTela(InicioTela inicioTela) {
-        this.inicioTela = inicioTela; // Implemente este método para definir a referência inicioTela
+        this.inicioTela = inicioTela;
     }
 
     public LoginTela() {
@@ -25,17 +27,17 @@ public class LoginTela extends JPanel {
         });
         setLayout(new MigLayout("wrap,fillx,insets 45 45 50 45", "[fill]"));
         JLabel title = new JLabel("Acesse a sua conta", SwingConstants.CENTER);
-        JTextField txtUsername = new JTextField();
-        JPasswordField txtPassword = new JPasswordField();
+        JTextField emailTextField = new JTextField();
+        JPasswordField senhaPasswordField = new JPasswordField();
         JCheckBox chRememberMe = new JCheckBox("Lembrar");
         JButton loginButton = new JButton("Entrar");
         title.putClientProperty(FlatClientProperties.STYLE, "" +
                 "font:montserrat +10");
-        txtUsername.putClientProperty(FlatClientProperties.STYLE, "" +
+        emailTextField.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
                 "innerFocusWidth:0");
-        txtPassword.putClientProperty(FlatClientProperties.STYLE, "" +
+        senhaPasswordField.putClientProperty(FlatClientProperties.STYLE, "" +
                 "margin:5,10,5,10;" +
                 "focusWidth:1;" +
                 "innerFocusWidth:0;" +
@@ -45,20 +47,36 @@ public class LoginTela extends JPanel {
                 "borderWidth:0;" +
                 "focusWidth:0;" +
                 "innerFocusWidth:0");
-        txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite seu usuário");
-        txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite sua senha");
+        emailTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite seu e-mail");
+        senhaPasswordField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite sua senha");
+        
         loginButton.addActionListener(e -> {
-            inicioTela.dispose();
-            SwingUtilities.getWindowAncestor(this).dispose();
-            HomeTela homeTela = new HomeTela();
-            homeTela.setVisible(true);
+            try {
+                var login = emailTextField.getText();
+                var senha = new String(senhaPasswordField.getPassword());
+                if (login.isEmpty() || senha.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+                    return;
+                }
+                var usuario = new LoginController(login, senha);
+                var dao = new LoginDAO();
+                if(dao.existe(usuario)){
+                    inicioTela.dispose();
+                    SwingUtilities.getWindowAncestor(this).dispose();
+                    HomeTela homeTela = new HomeTela();
+                    homeTela.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            }
         });
 
         add(title);
-        add(new JLabel("Usuário"), "gapy 20");
-        add(txtUsername);
+        add(new JLabel("E-mail"), "gapy 20");
+        add(emailTextField);
         add(new JLabel("Senha"), "gapy 10");
-        add(txtPassword);
+        add(senhaPasswordField);
         add(chRememberMe);
         add(loginButton, "gapy 30");
     }
@@ -74,4 +92,24 @@ public class LoginTela extends JPanel {
         g2.dispose();
         super.paintComponent(g);
     }
+
+    public JTextField getEmailTextField() {
+        return emailTextField;
+    }
+
+    public void setEmailTextField(JTextField emailTextField) {
+        this.emailTextField = emailTextField;
+    }
+
+    public JPasswordField getSenhaPasswordField() {
+        return senhaPasswordField;
+    }
+
+    //declaração dos objetos
+    public void setSenhaPasswordField(JPasswordField senhaPasswordField) {
+        this.senhaPasswordField = senhaPasswordField;
+    }
+    private JTextField emailTextField;
+    private JPasswordField senhaPasswordField;
+    
 }

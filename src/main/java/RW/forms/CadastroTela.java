@@ -1,7 +1,7 @@
 package RW.forms;
 
 import RW.components.StatusForcaSenha;
-import RW.controller.CadastroController;
+import RW.controller_dao.CadastroController;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
@@ -218,7 +218,7 @@ public class CadastroTela extends JPanel {
         }
         //String contraSenha = String.valueOf(confirmaSenhaPasswordField.getPassword());
         //String senha = String.valueOf(senhaPasswordField.getPassword());
-        //if ( senha != contraSenha){
+        //if ( confirmaSenhaPasswordField.getText() != senhaPasswordField.getText()){
         //    mensagemErro.append("As senhas fornecidas não coincidem. Por favor, verifique e tente novamente.\n");
         //}
         return mensagemErro.toString();
