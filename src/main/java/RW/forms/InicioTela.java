@@ -1,25 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RW.forms;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Guilherme Quiller
- */
-
 public class InicioTela extends JPanel {
-
+    
+    private InicioTela inicioTela;
     private List<VideosOverlay> locations;
     private int index = 0;
     private InicioOverlay homeOverlay;
@@ -55,17 +46,17 @@ public class InicioTela extends JPanel {
                 "Onde cada árvore é um novo começo.",            
                 "src/main/resources/imagens/video1.mp4"));
 
-        locations.add(new VideosOverlay("Whispering Pines\nRetreat",
+        locations.add(new VideosOverlay("",
                 "Semeando mudança para um amanhã sustentável.",
                 "src/main/resources/imagens/video2.mp4"));
 
-        locations.add(new VideosOverlay("Serenity Cove\nResort",
+        locations.add(new VideosOverlay("",
                 "A cada árvore, um legado de esperança.",
                 "src/main/resources/imagens/video3.mp4"));
     }
 
     public void initOverlay(JFrame frame) {
-        homeOverlay = new InicioOverlay(frame, locations);
+        homeOverlay = new InicioOverlay(frame, this, locations);
         homeOverlay.getOverlay().setEventHomeOverlay(index1 -> {
             play(index1);
         });
@@ -89,7 +80,11 @@ public class InicioTela extends JPanel {
         mediaPlayer.release();
         factory.release();
     }
+
+    void dispose() {
+        mediaPlayer.release();
+        factory.release();
+        homeOverlay.closeMainWindow();
+    }
+    
 }
-
-
-
