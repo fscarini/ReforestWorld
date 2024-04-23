@@ -14,6 +14,8 @@ import javax.swing.text.MaskFormatter;
 import RW.components.LoadingPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CadastroTela extends JPanel {
     private LoadingPanel loadingPanel;
@@ -195,8 +197,9 @@ public class CadastroTela extends JPanel {
     //Validar preenchimento dos campos do cadastro
     private String verificarCamposCadastro() {
         StringBuilder mensagemErro = new StringBuilder();
-        if (nomeUsuarioTextField.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo Nome.\n");
+        String nome = nomeUsuarioTextField.getText().trim();
+        if (nome.isEmpty() || !nome.contains(" ")) {
+            mensagemErro.append("Por favor, preencha o campo Nome com pelo menos um nome e um sobrenome.\n");
         }
         if (dtNascimentoTextField.getText().isEmpty()) {
             mensagemErro.append("Por favor, preencha o campo Data de Nascimento.\n");
@@ -204,11 +207,13 @@ public class CadastroTela extends JPanel {
         if (sexoComboBox.getItemCount() == 0) {
             mensagemErro.append("Por favor, preencha o campo Sexo.\n");
         }
-        if (emailTextField.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo E-mail.\n");
+        String email = emailTextField.getText().trim();
+        if (emailTextField.getText().isEmpty() || !validarEmail(email)) {
+            mensagemErro.append("Por favor, preencha o campo E-mail com um e-mail válido.\n");
         }
-        if (cpfTextField.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo CPF.\n");
+        String cpf = cpfTextField.getText().replaceAll("[^0-9]", "");
+        if (cpf.length() != 11 || !validarCPF(cpf)) {
+            mensagemErro.append("Por favor, preencha o campo CPF com um CPF válido.\n");
         }
         if (senhaPasswordField.getPassword().length == 0) {
             mensagemErro.append("Por favor, preencha o campo Senha.\n");
@@ -216,12 +221,73 @@ public class CadastroTela extends JPanel {
         if (confirmaSenhaPasswordField.getPassword().length == 0) {
             mensagemErro.append("Por favor, preencha o campo Confirmação da Senha.\n");
         }
-        //String contraSenha = String.valueOf(confirmaSenhaPasswordField.getPassword());
-        //String senha = String.valueOf(senhaPasswordField.getPassword());
-        //if ( confirmaSenhaPasswordField.getText() != senhaPasswordField.getText()){
-        //    mensagemErro.append("As senhas fornecidas não coincidem. Por favor, verifique e tente novamente.\n");
-        //}
+        char[] senha = senhaPasswordField.getPassword();
+        char[] confirmacaoSenha = confirmaSenhaPasswordField.getPassword();
+        if (senha.length == 0 || confirmacaoSenha.length == 0 || !senhaIguais(senha, confirmacaoSenha)) {
+            mensagemErro.append("As senhas fornecidas não coincidem. Por favor, verifique e tente novamente.\n");
+        }
         return mensagemErro.toString();
+    }
+    
+    private boolean validarEmail(String email) {
+        // Lógica para validar o e-mail
+        // Utilize uma expressão regular para validar o formato do e-mail
+        Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
+    private boolean senhaIguais(char[] senha, char[] confirmacaoSenha) {
+        // Comparar as senhas
+        if (senha.length != confirmacaoSenha.length) {
+            return false;
+        }
+        for (int i = 0; i < senha.length; i++) {
+            if (senha[i] != confirmacaoSenha[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean validarCPF(String cpf) {
+        // Verifica se o CPF tem 11 dígitos
+        if (cpf.length() != 11) {
+            return false;
+        }
+
+        // Verifica se todos os dígitos são iguais (caso contrário, não é um CPF válido)
+        if (cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+
+        // Calcula o primeiro dígito verificador
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += (10 - i) * Character.getNumericValue(cpf.charAt(i));
+        }
+        int primeiroDigito = 11 - (soma % 11);
+        if (primeiroDigito >= 10) {
+            primeiroDigito = 0;
+        }
+
+        // Verifica se o primeiro dígito verificador está correto
+        if (Character.getNumericValue(cpf.charAt(9)) != primeiroDigito) {
+            return false;
+        }
+
+        // Calcula o segundo dígito verificador
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += (11 - i) * Character.getNumericValue(cpf.charAt(i));
+        }
+        int segundoDigito = 11 - (soma % 11);
+        if (segundoDigito >= 10) {
+            segundoDigito = 0;
+        }
+
+        // Verifica se o segundo dígito verificador está correto
+        return Character.getNumericValue(cpf.charAt(10)) == segundoDigito;
     }
         
     // Função para formatar automaticamente o CPF

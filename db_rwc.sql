@@ -9,7 +9,7 @@ primary key (id)
 );
 insert into users(id, nome, email, senha) values (null, 'admin', 'admin@reforestworld,com.br','admin');
 select * from users;
-update users set email= 'admin@reforestworld.com.br' where id = 1;
+update users set cpf= '123.456.789-92' where id = 55;
 ALTER TABLE `db_rwc`.`users` 
 ADD COLUMN `dt_nascimento` VARCHAR(10) NOT NULL AFTER `senha`,
 ADD COLUMN `sexo` VARCHAR(1) NOT NULL AFTER `dt_nascimento`,
