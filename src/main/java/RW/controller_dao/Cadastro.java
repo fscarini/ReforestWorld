@@ -1,4 +1,4 @@
-package RW.main;
+package RW.controller_dao;
 
 
 public class Cadastro {
