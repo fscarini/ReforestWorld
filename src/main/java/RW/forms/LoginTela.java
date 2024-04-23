@@ -77,7 +77,7 @@ public class LoginTela extends JPanel {
         add(emailTextField);
         add(new JLabel("Senha"), "gapy 10");
         add(senhaPasswordField);
-        add(chRememberMe);
+        //add(chRememberMe);
         add(loginButton, "gapy 30");
     }
 
