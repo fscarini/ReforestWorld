@@ -63,8 +63,8 @@ public class LoginTela extends JPanel {
                 if(dao.existe(usuario)){
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
-                    HomeTela homeTela = new HomeTela();
-                    homeTela.setVisible(true);
+                    TelaHome telaHome = new TelaHome();
+                    telaHome.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
             } catch (Exception ex) {
