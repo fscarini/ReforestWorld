@@ -4,6 +4,7 @@ package RW.forms;
 import RW.controller_dao.LoginController;
 import RW.controller_dao.LoginDAO;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
@@ -65,6 +66,7 @@ public class LoginTela extends JPanel {
                     SwingUtilities.getWindowAncestor(this).dispose();
                     TelaHome telaHome = new TelaHome();
                     telaHome.setVisible(true);
+                    FlatLaf.registerCustomDefaultsSource("RW.themes");
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
             } catch (Exception ex) {
