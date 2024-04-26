@@ -73,14 +73,27 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                     public void selected(MenuAction action, int index, int subIndex) {
                         System.err.println("Menu selected "+index+" "+subIndex);
                     }
-                })
-                
-        ;
+               })                
+                .setMenuValidation(new  MenuValidation(){
+            @Override
+            public boolean menuValidation(int index, int subIndex) {
+               if (index==0){
+               return false;
+               }else if (index==3){
+                return false;
+               }
+                return true;
+            }
+                    
+                }) ;
     }
 
     @Override
     public SimpleFooterData getSimpleFooterData() {
-        return new SimpleFooterData();
+        return new SimpleFooterData()
+                .setTitle("Reforest World")
+                .setDescription("Versão 2024");
+        
     }
     
 }
