@@ -1,6 +1,10 @@
 
 package RW.Drawer;
 
+import RW.Tabbed.WindowsTabbed;
+import RW.forms.TelaHome;
+import RW.main.Main;
+import com.sun.jna.NativeLibrary;
 import java.util.HashSet;
 import java.util.Set;
 import raven.drawer.component.SimpleDrawerBuilder;
@@ -12,6 +16,7 @@ import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import raven.swing.AvatarIcon;
 import javax.swing.JMenu;
+import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
 
 /**
@@ -71,6 +76,13 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                .setIconScale(0.45f)
                .addMenuEvent(new MenuEvent() {
                     public void selected(MenuAction action, int index, int subIndex) {
+                        if (index == 9) {
+                            String userDir = System.getProperty("user.dir");
+                            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
+                            Main main = new Main();
+                            main.setVisible(true);
+//                            TelaHome.dispose();
+                        } 
                         System.err.println("Menu selected "+index+" "+subIndex);
                     }
                })                
