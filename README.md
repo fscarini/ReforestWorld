@@ -1,6 +1,6 @@
 # Reforest World
 
-![](src/Group43.jpg)
+<p><img src="https://reforestworld.s3.us-east-2.amazonaws.com/Group43.jpg" alt=""></p>
 
 > Este projeto está sendo desenvolvido como uma solução tecnológica em linguagem Java para apresentarmos à Universidade São Judas Tadeu no primeiro semestre do ano de 2024, onde estamos abordando o tema de duas ODS (Objetivos de Desenvolvimento Sustentável) definidas pela ONU.
 
@@ -9,30 +9,28 @@
 O objetivo do projeto é criar uma solução em desktop que contribua em ações contra a mudança climática global, juntamente com apoio à vida terrestre.
 Ações essas, que fazem parte dos Objetivos de Desenvolvimento Sustentável (ODS) propostos pela ONU, são elas:
 
-![ODS](src/ods13-15.jpg)
+<p><img src="https://reforestworld.s3.us-east-2.amazonaws.com/ods13-15.jpg" alt="ODS"></p>
 
 ### Propósito do Projeto
 
 Utilizando a linguagem de programação Java, temos como propósito o desenvolvimento de uma solução que contribua com reflorestamento mundial. No momento, o desenvolvimento está com foco no Brasil! 
 
-### Etapas do Projeto
+### 💻 Pré-requisitos
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Gui de login sem funcionalidades
 - [x] Script do banco de dados
-- [ ] Login funcional
+- [x] Login funcional
 - [ ] Cadastro de eventos
 - [ ] Criação de contas
 - [ ] Listagem de eventos
 
-## 💻 Pré-requisitos
+## 🚀 Para rodar o Reforest World
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você instalou a versão mais recente do `Java 22`
-
-## 🚀 Instalando Reforest World
 
 Para instalar o Reforest World, siga estas etapas:
 
