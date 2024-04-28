@@ -11,14 +11,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import javax.swing.text.MaskFormatter;
-import RW.components.LoadingPanel;
+import RW.main.Main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CadastroTela extends JPanel {
-    private LoadingPanel loadingPanel;
+    private InicioTela inicioTela; 
+    public void setInicioTela(InicioTela inicioTela) {
+        this.inicioTela = inicioTela;
+    }
 
     public CadastroTela() {
         init();
@@ -104,36 +107,17 @@ public class CadastroTela extends JPanel {
             String mensagemErro = verificarCamposCadastro();
             if (mensagemErro.isEmpty()) {
                 cadastrar();
-                
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new RW.forms.SplashScreen(null, true).setVisible(true);
+                    }
+                });
+                inicioTela.dispose();
+                SwingUtilities.getWindowAncestor(this).dispose();
+                Main main = new Main();
+                main.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null,mensagemErro);
-            }
-        });
-        cadastrarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Cria uma nova janela para exibir o painel de loading
-                JFrame loadingFrame = new JFrame("Loading");
-                loadingFrame.setSize(200, 100);
-                loadingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                loadingFrame.setLocationRelativeTo(null); // Centraliza a janela
-
-                // Cria uma instância do painel de loading
-                LoadingPanel loadingPanel = new LoadingPanel();
-                loadingPanel.setLayout(new BorderLayout());
-                loadingPanel.setBackground(Color.WHITE); // Defina a cor de fundo conforme necessário
-
-                // Adiciona o painel de loading à nova janela
-                loadingFrame.add(loadingPanel);
-
-                // Torna a janela visível
-                loadingFrame.setVisible(true);
-
-                // Realiza o cadastro (simulando uma operação demorada)
-                realizarCadastro();
-
-                // Fecha a janela de loading após o término do cadastro
-                loadingFrame.dispose();
             }
         });
         

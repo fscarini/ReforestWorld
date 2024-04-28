@@ -238,6 +238,7 @@ public class InicioOverlay extends JWindow {
                 runRecuperarSenhaAnimation(false);
             });
             cadastrarHeaderButton.addActionListener(e -> {
+                panelCadastro.setInicioTela(inicioTela);
                 runCadastroAnimation(true);
                 runLoginAnimation(false);
                 runRecuperarSenhaAnimation(false);
