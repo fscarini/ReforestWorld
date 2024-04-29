@@ -26,11 +26,17 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Criação de contas
 - [ ] Listagem de eventos
 
+## 🛠️ O Reforest World foi construído com:
+
+* [Java 22](https://www.oracle.com/br/java/technologies/downloads/) - A versão do JAVA que compilamos.
+* [VLC Media Player](https://github.com/portapps/vlc-portable/releases/tag/3.0.16-11) - O reprodutor de mídia que passam os nossos vídeos. [Caso não encontre, aqui você consegue baixar uma cópia da versão para Windows x64](https://1drv.ms/u/s!AtIo44Wq7HQphc4TlY2bo0LqbslrPA?e=Ke2xMh)
+* [Convenção de Commits](https://github.com/iuricode/padroes-de-commits) - Usamos esse modelo para realizar os commits no projeto.
+
 ## 🚀 Para rodar o Reforest World
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Temos os seguintes requisitos:
 
-- Você instalou a versão mais recente do `Java 22`
+- Você deve baixar a versão portátil do VLC Media Player e colocar todo o conteúdo baixado e descompactado dentro da pasta \src\vlc-3.0.16.
 
 Para instalar o Reforest World, siga estas etapas:
 
@@ -46,15 +52,9 @@ Windows:
 <comando_de_instalação>
 ```
 
-## ☕ Usando Reforest World
+## 📌 Versão
 
-Para usar Reforest World, siga estas etapas:
-
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+Nós usamos o [GitHub](https://github.com/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/fscarini/ReforestWorld/tags). 
 
 
 ## 🤝 Colaboradores
