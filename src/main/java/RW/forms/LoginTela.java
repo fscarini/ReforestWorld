@@ -64,6 +64,11 @@ public class LoginTela extends JPanel {
                 if(dao.existe(usuario)){
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new RW.forms.LoginLoadTela(null, true).setVisible(true);
+                        }
+                    });
                     TelaHome telaHome = new TelaHome();
                     telaHome.setVisible(true);
                     FlatLaf.registerCustomDefaultsSource("RW.themes");

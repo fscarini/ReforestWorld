@@ -109,7 +109,7 @@ public class CadastroTela extends JPanel {
                 cadastrar();
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        new RW.forms.SplashScreen(null, true).setVisible(true);
+                        new RW.forms.CadastroLoadTela(null, true).setVisible(true);
                     }
                 });
                 inicioTela.dispose();
