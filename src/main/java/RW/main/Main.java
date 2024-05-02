@@ -47,7 +47,7 @@ public class Main extends JFrame {
         String userDir = System.getProperty("user.dir");
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
         FlatRobotoFont.install();
-        FlatLaf.registerCustomDefaultsSource("raven.themes");
+        FlatLaf.registerCustomDefaultsSource("RW.themes");
         FlatMacDarkLaf.setup();
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         EventQueue.invokeLater(() -> new Main().setVisible(true));
