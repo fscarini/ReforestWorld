@@ -20,13 +20,16 @@ public class InicioOverlay extends JWindow {
     private JFrame mainWindow;
     private InicioTela inicioTela;
     private LoadingPanel loadingPanel;
+    private PanelOverlay overlay;
+    private List<VideosOverlay> videosOverlay;
+    
+    public enum AnimationType {
+        CLOSE_VIDEO, SHOW_VIDEO, NONE
+    }
+    
     public PanelOverlay getOverlay() {
         return overlay;
     }
-    
-    private PanelOverlay overlay;
-    private List<VideosOverlay> videosOverlay;
-
 
     public InicioOverlay(JFrame frame, InicioTela inicioTela, List<VideosOverlay> locations) {
         super(frame);
@@ -51,15 +54,7 @@ public class InicioOverlay extends JWindow {
     }
 
     public class PanelOverlay extends JPanel {
-        private InicioTela inicioTela;
-        public void setInicioTela(InicioTela inicioTela) {
-        this.inicioTela = inicioTela;
-    }
-
-        public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
-            this.eventHomeOverlay = eventHomeOverlay;
-        }
-
+        
         private MigLayout migLayout;
         private EventHomeOverlay eventHomeOverlay;
         private AnimationType animationType = AnimationType.NONE;
@@ -72,14 +67,16 @@ public class InicioOverlay extends JWindow {
         private boolean showLogin;
         private boolean showCadastro;
         private boolean showRecuperarSenha;
-
-        public void setIndex(int index) {
-            this.index = index;
-            VideosOverlay location = videosOverlay.get(index);
-            textTitle.setText(location.getTitle());
-            textDescription.setText(location.getDescription());
-        }
-
+        private InicioTela inicioTela;
+        private JPanel header;
+        private JTextPane textTitle;
+        private JTextPane textDescription;
+        private JButton sobreNosJButton;
+        private LoginTela panelLogin;
+        private CadastroTela panelCadastro;
+        private RecuperaSenhaTela panelRecuperarSenha;
+        private JLabel logo;
+        
         public PanelOverlay() {
             init();
         }
@@ -111,14 +108,12 @@ public class InicioOverlay extends JWindow {
                     "font:montserrat +2;" +
                     "border:0,0,0,0");
             sobreNosJButton.putClientProperty(FlatClientProperties.STYLE, "" +
-                    //"background:$Component.accentColor;" +
+                    "background:$Component.accentColor;" +
                     "borderWidth:0;" +
                     "margin:5,15,5,15;" +
                     "focusWidth:0;" +
                     "innerFocusWidth:0;" +
                     "arc:999");
-            //troca cor do botão "sobre nos"
-            sobreNosJButton.setBackground(new Color(149, 175, 66));
             logo = new JLabel();
             logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Reforest World Logo.png")));
             logo.putClientProperty(FlatClientProperties.STYLE, "" +
@@ -199,6 +194,21 @@ public class InicioOverlay extends JWindow {
             recuperarSenhaAnimator.setInterpolator(CubicBezierEasing.EASE);
             
         }
+        
+        public void setInicioTela(InicioTela inicioTela) {
+            this.inicioTela = inicioTela;
+        }
+
+        public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
+            this.eventHomeOverlay = eventHomeOverlay;
+        }
+        
+        public void setIndex(int index) {
+            this.index = index;
+            VideosOverlay location = videosOverlay.get(index);
+            textTitle.setText(location.getTitle());
+            textDescription.setText(location.getDescription());
+        }
 
         private void sleep(long l) {
             try {
@@ -232,10 +242,7 @@ public class InicioOverlay extends JWindow {
             
 
             entrarHeaderButton.addActionListener(e -> {
-                panelLogin.setInicioTela(inicioTela);
-                runLoginAnimation(true);
-                runCadastroAnimation(false);
-                runRecuperarSenhaAnimation(false);
+                loginAction();
             });
             cadastrarHeaderButton.addActionListener(e -> {
                 panelCadastro.setInicioTela(inicioTela);
@@ -260,6 +267,12 @@ public class InicioOverlay extends JWindow {
             header.add(cadastrarHeaderButton);
             header.add(entrarHeaderButton);
             add(header, "wrap");
+        }
+        public void loginAction() {
+            panelLogin.setInicioTela(inicioTela);
+            runLoginAnimation(true);
+            runCadastroAnimation(false);
+            runRecuperarSenhaAnimation(false);
         }
 
         private void createLogin() {
@@ -390,21 +403,5 @@ public class InicioOverlay extends JWindow {
             Ellipse2D ell = new Ellipse2D.Double(x, y, size, size);
             return ell;
         }
-
-
-        private JPanel header;
-        private JTextPane textTitle;
-        private JTextPane textDescription;
-        private JButton sobreNosJButton;
-        private LoginTela panelLogin;
-        private CadastroTela panelCadastro;
-        private RecuperaSenhaTela panelRecuperarSenha;
-        private JLabel logo;
-    }
-
-    public enum AnimationType {
-        CLOSE_VIDEO, SHOW_VIDEO, NONE
     }
 }
-
-

@@ -1,6 +1,9 @@
 package RW.forms;
 
+import RW.controller_dao.LoginController;
+import RW.controller_dao.LoginDAO;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
@@ -8,7 +11,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
 
+
 public class RecuperaSenhaTela extends JPanel {
+    private InicioTela inicioTela; 
+    public void setInicioTela(InicioTela inicioTela) {
+        this.inicioTela = inicioTela;
+    }
 
     public RecuperaSenhaTela() {
         init();
@@ -35,6 +43,22 @@ public class RecuperaSenhaTela extends JPanel {
                 "innerFocusWidth:0");
         emaiJTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira seu E-mail");
 
+        cmdLogin.addActionListener(e -> {
+            // Criar um JFrame para exibir o ConfirmaUsuarioTela
+            JFrame frame = new JFrame("Confirmação de Usuário");
+
+            // Adicionar o ConfirmaUsuarioTela ao JFrame
+            ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela();
+            frame.getContentPane().add(confirmaUsuarioTela);
+
+            // Configurar o JFrame
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela ao sair
+            frame.pack(); // Ajustar o tamanho do JFrame com base no conteúdo
+            frame.setLocationRelativeTo(null); // Centralizar o JFrame na tela
+            frame.setVisible(true); // Exibir o JFrame
+                //loginAction();
+        });
+        
         add(title);
         add(new JLabel("Para recuperar seu acesso digite seu e-mail e"), "gapy 20");
         add(new JLabel("siga as orientações que encaminhamos para"), "gapy 1");
@@ -43,7 +67,7 @@ public class RecuperaSenhaTela extends JPanel {
         add(emaiJTextField);
         add(cmdLogin, "gapy 30");
     }
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
