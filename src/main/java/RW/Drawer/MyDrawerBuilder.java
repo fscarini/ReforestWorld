@@ -2,6 +2,7 @@
 package RW.Drawer;
 
 import RW.Tabbed.WindowsTabbed;
+import RW.forms.CadastroEventosTela;
 import RW.forms.TelaHome;
 import RW.main.Main;
 import com.sun.jna.NativeLibrary;
@@ -41,21 +42,11 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
-            {"~FERNANDO~"},
+            {"~MAIN~"},
             {"Dashboard"},
-            {"~RAUL~"},
-            {"Email", "Inbox", "Read", "Compost"},
-            {"Chat"},
-            {"Calendar"},
-            {"~GUILHERME~"},
-            {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
-            {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
-            {"~OTHER~"},
-            {"Charts", "Apex", "Flot", "Sparkline"},
-            {"Icons", "Feather Icons", "Flag Icons", "Mdi Icons"},
-            {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},
-            {"Logout"}
-        };
+            {"~Navegação~"},
+            {"Eventos", "Listar eventos", "Criar eventos"},
+            {"Logout"}};
         
         String icons[] = {
             "dashboard.svg",
@@ -76,7 +67,10 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                .setIconScale(0.45f)
                .addMenuEvent(new MenuEvent() {
                     public void selected(MenuAction action, int index, int subIndex) {
-                        if (index == 9) {
+                        if(index == 1 && subIndex == 2){
+                            WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
+                        }
+                        if (index == 2) {
                             String userDir = System.getProperty("user.dir");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
                             Main main = new Main();
