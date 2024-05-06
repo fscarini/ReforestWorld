@@ -41,13 +41,13 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
-            {"~MAIN~"},
+            {"~FERNANDO~"},
             {"Dashboard"},
-            {"~WEB APP~"},
+            {"~RAUL~"},
             {"Email", "Inbox", "Read", "Compost"},
             {"Chat"},
             {"Calendar"},
-            {"~COMPONENT~"},
+            {"~GUILHERME~"},
             {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
             {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
             {"~OTHER~"},
@@ -89,11 +89,11 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                 .setMenuValidation(new  MenuValidation(){
             @Override
             public boolean menuValidation(int index, int subIndex) {
-               if (index==0){
-               return false;
-               }else if (index==3){
-                return false;
-               }
+//               if (index==0){
+//               return false;
+//               }else if (index==3){
+//                return false;
+//               }
                 return true;
             }
                     
