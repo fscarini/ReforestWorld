@@ -44,6 +44,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
+
             {"~ÁREA DO USUÁRIO~"},
             {"Meu Perfil"},
             {"~COMUNIDADE~"},
@@ -79,6 +80,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                .setIconScale(0.45f)
                .addMenuEvent(new MenuEvent() {
                     public void selected(MenuAction action, int index, int subIndex) {
+
                         if (index == 0) {
                         WindowsTabbed.getInstance().addTab("Test", new Teste());
                         }
@@ -89,6 +91,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                             WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
                         }
                         if (index == 9) {
+
                             String userDir = System.getProperty("user.dir");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16/vlc-3.0.16");

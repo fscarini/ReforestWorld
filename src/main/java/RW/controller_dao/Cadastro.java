@@ -63,5 +63,3 @@ public class Cadastro {
     private String nome, email, senha, dt_nascimento, sexo, cpf;
     
 }
-
-    
