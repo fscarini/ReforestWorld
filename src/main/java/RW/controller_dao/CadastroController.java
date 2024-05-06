@@ -2,6 +2,7 @@ package RW.controller_dao;
 
 import RW.connection.Conexao;
 import RW.forms.CadastroTela;
+import RW.forms.CadastroEventosTela;
 import RW.controller_dao.CadastroDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,19 @@ public class CadastroController {
             code);
 
     }
-            private String generateVerifyCode() throws SQLException {
+
+    public void cadastroEvento(CadastroEventosTela view) throws SQLException {
+            CadastroDAO cadastro = new CadastroDAO();
+            cadastro.cadastrarEvento(
+            view.getNomeEventoTextField().getText(),
+            view.getDataEventoTextField().getText(),
+            view.getLocalTextField().getText(),
+            view.getDescricaoTextArea().getText(),
+            1
+            );
+    }
+    
+    private String generateVerifyCode() throws SQLException {
         DecimalFormat df = new DecimalFormat("000000");
         Random ran = new Random();
         String code = df.format(ran.nextInt(1000000));  //  Random from 0 to 999999
