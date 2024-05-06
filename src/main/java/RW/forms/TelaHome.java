@@ -75,10 +75,6 @@ public class TelaHome extends javax.swing.JFrame {
      */
     
     public static void main(String args[]) {
-        FlatRobotoFont.install();
-        FlatLaf.registerCustomDefaultsSource("RW.themes");
-        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaHome().setVisible(true);    
