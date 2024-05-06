@@ -22,3 +22,7 @@ ADD COLUMN `id_usuario` INT NOT NULL AFTER `descricao`,
 CHANGE COLUMN `nome do evento` `nome` VARCHAR(250) NOT NULL ,
 CHANGE COLUMN `data do evento` `descricao` VARCHAR(10) NOT NULL ,
 CHANGE COLUMN `data do registro` `data_registro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ;
+
+
+SELECT * FROM eventos;
+DESCRIBE eventos;
