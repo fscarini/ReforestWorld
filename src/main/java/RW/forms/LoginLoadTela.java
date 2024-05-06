@@ -107,17 +107,7 @@ public class LoginLoadTela extends javax.swing.JDialog {
             public void run() {
                 try {
                     doTask("Validando os dados ...", 3);
-                    doTask("Validando os dados ...", 5);
-                    doTask("Validando os dados ...", 8);
-                    doTask("Validando os dados ...", 16);
-                    doTask("Validando os dados ...", 18);
-                    doTask("Validando os dados ...", 20);
-                    doTask("Estabelecendo a conexão ...", 30);
-                    doTask("Estabelecendo a conexão ...", 40);
-                    doTask("Criptografando a conexão ...", 50);
-                    doTask("Criptografando a conexão ...", 60);
                     doTask("Criptografando a conexão ...", 70);
-                    doTask("Aguarde ...", 80);
                     doTask("Aguarde ...", 90);
                     doTask("Aguarde ...", 100);
                     doTask("Seja bem vindo!", 100);

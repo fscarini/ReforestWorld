@@ -107,23 +107,11 @@ public class CadastroLoadTela extends javax.swing.JDialog {
             public void run() {
                 try {
                     doTask("Iniciando seu cadastro ...", 3);
-                    doTask("Iniciando seu cadastro ...", 5);
-                    doTask("Iniciando seu cadastro ...", 8);
-                    doTask("Iniciando seu cadastro ...", 11);
-                    doTask("Iniciando seu cadastro ...", 14);
-                    doTask("Iniciando seu cadastro ...", 16);
                     doTask("Iniciando seu cadastro ...", 18);
                     doTask("Validando os dados ...", 20);
-                    doTask("Checando junto ao governo local ...", 30);
-                    doTask("Checando junto ao governo local ...", 40);
                     doTask("Checando junto ao governo local ...", 50);
                     doTask("Obtendo retorno ...", 60);
-                    doTask("Criptografando ...", 70);
-                    doTask("Criptografando ...", 73);
-                    doTask("Criptografando ...", 75);
                     doTask("Criptografando ...", 78);
-                    doTask("Finalizando a criptografia ...", 80);
-                    doTask("Finalizando a criptografia ...", 84);
                     doTask("Finalizando a criptografia ...", 88);
                     doTask("Gravando seus dados ...", 90);
                     doTask("Finalizando ...", 100);

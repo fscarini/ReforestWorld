@@ -67,11 +67,10 @@ public class LoginTela extends JPanel {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             new RW.forms.LoginLoadTela(null, true).setVisible(true);
+                            TelaHome telaHome = new TelaHome();
+                            telaHome.setVisible(true);
                         }
                     });
-                    TelaHome telaHome = new TelaHome();
-                    telaHome.setVisible(true);
-                    FlatLaf.registerCustomDefaultsSource("RW.themes");
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
             } catch (Exception ex) {
