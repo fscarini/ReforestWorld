@@ -46,6 +46,7 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         String userDir = System.getProperty("user.dir");
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16/vlc-3.0.16");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("RW.themes");
         FlatMacDarkLaf.setup();

@@ -2,7 +2,10 @@
 package RW.Drawer;
 
 import RW.Tabbed.WindowsTabbed;
+import RW.forms.CadastroEventosTela;
 import RW.forms.TelaHome;
+import RW.forms.Teste;
+import RW.forms.Teste1;
 import RW.main.Main;
 import com.sun.jna.NativeLibrary;
 import java.util.HashSet;
@@ -41,26 +44,26 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
-            {"~FERNANDO~"},
-            {"Dashboard"},
-            {"~RAUL~"},
-            {"Email", "Inbox", "Read", "Compost"},
+            {"~ÁREA DO USUÁRIO~"},
+            {"Meu Perfil"},
+            {"~COMUNIDADE~"},
             {"Chat"},
-            {"Calendar"},
-            {"~GUILHERME~"},
-            {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
-            {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
-            {"~OTHER~"},
-            {"Charts", "Apex", "Flot", "Sparkline"},
-            {"Icons", "Feather Icons", "Flag Icons", "Mdi Icons"},
-            {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},
+            {"Forum"},
+            {"~DOAÇÕES~"},
+            {"Cadastro de Mudas"},
+            {"Doações Livres"},
+            {"Eventos", "Cadastro de Eventos", "Consulta de Eventos"},
+            {"Minhas Contribuições"},
+            {"~CONFIGURAÇÕES~"},
+            {"Ajuda", "Fale conosco", "Sobre nos", "Ajuda"},
+            {"Configurações"},
             {"Logout"}
         };
-        
+
         String icons[] = {
             "dashboard.svg",
-            "email.svg",
             "chat.svg",
+            "email.svg",
             "calendar.svg",
             "ui.svg",
             "forms.svg",
@@ -68,7 +71,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
             "icon.svg",
             "page.svg",
             "logout.svg"};
-         
+            
         return new SimpleMenuOption()
                .setMenus(menus)
                .setIcons(icons)
@@ -76,9 +79,19 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                .setIconScale(0.45f)
                .addMenuEvent(new MenuEvent() {
                     public void selected(MenuAction action, int index, int subIndex) {
+                        if (index == 0) {
+                        WindowsTabbed.getInstance().addTab("Test", new Teste());
+                        }
+                        if (index == 2) {
+                        WindowsTabbed.getInstance().addTab("Test1", new Teste1());
+                        }
+                        if(index == 5 && subIndex == 1){
+                            WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
+                        }
                         if (index == 9) {
                             String userDir = System.getProperty("user.dir");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
+                            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16/vlc-3.0.16");
                             Main main = new Main();
                             main.setVisible(true);
 //                            TelaHome.dispose();
