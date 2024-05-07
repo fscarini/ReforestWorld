@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class ConexaoController {
 
-    public void cadastroUsuario(CadastroTela view) throws SQLException {
+    public String cadastroUsuario(CadastroTela view) throws SQLException {
 
         ConexaoDAO cadastro = new ConexaoDAO();
         String code = generateVerifyCode();
@@ -23,6 +23,7 @@ public class ConexaoController {
             (String) view.getSexoComboBox().getSelectedItem(),
             view.getCpfTextField().getText(),
             code);
+        return code;
 
     }
 

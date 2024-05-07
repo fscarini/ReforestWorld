@@ -24,7 +24,6 @@ public class ConfigConexao {
         String user = "avnadmin";
         String password = "AVNS_vwM_kVHzcyVDkeI8bb5";
         String database = "db_rwc";
-        //"jdbc:mysql://mysql-260935f7-dartvader.b.aivencloud.com:16916/db_rwc","avnadmin","AVNS_vwM_kVHzcyVDkeI8bb5");
     
         // Concatenando login e senha em uma string
         String dados = host + ":" + port + ":" + user + ":" + password + ":" + database;

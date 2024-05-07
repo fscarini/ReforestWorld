@@ -1,5 +1,7 @@
 package RW.forms;
 
+import RW.components.ModelMessage;
+import RW.components.ServiceMail;
 import RW.components.StatusForcaSenha;
 import RW.controller_dao.ConexaoController;
 import RW.controller_dao.ConexaoDAO;
@@ -137,6 +139,25 @@ public class CadastroTela extends JPanel {
         add(cadastrarButton, "gapy 30");
     }
     
+    private void sendMail(String email, String code) {
+        new Thread(() -> {
+            // Chama o serviço de envio de e-mail
+            ModelMessage message = new ServiceMail().sendMail(email, code);
+            // Mostra o resultado do envio de e-mail
+            if (message.isSuccess()) {
+                // Operação bem-sucedida: Esconda o componente de carregamento e mostre uma mensagem de sucesso
+                // Por exemplo:
+                // loading.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Email de verificação enviado com sucesso!");
+            } else {
+                // Operação com falha: Esconda o componente de carregamento e mostre uma mensagem de erro
+                // Por exemplo:
+                // loading.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Falha ao enviar email de verificação: " + message.getMessage());
+            }
+        }).start();
+    }
+    
     private void realizarCadastro() {
         try {
             // Simula uma operação demorada
@@ -169,6 +190,9 @@ public class CadastroTela extends JPanel {
             }else if(dao.checkEmailDuplicado(getEmailTextField().getText())){
                 JOptionPane.showMessageDialog(null, "Email já cadastrado! Verifique e tente novamente.");
             }else{
+                ConexaoController cadastroController = new ConexaoController();
+                String code = cadastroController.cadastroUsuario(this);
+                sendMail(getEmailTextField().getText(), code);
                 cadastro.cadastroUsuario(this);
                 inicioTela.dispose();
                 SwingUtilities.getWindowAncestor(this).dispose();

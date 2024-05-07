@@ -10,7 +10,7 @@ primary key (id)
 insert into users(id, nome, email, senha) values (null, 'admin', 'admin@reforestworld,com.br','admin');
 select * from users;
 select * from eventos;
-update users set cpf= '123.456.789-92' where id = 55;
+update users set status_verificacao= 'Verificado' where id = 26;
 ALTER TABLE `db_rwc`.`users` 
 ADD COLUMN `dt_nascimento` VARCHAR(10) NOT NULL AFTER `senha`,
 ADD COLUMN `sexo` VARCHAR(1) NOT NULL AFTER `dt_nascimento`,
@@ -25,3 +25,5 @@ CHANGE COLUMN `data do registro` `data_registro` DATETIME NOT NULL DEFAULT CURRE
 
 SELECT * FROM eventos;
 DESCRIBE eventos;
+SELECT * FROM users WHERE email='raul.santosss@gmail.com' limit 1;
+DELETE FROM users WHERE email='raul.santosss@gmail.com'
