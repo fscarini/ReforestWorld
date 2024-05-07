@@ -1,10 +1,9 @@
 
 package RW.forms;
 
+import RW.controller_dao.ConexaoDAO;
 import RW.controller_dao.LoginController;
-import RW.controller_dao.LoginDAO;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
@@ -60,7 +59,7 @@ public class LoginTela extends JPanel {
                     return;
                 }
                 var usuario = new LoginController(login, senha);
-                var dao = new LoginDAO();
+                var dao = new ConexaoDAO();
                 if(dao.existe(usuario)){
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
