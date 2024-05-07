@@ -83,11 +83,11 @@ public class ConexaoDAO {
         conexao.close();  
         return verify;
     }
-    public boolean checkDuplicateUser(String user) throws SQLException {
+    public boolean checkCPFDuplicado(String cpf) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("select UserID from `user` where UserName=? and `Status`='Verified' limit 1");
-        p.setString(1, user);
+        var p = conexao.prepareStatement("SELECT id FROM users WHERE CPF=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        p.setString(1, cpf);
         ResultSet r = p.executeQuery();
         if (r.first()) {
             duplicate = true;
@@ -97,11 +97,11 @@ public class ConexaoDAO {
         conexao.close(); 
         return duplicate;
     }
-    public boolean checkDuplicateEmail(String user) throws SQLException {
+    public boolean checkEmailDuplicado(String email) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("select UserID from `user` where Email=? and `Status`='Verified' limit 1");
-        p.setString(1, user);
+        var p = conexao.prepareStatement("SELECT id FROM users WHERE email=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        p.setString(1, email);
         ResultSet r = p.executeQuery();
         if (r.first()) {
             duplicate = true;
