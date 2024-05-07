@@ -112,18 +112,7 @@ public class CadastroTela extends JPanel {
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new RW.forms.CadastroLoadTela(null, true).setVisible(true);
-                        // Criar um JFrame para exibir o ConfirmaUsuarioTela
-                        JFrame frame = new JFrame("Confirmação de Usuário");
-
-                        // Adicionar o ConfirmaUsuarioTela ao JFrame
-                        ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela();
-                        frame.getContentPane().add(confirmaUsuarioTela);
-
-                        // Configurar o JFrame
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela ao sair
-                        frame.pack(); // Ajustar o tamanho do JFrame com base no conteúdo
-                        frame.setLocationRelativeTo(null); // Centralizar o JFrame na tela
-                        frame.setVisible(true); // Exibir o JFrame
+                        JOptionPane.showMessageDialog(null, "Seu cadastro foi realizado com sucesso! \n Ao realizar o primeiro acesso, você precisa confirmar o seu usuário com o código enviado para o e-mail cadastrado.");
                         Main main = new Main();
                         main.setVisible(true);
                     }

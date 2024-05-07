@@ -44,19 +44,19 @@ public class RecuperaSenhaTela extends JPanel {
         emaiJTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Insira seu E-mail");
 
         cmdLogin.addActionListener(e -> {
-            // Criar um JFrame para exibir o ConfirmaUsuarioTela
-            JFrame frame = new JFrame("Confirmação de Usuário");
-
-            // Adicionar o ConfirmaUsuarioTela ao JFrame
-            ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela();
-            frame.getContentPane().add(confirmaUsuarioTela);
-
-            // Configurar o JFrame
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela ao sair
-            frame.pack(); // Ajustar o tamanho do JFrame com base no conteúdo
-            frame.setLocationRelativeTo(null); // Centralizar o JFrame na tela
-            frame.setVisible(true); // Exibir o JFrame
-                //loginAction();
+//            // Criar um JFrame para exibir o ConfirmaUsuarioTela
+//            JFrame frame = new JFrame("Confirmação de Usuário");
+//
+//            // Adicionar o ConfirmaUsuarioTela ao JFrame
+//            ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela(emailTextField.getText());
+//            frame.getContentPane().add(confirmaUsuarioTela);
+//
+//            // Configurar o JFrame
+//            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela ao sair
+//            frame.pack(); // Ajustar o tamanho do JFrame com base no conteúdo
+//            frame.setLocationRelativeTo(null); // Centralizar o JFrame na tela
+//            frame.setVisible(true); // Exibir o JFrame
+//                //loginAction();
         });
         
         add(title);
