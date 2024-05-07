@@ -5,7 +5,7 @@
 package RW.forms;
 
 import RW.Tabbed.TabbedForm;
-import RW.controller_dao.CadastroController;
+import RW.controller_dao.ConexaoController;
 import java.sql.SQLException;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JOptionPane;
@@ -172,7 +172,7 @@ public class CadastroEventosTela extends TabbedForm {
     
     // Função Cadastrar
     private void cadastrar() {
-        CadastroController cadastro = new CadastroController();
+        ConexaoController cadastro = new ConexaoController();
         try {
             cadastro.cadastroEvento(this);
 

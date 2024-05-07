@@ -1,7 +1,7 @@
 package RW.forms;
 
 import RW.components.StatusForcaSenha;
-import RW.controller_dao.CadastroController;
+import RW.controller_dao.ConexaoController;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
@@ -181,10 +181,9 @@ public class CadastroTela extends JPanel {
         
     //função cadastrar
     private void cadastrar() {
-        CadastroController cadastro = new CadastroController();
+        ConexaoController cadastro = new ConexaoController();
         try {
-            cadastro.cadastroUsuario(this);
-            
+            cadastro.cadastroUsuario(this);         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
         }

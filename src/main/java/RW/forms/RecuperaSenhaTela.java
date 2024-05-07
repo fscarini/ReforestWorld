@@ -1,7 +1,7 @@
 package RW.forms;
 
 import RW.controller_dao.LoginController;
-import RW.controller_dao.LoginDAO;
+import RW.controller_dao.ConexaoDAO;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.UIScale;
