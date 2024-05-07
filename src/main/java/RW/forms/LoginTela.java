@@ -60,7 +60,7 @@ public class LoginTela extends JPanel {
                 }
                 var usuario = new LoginController(login, senha);
                 var dao = new ConexaoDAO();
-                if(dao.existe(usuario)){
+                if(dao.existeVerificado(usuario)){
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
                     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -70,6 +70,16 @@ public class LoginTela extends JPanel {
                             telaHome.setVisible(true);
                         }
                     });
+                }else if(dao.existeNaoVerificado(usuario)){
+                    inicioTela.dispose();
+                    SwingUtilities.getWindowAncestor(this).dispose();
+                    JFrame frame = new JFrame("Confirmação de Usuário");
+                    ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela(emailTextField.getText());
+                    frame.getContentPane().add(confirmaUsuarioTela);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
             } catch (Exception ex) {

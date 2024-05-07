@@ -1,7 +1,10 @@
 package RW.forms;
 
+import RW.components.ModelMessage;
+import RW.components.ServiceMail;
 import RW.components.StatusForcaSenha;
 import RW.controller_dao.ConexaoController;
+import RW.controller_dao.ConexaoDAO;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import net.miginfocom.swing.MigLayout;
@@ -107,27 +110,6 @@ public class CadastroTela extends JPanel {
             String mensagemErro = verificarCamposCadastro();
             if (mensagemErro.isEmpty()) {
                 cadastrar();
-                inicioTela.dispose();
-                SwingUtilities.getWindowAncestor(this).dispose();
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new RW.forms.CadastroLoadTela(null, true).setVisible(true);
-                        // Criar um JFrame para exibir o ConfirmaUsuarioTela
-                        JFrame frame = new JFrame("Confirmação de Usuário");
-
-                        // Adicionar o ConfirmaUsuarioTela ao JFrame
-                        ConfirmaUsuarioTela confirmaUsuarioTela = new ConfirmaUsuarioTela();
-                        frame.getContentPane().add(confirmaUsuarioTela);
-
-                        // Configurar o JFrame
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela ao sair
-                        frame.pack(); // Ajustar o tamanho do JFrame com base no conteúdo
-                        frame.setLocationRelativeTo(null); // Centralizar o JFrame na tela
-                        frame.setVisible(true); // Exibir o JFrame
-                        Main main = new Main();
-                        main.setVisible(true);
-                    }
-                });
             } else {
                 JOptionPane.showMessageDialog(null,mensagemErro);
             }
@@ -157,6 +139,25 @@ public class CadastroTela extends JPanel {
         add(cadastrarButton, "gapy 30");
     }
     
+    private void sendMail(String email, String code) {
+        new Thread(() -> {
+            // Chama o serviço de envio de e-mail
+            ModelMessage message = new ServiceMail().sendMail(email, code);
+            // Mostra o resultado do envio de e-mail
+            if (message.isSuccess()) {
+                // Operação bem-sucedida: Esconda o componente de carregamento e mostre uma mensagem de sucesso
+                // Por exemplo:
+                // loading.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Email de verificação enviado com sucesso!");
+            } else {
+                // Operação com falha: Esconda o componente de carregamento e mostre uma mensagem de erro
+                // Por exemplo:
+                // loading.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Falha ao enviar email de verificação: " + message.getMessage());
+            }
+        }).start();
+    }
+    
     private void realizarCadastro() {
         try {
             // Simula uma operação demorada
@@ -183,7 +184,27 @@ public class CadastroTela extends JPanel {
     private void cadastrar() {
         ConexaoController cadastro = new ConexaoController();
         try {
-            cadastro.cadastroUsuario(this);         
+            var dao = new ConexaoDAO();
+            if(dao.checkCPFDuplicado(getCpfTextField().getText())){
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado! Verifique e tente novamente.");
+            }else if(dao.checkEmailDuplicado(getEmailTextField().getText())){
+                JOptionPane.showMessageDialog(null, "Email já cadastrado! Verifique e tente novamente.");
+            }else{
+                ConexaoController cadastroController = new ConexaoController();
+                String code = cadastroController.cadastroUsuario(this);
+                sendMail(getEmailTextField().getText(), code);
+                cadastro.cadastroUsuario(this);
+                inicioTela.dispose();
+                SwingUtilities.getWindowAncestor(this).dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new RW.forms.CadastroLoadTela(null, true).setVisible(true);
+                        JOptionPane.showMessageDialog(null, "Seu cadastro foi realizado com sucesso! \n Ao realizar o primeiro acesso, você precisa confirmar o seu usuário com o código enviado para o e-mail cadastrado.");
+                        Main main = new Main();
+                        main.setVisible(true);
+                    }
+                });
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
         }
