@@ -101,11 +101,11 @@ public class InicioOverlay extends JWindow {
             textTitle.putClientProperty(FlatClientProperties.STYLE, "" +
                     "font:montserrat +40;" +
                     "border:0,0,0,0");
-
             textDescription.setOpaque(false);
             textDescription.setEditable(false);
             textDescription.putClientProperty(FlatClientProperties.STYLE, "" +
                     "font:montserrat +2;" +
+                    "foreground:$Component.accentColor;" +
                     "border:0,0,0,0");
             sobreNosJButton.putClientProperty(FlatClientProperties.STYLE, "" +
                     "background:$Component.accentColor;" +
