@@ -2,10 +2,20 @@
 package RW.Drawer;
 
 import RW.Tabbed.WindowsTabbed;
+import RW.forms.AjudaTela;
 import RW.forms.CadastroEventosTela;
+import RW.forms.CadastroMudasTela;
+import RW.forms.ChatTela;
+import RW.forms.ConfiguracoesTela;
+import RW.forms.ConsultaEventosTela;
+import RW.forms.DoacaoLivreTela;
+import RW.forms.FaleConoscoTela;
+import RW.forms.ForumTela;
+import RW.forms.GestaoUsuariosTela;
+import RW.forms.MeuPerfilTela;
+import RW.forms.MinhasContribuicoesTela;
+import RW.forms.SobreNosTela;
 import RW.forms.TelaHome;
-import RW.forms.Teste;
-import RW.forms.Teste1;
 import RW.main.Main;
 import com.sun.jna.NativeLibrary;
 import java.util.HashSet;
@@ -51,13 +61,14 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
             {"Chat"},
             {"Forum"},
             {"~DOAÇÕES~"},
-            {"Cadastro de Mudas"},
+            {"Gestão de Mudas"},
             {"Doações Livres"},
             {"Eventos", "Cadastro de Eventos", "Consulta de Eventos"},
             {"Minhas Contribuições"},
             {"~CONFIGURAÇÕES~"},
-            {"Ajuda", "Fale conosco", "Sobre nos", "Ajuda"},
+            {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
             {"Configurações"},
+            {"Gestão de Usuários"},
             {"Logout"}
         };
 
@@ -71,6 +82,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
             "chart.svg",
             "icon.svg",
             "page.svg",
+            "page.svg",
             "logout.svg"};
             
         return new SimpleMenuOption()
@@ -82,15 +94,45 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                     public void selected(MenuAction action, int index, int subIndex) {
 
                         if (index == 0) {
-                        WindowsTabbed.getInstance().addTab("Test", new Teste());
+                        WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela());
+                        }
+                        if (index == 1) {
+                        WindowsTabbed.getInstance().addTab("Chat", new ChatTela());
                         }
                         if (index == 2) {
-                        WindowsTabbed.getInstance().addTab("Test1", new Teste1());
+                        WindowsTabbed.getInstance().addTab("Forum", new ForumTela());
+                        }
+                        if (index == 3) {
+                        WindowsTabbed.getInstance().addTab("Gestão de Mudas", new CadastroMudasTela());
+                        }
+                        if (index == 4) {
+                        WindowsTabbed.getInstance().addTab("Doações Livres", new DoacaoLivreTela());
                         }
                         if(index == 5 && subIndex == 1){
                             WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
                         }
+                        if(index == 5 && subIndex == 2){
+                            WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());
+                        }
+                        if (index == 6) {
+                        WindowsTabbed.getInstance().addTab("Minhas Contribuições", new MinhasContribuicoesTela());
+                        }
+                        if (index == 7 && subIndex == 1) {
+                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                        }
+                        if (index == 7 && subIndex == 2) {
+                        WindowsTabbed.getInstance().addTab("Sobre nós", new SobreNosTela());
+                        }
+                        if (index == 7 && subIndex == 3) {
+                        WindowsTabbed.getInstance().addTab("Ajuda", new AjudaTela());
+                        }
+                        if (index == 8) {
+                        WindowsTabbed.getInstance().addTab("Configurações", new ConfiguracoesTela());
+                        }
                         if (index == 9) {
+                        WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela());
+                        }
+                        if (index == 10) {
 
                             String userDir = System.getProperty("user.dir");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
