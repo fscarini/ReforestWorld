@@ -1,4 +1,3 @@
-
 package RW.Drawer;
 
 import RW.Tabbed.WindowsTabbed;
@@ -15,11 +14,13 @@ import RW.forms.GestaoUsuariosTela;
 import RW.forms.MeuPerfilTela;
 import RW.forms.MinhasContribuicoesTela;
 import RW.forms.SobreNosTela;
-import RW.forms.TelaHome;
 import RW.main.Main;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.sun.jna.NativeLibrary;
-import java.util.HashSet;
-import java.util.Set;
+import java.awt.EventQueue;
 import raven.drawer.component.SimpleDrawerBuilder;
 import raven.drawer.component.footer.SimpleFooterData;
 import raven.drawer.component.header.SimpleHeaderData;
@@ -28,16 +29,29 @@ import raven.drawer.component.menu.MenuEvent;
 import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import raven.swing.AvatarIcon;
-import javax.swing.JMenu;
 import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
 
-
-/**
- *
- * @author Guilherme Quiller
- */
 public class MyDrawerBuilder extends SimpleDrawerBuilder{
 
+        private void changeMode(boolean dark) {
+        if (FlatLaf.isLafDark() != dark) {
+            if (dark) {
+                EventQueue.invokeLater(() -> {
+                    FlatAnimatedLafChange.showSnapshot();
+                    FlatMacDarkLaf.setup();
+                    FlatLaf.updateUI();
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+            } else {
+                EventQueue.invokeLater(() -> {
+                    FlatAnimatedLafChange.showSnapshot();
+                    FlatMacLightLaf.setup();
+                    FlatLaf.updateUI();
+                    FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                });
+            }
+        }
+    }
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
@@ -69,6 +83,8 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
             {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
             {"Configurações"},
             {"Gestão de Usuários"},
+            {"Dark Theme"},
+            {"Light Theme"},
             {"Logout"}
         };
 
@@ -83,6 +99,8 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
             "icon.svg",
             "page.svg",
             "page.svg",
+            "dark.svg",
+            "light.svg",
             "logout.svg"};
             
         return new SimpleMenuOption()
@@ -133,6 +151,12 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder{
                         WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela());
                         }
                         if (index == 10) {
+                        changeMode(true);
+                        }
+                        if (index == 11) {
+                        changeMode(false);
+                        }
+                        if (index == 12) {
 
                             String userDir = System.getProperty("user.dir");
                             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir +"/src/vlc-3.0.16");
