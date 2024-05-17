@@ -4,11 +4,11 @@ import RW.Tabbed.TabbedForm;
 import RW.controller_dao.ConexaoController;
 import java.awt.Image;
 import java.io.FileInputStream;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,22 +40,27 @@ public class CadastroMudasTela extends TabbedForm {
                 ImagemMudaLabel.setIcon(new ImageIcon(foto));
                 ImagemMudaLabel.updateUI();
                 fotoCarregada = true;
-            } catch (Exception e) {
-                System.out.println(e);
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
         }
     }
-    // Função Cadastrar
 
-    private void cadastrar() {
+    private int cadastrar() {
         ConexaoController cadastro = new ConexaoController();
         try {
-            cadastro.cadastroMuda(this);
+            int retorno = cadastro.cadastroMuda(this);
+            if (retorno > 0) {
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível realizar o cadastro.");
+            };
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
             Logger.getLogger(CadastroMudasTela.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
 
     private void buscar() {
@@ -72,11 +77,11 @@ public class CadastroMudasTela extends TabbedForm {
     private void reset() {
         BuscarTextField.setText(null);
         CaracteristicasTextArea.setText(null);
-        EstadoTextField.setText(null);
+        EstadoComboBox.setSelectedItem(null);
         ImagemMudaLabel.setIcon(new ImageIcon(CadastroMudasTela.class.getResource("/imagens/camera (1).png")));
         NomeCientificoTextField.setText(null);
         NomeComercialTextField.setText(null);
-        StatusTextField.setText(null);
+        StatusComboBox.setSelectedItem(null);
         UsosTextArea.setText(null);
         ValorTextField.setText(null);
         BuscarTextField.requestFocus();
@@ -98,10 +103,8 @@ public class CadastroMudasTela extends TabbedForm {
         CaracteristicasLabel = new javax.swing.JLabel();
         CadastrarMudaButton = new javax.swing.JButton();
         LimparButton = new javax.swing.JButton();
-        EstadoTextField = new javax.swing.JTextField();
         EstadoLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        StatusTextField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         UsosTextArea = new javax.swing.JTextArea();
         UsosComunsLabel = new javax.swing.JLabel();
@@ -112,6 +115,8 @@ public class CadastroMudasTela extends TabbedForm {
         BuscaLabel = new javax.swing.JLabel();
         BuscarTextField = new javax.swing.JTextField();
         BuscarButton = new javax.swing.JButton();
+        EstadoComboBox = new javax.swing.JComboBox<>();
+        StatusComboBox = new javax.swing.JComboBox<>();
 
         CaracteristicasTextArea.setColumns(20);
         CaracteristicasTextArea.setRows(5);
@@ -178,6 +183,10 @@ public class CadastroMudasTela extends TabbedForm {
             }
         });
 
+        EstadoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+
+        StatusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Ativa", "Inativa" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,7 +210,6 @@ public class CadastroMudasTela extends TabbedForm {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane2)
-                            .addComponent(EstadoTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ValorTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(NomeComercialTextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +218,8 @@ public class CadastroMudasTela extends TabbedForm {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(CadastrarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AtualizarMudaButton)))
+                                .addComponent(AtualizarMudaButton))
+                            .addComponent(EstadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -220,8 +229,8 @@ public class CadastroMudasTela extends TabbedForm {
                                     .addComponent(NomeCientificoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(StatusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                 .addComponent(ImagemLabel)
                                 .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,13 +255,13 @@ public class CadastroMudasTela extends TabbedForm {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ValorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ValorLabel)
-                    .addComponent(StatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(StatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EstadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EstadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(EstadoLabel))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,12 +357,94 @@ public class CadastroMudasTela extends TabbedForm {
         this.CaracteristicasTextArea = CaracteristicasTextArea;
     }
 
-    public JTextField getEstadoTextField() {
-        return EstadoTextField;
+    @SuppressWarnings("empty-statement")
+    public int getEstadoTextField() {
+        int codigoEstado = 0;
+
+        if ("Acre".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 1;
+        };
+        if ("Alagoas".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 2;
+        };
+        if ("Amapá".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 3;
+        };
+        if ("Amazonas".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 4;
+        };
+        if ("Bahia".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 5;
+        };
+        if ("Ceará".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 6;
+        };
+        if ("Espírito Santo".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 7;
+        };
+        if ("Goiás".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 8;
+        };
+        if ("Maranhão".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 9;
+        };
+        if ("Mato Grosso".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 10;
+        };
+        if ("Mato Grosso do Sul".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 11;
+        };
+        if ("Minas Gerais".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 12;
+        };
+        if ("Pará".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 13;
+        };
+        if ("Paraíba".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 14;
+        };
+        if ("Paraná".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 15;
+        };
+        if ("Pernambuco".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 16;
+        };
+        if ("Piauí".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 17;
+        };
+        if ("Rio de Janeiro".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 18;
+        };
+        if ("Rio Grande do Norte".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 19;
+        };
+        if ("Rio Grande do Sul".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 20;
+        };
+        if ("Rondônia".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 21;
+        };
+        if ("Roraima".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 22;
+        };
+        if ("Santa Catarina".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 23;
+        };
+        if ("São Paulo".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 24;
+        };
+        if ("Sergipe".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 25;
+        };
+        if ("Tocantins".equals(EstadoComboBox.getSelectedItem())) {
+            codigoEstado = 26;
+        };
+
+        return codigoEstado;
     }
 
-    public void setEstadoTextField(JTextField EstadoTextField) {
-        this.EstadoTextField = EstadoTextField;
+    public void setEstadoComboBox(JComboBox<String> EstadoComboBox) {
+        this.EstadoComboBox = EstadoComboBox;
     }
 
     public JTextField getNomeCientificoTextField() {
@@ -372,12 +463,19 @@ public class CadastroMudasTela extends TabbedForm {
         NomeComercialTextField.setText(nomeComercial);
     }
 
-    public JTextField getStatusTextField() {
-        return StatusTextField;
+    public int getStatusTextField() {
+        int codigoStatus = 0;
+        if ("Ativa".equals(StatusComboBox.getSelectedItem())) {
+            codigoStatus = 1;
+        }
+        if ("Inativa".equals(StatusComboBox.getSelectedItem())) {
+            codigoStatus = 2;
+        }
+        return codigoStatus;
     }
 
-    public void setStatusTextField(JTextField StatusTextField) {
-        this.StatusTextField = StatusTextField;
+    public void setStatusTextField(JComboBox<String> StatusComboBox) {
+        this.StatusComboBox = StatusComboBox;
     }
 
     public JTextArea getUsosTextArea() {
@@ -401,25 +499,8 @@ public class CadastroMudasTela extends TabbedForm {
     }
 
     public void setImagemMudaLabel(ImageIcon icon) {
-    // Obtém a largura e a altura do JLabel
-    int labelWidth = ImagemMudaLabel.getWidth();
-    int labelHeight = ImagemMudaLabel.getHeight();
-    
-    // Carrega a imagem original do ImageIcon
-    Image imagemOriginal = icon.getImage();
-    
-    // Redimensiona a imagem para caber no JLabel
-    Image imagemRedimensionada = imagemOriginal.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
-    
-    // Cria um novo ImageIcon com a imagem redimensionada
-    ImageIcon novoIcon = new ImageIcon(imagemRedimensionada);
-    
-    // Define o novo ImageIcon como o ícone do JLabel
-    ImagemMudaLabel.setIcon(novoIcon);
-    
-    // Atualiza o JLabel para refletir a mudança
-    ImagemMudaLabel.repaint();
-}
+        ImagemMudaLabel.setIcon(icon);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtualizarMudaButton;
@@ -430,8 +511,8 @@ public class CadastroMudasTela extends TabbedForm {
     private javax.swing.JLabel CaracteristicasLabel;
     private javax.swing.JTextArea CaracteristicasTextArea;
     private javax.swing.JButton CarregarImagemButton;
+    private javax.swing.JComboBox<String> EstadoComboBox;
     private javax.swing.JLabel EstadoLabel;
-    private javax.swing.JTextField EstadoTextField;
     private javax.swing.JLabel ImagemLabel;
     private javax.swing.JLabel ImagemMudaLabel;
     private javax.swing.JButton LimparButton;
@@ -439,7 +520,7 @@ public class CadastroMudasTela extends TabbedForm {
     private javax.swing.JTextField NomeCientificoTextField;
     private javax.swing.JLabel NomeComercialLabel;
     private javax.swing.JTextField NomeComercialTextField;
-    private javax.swing.JTextField StatusTextField;
+    private javax.swing.JComboBox<String> StatusComboBox;
     private javax.swing.JLabel UsosComunsLabel;
     private javax.swing.JTextArea UsosTextArea;
     private javax.swing.JLabel ValorLabel;

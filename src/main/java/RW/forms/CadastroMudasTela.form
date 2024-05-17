@@ -52,7 +52,6 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jScrollPane2" max="32767" attributes="0"/>
-                              <Component id="EstadoTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                               <Component id="ValorTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="NomeComercialTextField" alignment="0" max="32767" attributes="0"/>
@@ -63,6 +62,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="AtualizarMudaButton" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="EstadoComboBox" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -74,8 +74,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="StatusTextField" min="-2" pref="218" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="StatusComboBox" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" alignment="1" groupAlignment="2" attributes="0">
@@ -110,14 +110,14 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="ValorTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="ValorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="StatusTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="StatusComboBox" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="EstadoTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="EstadoComboBox" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="EstadoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -218,8 +218,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LimparButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="EstadoTextField">
-        </Component>
         <Component class="javax.swing.JLabel" name="EstadoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Estado"/>
@@ -229,8 +227,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Status"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="StatusTextField">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -296,6 +292,58 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="EstadoComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="27">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="Acre"/>
+                <StringItem index="2" value="Alagoas"/>
+                <StringItem index="3" value="Amap&#xe1;"/>
+                <StringItem index="4" value="Amazonas"/>
+                <StringItem index="5" value="Bahia"/>
+                <StringItem index="6" value="Cear&#xe1;"/>
+                <StringItem index="7" value="Esp&#xed;rito Santo"/>
+                <StringItem index="8" value="Goi&#xe1;s"/>
+                <StringItem index="9" value="Maranh&#xe3;o"/>
+                <StringItem index="10" value="Mato Grosso"/>
+                <StringItem index="11" value="Mato Grosso do Sul"/>
+                <StringItem index="12" value="Minas Gerais"/>
+                <StringItem index="13" value="Par&#xe1;"/>
+                <StringItem index="14" value="Para&#xed;ba"/>
+                <StringItem index="15" value="Paran&#xe1;"/>
+                <StringItem index="16" value="Pernambuco"/>
+                <StringItem index="17" value="Piau&#xed;"/>
+                <StringItem index="18" value="Rio de Janeiro"/>
+                <StringItem index="19" value="Rio Grande do Norte"/>
+                <StringItem index="20" value="Rio Grande do Sul"/>
+                <StringItem index="21" value="Rond&#xf4;nia"/>
+                <StringItem index="22" value="Roraima"/>
+                <StringItem index="23" value="Santa Catarina"/>
+                <StringItem index="24" value="S&#xe3;o Paulo"/>
+                <StringItem index="25" value="Sergipe"/>
+                <StringItem index="26" value="Tocantins"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="StatusComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="Ativa"/>
+                <StringItem index="2" value="Inativa"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
