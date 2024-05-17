@@ -26,4 +26,7 @@ CHANGE COLUMN `data do registro` `data_registro` DATETIME NOT NULL DEFAULT CURRE
 SELECT * FROM eventos;
 DESCRIBE eventos;
 SELECT * FROM users WHERE email='raul.santosss@gmail.com' limit 1;
-DELETE FROM users WHERE id NOT IN(1,26,97)
+DELETE FROM users WHERE id NOT IN(1,26);
+SELECT * FROM estado;
+SELECT * FROM muda WHERE cod_muda = 146;
+SELECT CURRENT_TIMESTAMP
