@@ -4,12 +4,15 @@ import RW.connection.Conexao;
 import RW.forms.CadastroTela;
 import RW.forms.CadastroEventosTela;
 import RW.forms.CadastroMudasTela;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class ConexaoController {
@@ -41,31 +44,22 @@ public class ConexaoController {
         );
     }
 
-    public void cadastroMuda(CadastroMudasTela view) throws Exception {
+    public int cadastroMuda(CadastroMudasTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
-        String estado = view.getEstadoTextField().getText();
-        String status_muda = view.getStatusTextField().getText();
-        cadastro.cadastrarMuda(
+
+        int retorno = cadastro.cadastrarMuda(
                 view.getNomeCientificoTextField().getText(),
                 view.getNomeComercialTextField().getText(),
                 Double.parseDouble(view.getValorTextField().getText()),
-                //            if (estado.equals("Acre")){
-                //                return 1;
-                //            }else if(estado.equals("Alagoas")){
-                //                return 2;
-                //            }else{
-                //                return 3;
-                //            };,
-                //            if (status_muda.equals("Ativa")){
-                //                return 1;
-                //            };,
-                1, 1,
+                view.getEstadoTextField(),
+                view.getStatusTextField(),
                 view.getCaracteristicasTextArea().getText(),
                 view.getUsosTextArea().getText(),
                 view.getFis(),
                 view.getTamanho(),
                 1
         );
+        return retorno;
     }
 
     public Map<String, Object> buscaCadastroMuda(CadastroMudasTela view) throws Exception {
@@ -74,20 +68,20 @@ public class ConexaoController {
         if (resultadoConsulta != null) {
             String nomeCientifico = (String) resultadoConsulta.get("nome_cientifico");
             String nomeComercial = (String) resultadoConsulta.get("nome_comercial");
-            byte[] imagemMudaBytes = (byte[]) resultadoConsulta.get("imagem_muda");
+            BufferedImage imagemMudaBytes = (BufferedImage) resultadoConsulta.get("imagem_muda");
             view.setNomeCientificoTextField(nomeCientifico);
             view.setNomeComercialTextField(nomeComercial);
-
-            // Verifica se há uma imagem para exibir
-            if (imagemMudaBytes != null && imagemMudaBytes.length > 0) {
-                // Cria um ImageIcon a partir dos bytes da imagem
+            if (imagemMudaBytes != null) {
                 ImageIcon imagemIcon = new ImageIcon(imagemMudaBytes);
-
+                Icon foto = new ImageIcon(imagemIcon.getImage().getScaledInstance(
+                        view.getImagemMudaLabel().getWidth(),
+                        view.getImagemMudaLabel().getHeight(),
+                        Image.SCALE_SMOOTH));
                 // Define o ImageIcon como o ícone da JLabel
-                view.getImagemMudaLabel().setIcon(imagemIcon);
+                view.getImagemMudaLabel().setIcon(foto);
             } else {
                 // Se não houver imagem, limpa o ícone da JLabel
-                view.getImagemMudaLabel().setIcon(null);
+                view.getImagemMudaLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png")));
             }
         } else {
             // Se a consulta não retornou nenhum resultado, limpa os campos

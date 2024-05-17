@@ -1,13 +1,17 @@
 package RW.controller_dao;
 
 import RW.connection.Conexao;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 public class ConexaoDAO {
@@ -43,7 +47,7 @@ public class ConexaoDAO {
         conexao.close();
     }
 
-    public void cadastrarMuda(String nome_cientifico, String nome_comercial, double valor_muda,
+    public int cadastrarMuda(String nome_cientifico, String nome_comercial, double valor_muda,
             int cod_estado, int status_muda, String caracteristicas_gerais, String usos_comuns,
             FileInputStream fis, int tamanho, int cod_usuario) throws Exception {
         var conexao = new Conexao().conectar();
@@ -62,13 +66,9 @@ public class ConexaoDAO {
         p.setBlob(8, fis, tamanho);
         p.setInt(9, cod_usuario);
         int confirma = p.executeUpdate();
-        if (confirma == 1) {
-            JOptionPane.showMessageDialog(null, "Muda cadastrada com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Atenção! Muda não cadastrada. Verifique e tente novamente.");
-        }
         p.close();
         conexao.close();
+        return confirma;
     }
 
     public Map<String, Object> buscaCadastroMuda(String nome_cientifico) throws Exception {
@@ -78,25 +78,15 @@ public class ConexaoDAO {
         var rs = p.executeQuery();
         Map<String, Object> resultadoConsulta = new HashMap<>();
         if (rs.next()) {
-            // Extrai os valores do resultado da consulta
             String nomeCientifico = rs.getString("nome_cientifico");
             String nomeComercial = rs.getString("nome_comercial");
-            InputStream imagemMudaStream = rs.getBinaryStream("imagem_muda");
-
-            // Lê os bytes da imagem e armazena em um array de bytes
-            byte[] imagemMudaBytes = null;
-            if (imagemMudaStream != null) {
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                int bytesRead;
-                byte[] data = new byte[4096];
-                while ((bytesRead = imagemMudaStream.read(data, 0, data.length)) != -1) {
-                    buffer.write(data, 0, bytesRead);
-                }
-                imagemMudaBytes = buffer.toByteArray();
-            }
+            Blob blob = (Blob) rs.getBlob("imagem_muda");
+            byte[] img = blob.getBytes(1, (int) blob.length());
+            BufferedImage imagem = null;
+            imagem = ImageIO.read(new ByteArrayInputStream(img));
             resultadoConsulta.put("nome_cientifico", nomeCientifico);
             resultadoConsulta.put("nome_comercial", nomeComercial);
-            resultadoConsulta.put("imagem_muda", imagemMudaBytes);
+            resultadoConsulta.put("imagem_muda", imagem);
             rs.close();
             p.close();
             conexao.close();
@@ -130,7 +120,7 @@ public class ConexaoDAO {
 
     public void verificacaoUsuarioOk(String email) throws SQLException {
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("UPDATE users SET cod_verificacao='', status_verificacao='Verificado' where email=?");
+        var p = conexao.prepareStatement("UPDATE users SET cod_verificacao='', status_verificacao='Verificado', dt_verificacao=CURRENT_TIMESTAMP where email=?");
         p.setString(1, email);
         p.execute();
         p.close();
