@@ -33,7 +33,11 @@ public class ServiceMail {
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             message.setSubject("Código de verificação");
-            message.setText(code);
+            message.setText("Olá! Tudo bem? Somos da Reforest World!\n"
+                    + " Seu código de verificação é" + code
+                            + "\n Ao realizar o seu primeiro login, será solicitado que você digite o código."
+                            + "\n Após isso, sua conta será ativada e você poderá começar a contribuir com o nosso planeta."
+                            + "\n Seja bem vindo ao futuro!");
             Transport.send(message);
             ms.setSuccess(true);
         } catch (MessagingException e) {
