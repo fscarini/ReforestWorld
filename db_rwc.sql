@@ -28,5 +28,19 @@ DESCRIBE eventos;
 SELECT * FROM users WHERE email='raul.santosss@gmail.com' limit 1;
 DELETE FROM users WHERE id NOT IN(1,26);
 SELECT * FROM estado;
-SELECT * FROM muda WHERE cod_muda = 146;
-SELECT CURRENT_TIMESTAMP
+SELECT * FROM muda WHERE cod_muda = 149;
+SELECT CURRENT_TIMESTAMP;
+describe muda;
+select * from muda where nome_cientifico = 'arroz mexicanos';
+update muda set nome_cientifico='arroz mexicanos',
+nome_comercial='arroz mexicanos',
+valor_muda=200,
+cod_estado=1,
+status_muda=1,
+caracteristicas_gerais=1,
+usos_comuns=1,
+imagem_muda=1,
+cod_usuario=1,
+dt_operacao= CURRENT_TIMESTAMP where nome_cientifico = 'arroz mexicanos';
+
+select * from muda where cod_muda = 1

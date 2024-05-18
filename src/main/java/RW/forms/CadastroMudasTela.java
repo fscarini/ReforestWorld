@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,6 +45,7 @@ public class CadastroMudasTela extends TabbedForm {
         }
     }
 
+    @SuppressWarnings("empty-statement")
     private int cadastrar() {
         ConexaoController cadastro = new ConexaoController();
         try {
@@ -74,6 +74,17 @@ public class CadastroMudasTela extends TabbedForm {
         }
     }
 
+    private void atualizar() {
+        ConexaoController cadastro = new ConexaoController();
+        try {
+            cadastro.atualizaMuda(this);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            Logger.getLogger(CadastroMudasTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void reset() {
         BuscarTextField.setText(null);
         CaracteristicasTextArea.setText(null);
@@ -85,85 +96,72 @@ public class CadastroMudasTela extends TabbedForm {
         UsosTextArea.setText(null);
         ValorTextField.setText(null);
         BuscarTextField.requestFocus();
+        codigoLabel.setText(null);
+    }
+
+    private void resetBuscar() {
+        CaracteristicasTextArea.setText(null);
+        EstadoComboBox.setSelectedItem(null);
+        ImagemMudaLabel.setIcon(new ImageIcon(CadastroMudasTela.class.getResource("/imagens/camera (1).png")));
+        NomeCientificoTextField.setText(null);
+        NomeComercialTextField.setText(null);
+        StatusComboBox.setSelectedItem(null);
+        UsosTextArea.setText(null);
+        ValorTextField.setText(null);
+        BuscarTextField.requestFocus();
+        codigoLabel.setText(null);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        painelPrincipalPanel = new javax.swing.JPanel();
+        ImagemPanel = new javax.swing.JPanel();
+        ImagemMudaLabel = new javax.swing.JLabel();
+        ImagemLabel = new javax.swing.JLabel();
+        CarregarImagemButton = new javax.swing.JButton();
+        BuscaPanel = new javax.swing.JPanel();
+        BuscarTextField = new javax.swing.JTextField();
+        BuscaLabel = new javax.swing.JLabel();
+        BuscarButton = new javax.swing.JButton();
+        DadosPanel = new javax.swing.JPanel();
+        CaracteristicasLabel = new javax.swing.JLabel();
+        ValorTextField = new javax.swing.JTextField();
+        EstadoLabel = new javax.swing.JLabel();
+        NomeCientificoLabel = new javax.swing.JLabel();
+        EstadoComboBox = new javax.swing.JComboBox<>();
+        UsosComunsLabel = new javax.swing.JLabel();
         NomeComercialTextField = new javax.swing.JTextField();
+        NomeComercialLabel = new javax.swing.JLabel();
+        StatusComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         CaracteristicasTextArea = new javax.swing.JTextArea();
-        NomeCientificoTextField = new javax.swing.JTextField();
-        ValorTextField = new javax.swing.JTextField();
-        NomeCientificoLabel = new javax.swing.JLabel();
-        NomeComercialLabel = new javax.swing.JLabel();
-        ValorLabel = new javax.swing.JLabel();
-        CaracteristicasLabel = new javax.swing.JLabel();
-        CadastrarMudaButton = new javax.swing.JButton();
-        LimparButton = new javax.swing.JButton();
-        EstadoLabel = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         UsosTextArea = new javax.swing.JTextArea();
-        UsosComunsLabel = new javax.swing.JLabel();
+        ValorLabel = new javax.swing.JLabel();
+        NomeCientificoTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        codigoTxtLabel = new javax.swing.JLabel();
+        codigoLabel = new javax.swing.JLabel();
+        BotoesPanel = new javax.swing.JPanel();
+        CadastrarMudaButton = new javax.swing.JButton();
         AtualizarMudaButton = new javax.swing.JButton();
-        ImagemMudaLabel = new javax.swing.JLabel();
-        CarregarImagemButton = new javax.swing.JButton();
-        ImagemLabel = new javax.swing.JLabel();
-        BuscaLabel = new javax.swing.JLabel();
-        BuscarTextField = new javax.swing.JTextField();
-        BuscarButton = new javax.swing.JButton();
-        EstadoComboBox = new javax.swing.JComboBox<>();
-        StatusComboBox = new javax.swing.JComboBox<>();
+        LimparButton = new javax.swing.JButton();
 
-        CaracteristicasTextArea.setColumns(20);
-        CaracteristicasTextArea.setRows(5);
-        jScrollPane1.setViewportView(CaracteristicasTextArea);
+        setMaximumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        NomeCientificoLabel.setText("Nome Científico");
-
-        NomeComercialLabel.setText("Nome Comercial");
-
-        ValorLabel.setText("Valor");
-
-        CaracteristicasLabel.setText("Caracteristicas Gerais");
-
-        CadastrarMudaButton.setText("Cadastrar");
-        CadastrarMudaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarMudaButtonActionPerformed(evt);
-            }
-        });
-
-        LimparButton.setText("Limpar");
-        LimparButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimparButtonActionPerformed(evt);
-            }
-        });
-
-        EstadoLabel.setText("Estado");
-
-        jLabel6.setText("Status");
-
-        UsosTextArea.setColumns(20);
-        UsosTextArea.setRows(5);
-        jScrollPane2.setViewportView(UsosTextArea);
-
-        UsosComunsLabel.setText("Usos Comuns");
-
-        AtualizarMudaButton.setText("Atualizar");
-        AtualizarMudaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AtualizarMudaButtonActionPerformed(evt);
-            }
-        });
+        painelPrincipalPanel.setMaximumSize(new java.awt.Dimension(1024, 768));
+        painelPrincipalPanel.setMinimumSize(new java.awt.Dimension(1024, 768));
+        painelPrincipalPanel.setPreferredSize(new java.awt.Dimension(1024, 768));
 
         ImagemMudaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ImagemMudaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png"))); // NOI18N
         ImagemMudaLabel.setAlignmentY(0.0F);
+
+        ImagemLabel.setText("Imagem da espécie");
 
         CarregarImagemButton.setText("Anexar Imagem");
         CarregarImagemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +170,34 @@ public class CadastroMudasTela extends TabbedForm {
             }
         });
 
-        ImagemLabel.setText("Imagem da espécie");
+        javax.swing.GroupLayout ImagemPanelLayout = new javax.swing.GroupLayout(ImagemPanel);
+        ImagemPanel.setLayout(ImagemPanelLayout);
+        ImagemPanelLayout.setHorizontalGroup(
+            ImagemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ImagemPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ImagemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagemPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ImagemLabel)
+                        .addGap(121, 121, 121))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagemPanelLayout.createSequentialGroup()
+                .addContainerGap(102, Short.MAX_VALUE)
+                .addComponent(CarregarImagemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
+        );
+        ImagemPanelLayout.setVerticalGroup(
+            ImagemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ImagemPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(ImagemLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CarregarImagemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         BuscaLabel.setText("Buscar por nome científico");
 
@@ -183,123 +208,228 @@ public class CadastroMudasTela extends TabbedForm {
             }
         });
 
+        javax.swing.GroupLayout BuscaPanelLayout = new javax.swing.GroupLayout(BuscaPanel);
+        BuscaPanel.setLayout(BuscaPanelLayout);
+        BuscaPanelLayout.setHorizontalGroup(
+            BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BuscaLabel)
+                .addGap(18, 18, 18)
+                .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BuscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        BuscaPanelLayout.setVerticalGroup(
+            BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BuscaLabel)
+                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        CaracteristicasLabel.setText("Caracteristicas Gerais");
+
+        EstadoLabel.setText("Estado");
+
+        NomeCientificoLabel.setText("Nome Científico");
+
         EstadoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+
+        UsosComunsLabel.setText("Usos Comuns");
+
+        NomeComercialLabel.setText("Nome Comercial");
 
         StatusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Ativa", "Inativa" }));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BuscaLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BuscarButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(UsosComunsLabel)
-                            .addComponent(NomeComercialLabel)
-                            .addComponent(ValorLabel)
-                            .addComponent(CaracteristicasLabel)
-                            .addComponent(EstadoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ValorTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NomeComercialTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(LimparButton)
+        CaracteristicasTextArea.setColumns(20);
+        CaracteristicasTextArea.setRows(5);
+        jScrollPane1.setViewportView(CaracteristicasTextArea);
+
+        UsosTextArea.setColumns(20);
+        UsosTextArea.setRows(5);
+        jScrollPane2.setViewportView(UsosTextArea);
+
+        ValorLabel.setText("Valor");
+
+        jLabel6.setText("Status");
+
+        codigoTxtLabel.setText("Código");
+
+        javax.swing.GroupLayout DadosPanelLayout = new javax.swing.GroupLayout(DadosPanel);
+        DadosPanel.setLayout(DadosPanelLayout);
+        DadosPanelLayout.setHorizontalGroup(
+            DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DadosPanelLayout.createSequentialGroup()
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DadosPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CadastrarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(StatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(UsosComunsLabel)
+                                    .addComponent(NomeComercialLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(NomeComercialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addComponent(NomeCientificoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NomeCientificoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addComponent(EstadoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(EstadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addComponent(ValorLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AtualizarMudaButton))
-                            .addComponent(EstadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(NomeCientificoLabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(NomeCientificoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(StatusComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(ImagemLabel)
-                                .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CarregarImagemButton)))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                                .addComponent(ValorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DadosPanelLayout.createSequentialGroup()
+                                .addComponent(CaracteristicasLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(DadosPanelLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(codigoTxtLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codigoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BuscaLabel)
-                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuscarButton))
+        DadosPanelLayout.setVerticalGroup(
+            DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DadosPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(codigoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigoTxtLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomeComercialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NomeComercialLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NomeComercialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomeComercialLabel)
-                    .addComponent(NomeCientificoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomeCientificoLabel))
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomeCientificoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NomeCientificoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ValorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ValorLabel)
-                    .addComponent(jLabel6)
-                    .addComponent(StatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EstadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EstadoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EstadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EstadoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(CaracteristicasLabel))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(UsosComunsLabel)))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LimparButton)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(AtualizarMudaButton)
-                                .addComponent(CadastrarMudaButton))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ImagemLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CarregarImagemButton)))
-                .addGap(41, 41, 41))
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CaracteristicasLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UsosComunsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ValorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ValorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StatusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        CadastrarMudaButton.setText("Cadastrar");
+        CadastrarMudaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarMudaButtonActionPerformed(evt);
+            }
+        });
+
+        AtualizarMudaButton.setText("Atualizar");
+        AtualizarMudaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarMudaButtonActionPerformed(evt);
+            }
+        });
+
+        LimparButton.setText("Limpar");
+        LimparButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout BotoesPanelLayout = new javax.swing.GroupLayout(BotoesPanel);
+        BotoesPanel.setLayout(BotoesPanelLayout);
+        BotoesPanelLayout.setHorizontalGroup(
+            BotoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotoesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LimparButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CadastrarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(AtualizarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        BotoesPanelLayout.setVerticalGroup(
+            BotoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotoesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LimparButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CadastrarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AtualizarMudaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout painelPrincipalPanelLayout = new javax.swing.GroupLayout(painelPrincipalPanel);
+        painelPrincipalPanel.setLayout(painelPrincipalPanelLayout);
+        painelPrincipalPanelLayout.setHorizontalGroup(
+            painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
+                        .addComponent(DadosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ImagemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(BotoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28))
+                    .addComponent(BuscaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
+        );
+        painelPrincipalPanelLayout.setVerticalGroup(
+            painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(BuscaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(painelPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelPrincipalPanelLayout.createSequentialGroup()
+                        .addComponent(ImagemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(BotoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DadosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipalPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(painelPrincipalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -314,7 +444,9 @@ public class CadastroMudasTela extends TabbedForm {
     }//GEN-LAST:event_LimparButtonActionPerformed
 
     private void AtualizarMudaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarMudaButtonActionPerformed
-        // TODO add your handling code here:
+        atualizar();
+        resetBuscar();
+        buscar();
     }//GEN-LAST:event_AtualizarMudaButtonActionPerformed
 
     private void CarregarImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarImagemButtonActionPerformed
@@ -345,20 +477,16 @@ public class CadastroMudasTela extends TabbedForm {
         return BuscarTextField;
     }
 
-    public void setBuscarTextField(JTextField BuscarTextField) {
-        this.BuscarTextField = BuscarTextField;
-    }
-
     public JTextArea getCaracteristicasTextArea() {
         return CaracteristicasTextArea;
     }
 
-    public void setCaracteristicasTextArea(JTextArea CaracteristicasTextArea) {
-        this.CaracteristicasTextArea = CaracteristicasTextArea;
+    public void setCaracteristicasTextArea(String caracteristicas) {
+        CaracteristicasTextArea.setText(caracteristicas);
     }
 
     @SuppressWarnings("empty-statement")
-    public int getEstadoTextField() {
+    public int getEstadoComboBox() {
         int codigoEstado = 0;
 
         if ("Acre".equals(EstadoComboBox.getSelectedItem())) {
@@ -443,8 +571,8 @@ public class CadastroMudasTela extends TabbedForm {
         return codigoEstado;
     }
 
-    public void setEstadoComboBox(JComboBox<String> EstadoComboBox) {
-        this.EstadoComboBox = EstadoComboBox;
+    public void setEstadoComboBox(int estado) {
+        EstadoComboBox.setSelectedIndex(estado);
     }
 
     public JTextField getNomeCientificoTextField() {
@@ -463,7 +591,7 @@ public class CadastroMudasTela extends TabbedForm {
         NomeComercialTextField.setText(nomeComercial);
     }
 
-    public int getStatusTextField() {
+    public int getStatusComboBox() {
         int codigoStatus = 0;
         if ("Ativa".equals(StatusComboBox.getSelectedItem())) {
             codigoStatus = 1;
@@ -474,24 +602,24 @@ public class CadastroMudasTela extends TabbedForm {
         return codigoStatus;
     }
 
-    public void setStatusTextField(JComboBox<String> StatusComboBox) {
-        this.StatusComboBox = StatusComboBox;
+    public void setStatusComboBox(int status) {
+        StatusComboBox.setSelectedIndex(status);
     }
 
     public JTextArea getUsosTextArea() {
         return UsosTextArea;
     }
 
-    public void setUsosTextArea(JTextArea UsosTextArea) {
-        this.UsosTextArea = UsosTextArea;
+    public void setUsosTextArea(String usos) {
+        UsosTextArea.setText(usos);
     }
 
     public JTextField getValorTextField() {
         return ValorTextField;
     }
 
-    public void setValorTextField(JTextField ValorTextField) {
-        this.ValorTextField = ValorTextField;
+    public void setValorTextField(String valorMuda) {
+        ValorTextField.setText(valorMuda);
     }
 
     public JLabel getImagemMudaLabel() {
@@ -502,19 +630,32 @@ public class CadastroMudasTela extends TabbedForm {
         ImagemMudaLabel.setIcon(icon);
     }
 
+    public int getCodigoLabel() {
+        int codigo = Integer.parseInt(codigoLabel.getText());
+        return codigo;
+    }
+
+    public void setCodigoLabel(String codigo) {
+        codigoLabel.setText(codigo);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AtualizarMudaButton;
+    private javax.swing.JPanel BotoesPanel;
     private javax.swing.JLabel BuscaLabel;
+    private javax.swing.JPanel BuscaPanel;
     private javax.swing.JButton BuscarButton;
     private javax.swing.JTextField BuscarTextField;
     private javax.swing.JButton CadastrarMudaButton;
     private javax.swing.JLabel CaracteristicasLabel;
     private javax.swing.JTextArea CaracteristicasTextArea;
     private javax.swing.JButton CarregarImagemButton;
+    private javax.swing.JPanel DadosPanel;
     private javax.swing.JComboBox<String> EstadoComboBox;
     private javax.swing.JLabel EstadoLabel;
     private javax.swing.JLabel ImagemLabel;
     private javax.swing.JLabel ImagemMudaLabel;
+    private javax.swing.JPanel ImagemPanel;
     private javax.swing.JButton LimparButton;
     private javax.swing.JLabel NomeCientificoLabel;
     private javax.swing.JTextField NomeCientificoTextField;
@@ -525,10 +666,12 @@ public class CadastroMudasTela extends TabbedForm {
     private javax.swing.JTextArea UsosTextArea;
     private javax.swing.JLabel ValorLabel;
     private javax.swing.JTextField ValorTextField;
+    private javax.swing.JLabel codigoLabel;
+    private javax.swing.JLabel codigoTxtLabel;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel painelPrincipalPanel;
     // End of variables declaration//GEN-END:variables
 
 }

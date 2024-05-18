@@ -51,8 +51,8 @@ public class ConexaoController {
                 view.getNomeCientificoTextField().getText(),
                 view.getNomeComercialTextField().getText(),
                 Double.parseDouble(view.getValorTextField().getText()),
-                view.getEstadoTextField(),
-                view.getStatusTextField(),
+                view.getEstadoComboBox(),
+                view.getStatusComboBox(),
                 view.getCaracteristicasTextArea().getText(),
                 view.getUsosTextArea().getText(),
                 view.getFis(),
@@ -61,16 +61,48 @@ public class ConexaoController {
         );
         return retorno;
     }
+    
+    public int atualizaMuda(CadastroMudasTela view) throws Exception{
+        ConexaoDAO cadastro = new ConexaoDAO();
+        
+        int retorno = cadastro.atualizaMuda(
+                view.getNomeCientificoTextField().getText(),
+                view.getNomeComercialTextField().getText(),
+                Double.parseDouble(view.getValorTextField().getText()),
+                view.getEstadoComboBox(),
+                view.getStatusComboBox(),
+                view.getCaracteristicasTextArea().getText(),
+                view.getUsosTextArea().getText(),
+                view.getFis(),
+                view.getTamanho(),
+                1,
+                view.getCodigoLabel()
+        );
+        return retorno;
+    }
 
     public Map<String, Object> buscaCadastroMuda(CadastroMudasTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
         Map<String, Object> resultadoConsulta = cadastro.buscaCadastroMuda(view.getBuscarTextField().getText());
         if (resultadoConsulta != null) {
-            String nomeCientifico = (String) resultadoConsulta.get("nome_cientifico");
-            String nomeComercial = (String) resultadoConsulta.get("nome_comercial");
-            BufferedImage imagemMudaBytes = (BufferedImage) resultadoConsulta.get("imagem_muda");
+            var nomeCientifico = (String) resultadoConsulta.get("nome_cientifico");
+            var nomeComercial = (String) resultadoConsulta.get("nome_comercial");
+            var valorMuda = (String) resultadoConsulta.get("valor_muda");
+            var estado = (String) resultadoConsulta.get("cod_estado");
+            var status = (String) resultadoConsulta.get("status_muda");
+            var caracteristicas = (String) resultadoConsulta.get("caracteristicas_gerais");
+            var usos = (String) resultadoConsulta.get("usos_comuns");
+            var codigo = (String) resultadoConsulta.get("cod_muda");
+            var imagemMudaBytes = (BufferedImage) resultadoConsulta.get("imagem_muda");
             view.setNomeCientificoTextField(nomeCientifico);
             view.setNomeComercialTextField(nomeComercial);
+            view.setCaracteristicasTextArea(caracteristicas);
+            view.setUsosTextArea(usos);
+            view.setEstadoComboBox(Integer.parseInt(estado));
+            view.setStatusComboBox(Integer.parseInt(status));
+            view.setValorTextField(valorMuda);
+            view.setCodigoLabel(codigo);
+            
             if (imagemMudaBytes != null) {
                 ImageIcon imagemIcon = new ImageIcon(imagemMudaBytes);
                 Icon foto = new ImageIcon(imagemIcon.getImage().getScaledInstance(
@@ -87,7 +119,10 @@ public class ConexaoController {
             // Se a consulta não retornou nenhum resultado, limpa os campos
             view.setNomeCientificoTextField("");
             view.setNomeComercialTextField("");
+            view.setValorTextField("");
+            view.setEstadoComboBox(0);
             view.getImagemMudaLabel().setIcon(null);
+            view.setCodigoLabel("");
         }
 
         // Retorna o mapa contendo os valores
