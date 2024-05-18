@@ -3,16 +3,13 @@ package RW.controller_dao;
 import RW.connection.Conexao;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 public class ConexaoDAO {
 
@@ -71,21 +68,69 @@ public class ConexaoDAO {
         return confirma;
     }
 
+    public int atualizaMuda(String nome_cientifico, String nome_comercial, double valor_muda,
+            int cod_estado, int status_muda, String caracteristicas_gerais, String usos_comuns,
+            FileInputStream fis, int tamanho, int cod_usuario, int cod_muda) throws Exception {
+
+        var conexao = new Conexao().conectar();
+        var p = conexao.prepareStatement(
+                "UPDATE muda "
+                + "SET nome_cientifico = ?, "
+                + "nome_comercial = ?, "
+                + "valor_muda = ?, "
+                + "cod_estado = ?, "
+                + "status_muda = ?, "
+                + "caracteristicas_gerais = ?, "
+                + "usos_comuns = ?, "
+                + "imagem_muda = ?, "
+                + "cod_usuario = ?, "
+                + "dt_operacao = CURRENT_DATE "
+                + "WHERE cod_muda = ?");
+
+        p.setString(1, nome_cientifico);
+        p.setString(2, nome_comercial);
+        p.setDouble(3, valor_muda);
+        p.setInt(4, cod_estado);
+        p.setInt(5, status_muda);
+        p.setString(6, caracteristicas_gerais);
+        p.setString(7, usos_comuns);
+        p.setBlob(8, fis, tamanho);
+        p.setInt(9, cod_usuario);
+        p.setInt(10, cod_muda);
+
+        int confirma = p.executeUpdate();
+        p.close();
+        conexao.close();
+        return confirma;
+    }
+
     public Map<String, Object> buscaCadastroMuda(String nome_cientifico) throws Exception {
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT * FROM muda WHERE lower(nome_cientifico) = ?;");
+        var p = conexao.prepareStatement("SELECT * FROM muda WHERE lower(nome_cientifico) = ? limit 1;");
         p.setString(1, nome_cientifico);
         var rs = p.executeQuery();
         Map<String, Object> resultadoConsulta = new HashMap<>();
         if (rs.next()) {
             String nomeCientifico = rs.getString("nome_cientifico");
             String nomeComercial = rs.getString("nome_comercial");
+            String valorMuda = rs.getString("valor_muda");
+            String status = rs.getString("status_muda");
+            String estado = rs.getString("cod_estado");
+            String caracteristicasGerais = rs.getString("caracteristicas_gerais");
+            String usosComuns = rs.getString("usos_comuns");
+            String codigoMuda = rs.getString("cod_muda");
             Blob blob = (Blob) rs.getBlob("imagem_muda");
             byte[] img = blob.getBytes(1, (int) blob.length());
             BufferedImage imagem = null;
             imagem = ImageIO.read(new ByteArrayInputStream(img));
             resultadoConsulta.put("nome_cientifico", nomeCientifico);
             resultadoConsulta.put("nome_comercial", nomeComercial);
+            resultadoConsulta.put("valor_muda", valorMuda);
+            resultadoConsulta.put("status_muda", status);
+            resultadoConsulta.put("cod_estado", estado);
+            resultadoConsulta.put("caracteristicas_gerais", caracteristicasGerais);
+            resultadoConsulta.put("usos_comuns", usosComuns);
+            resultadoConsulta.put("cod_muda", codigoMuda);            
             resultadoConsulta.put("imagem_muda", imagem);
             rs.close();
             p.close();
