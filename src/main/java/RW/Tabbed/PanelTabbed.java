@@ -5,10 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import net.miginfocom.swing.MigLayout;
 
-/**
- *
- * @author RAVEN
- */
 public class PanelTabbed extends JPanel {
 
     private final ButtonGroup buttonGroup;

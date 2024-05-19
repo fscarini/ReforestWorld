@@ -2,10 +2,6 @@ package RW.Tabbed;
 
 import javax.swing.JPanel;
 
-/**
- *
- * @author RAVEN
- */
 public class TabbedForm extends JPanel{
     
     public void formOpen(){

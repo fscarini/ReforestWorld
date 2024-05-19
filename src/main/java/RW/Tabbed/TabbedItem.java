@@ -14,10 +14,6 @@ import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
 
-/**
- *
- * @author RAVEN
- */
 public class TabbedItem extends JToggleButton {
 
     protected final TabbedForm component;

@@ -1,4 +1,3 @@
-
 package RW.forms;
 
 import RW.controller_dao.ConexaoDAO;
@@ -10,9 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Map;
 
 public class LoginTela extends JPanel {
-    private InicioTela inicioTela; 
+
+    private InicioTela inicioTela;
+
     public void setInicioTela(InicioTela inicioTela) {
         this.inicioTela = inicioTela;
     }
@@ -31,25 +33,25 @@ public class LoginTela extends JPanel {
         JPasswordField senhaPasswordField = new JPasswordField();
         JCheckBox chRememberMe = new JCheckBox("Lembrar");
         JButton loginButton = new JButton("Entrar");
-        title.putClientProperty(FlatClientProperties.STYLE, "" +
-                "font:montserrat +10");
-        emailTextField.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0");
-        senhaPasswordField.putClientProperty(FlatClientProperties.STYLE, "" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0;" +
-                "showRevealButton:true");
-        loginButton.putClientProperty(FlatClientProperties.STYLE, "" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
+        title.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:montserrat +10");
+        emailTextField.putClientProperty(FlatClientProperties.STYLE, ""
+                + "margin:5,10,5,10;"
+                + "focusWidth:1;"
+                + "innerFocusWidth:0");
+        senhaPasswordField.putClientProperty(FlatClientProperties.STYLE, ""
+                + "margin:5,10,5,10;"
+                + "focusWidth:1;"
+                + "innerFocusWidth:0;"
+                + "showRevealButton:true");
+        loginButton.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Component.accentColor;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0");
         emailTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite seu e-mail");
         senhaPasswordField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite sua senha");
-        
+
         loginButton.addActionListener(e -> {
             try {
                 var login = emailTextField.getText();
@@ -60,17 +62,24 @@ public class LoginTela extends JPanel {
                 }
                 var usuario = new LoginController(login, senha);
                 var dao = new ConexaoDAO();
-                if(dao.existeVerificado(usuario)){
+                Map<String, String> resultadoConsulta = dao.existeVerificado(usuario);
+                if (resultadoConsulta != null) {
+                    var nome = (String) resultadoConsulta.get("nome");
+                    var email = (String) resultadoConsulta.get("email");
+                    var codPerfil = (String) resultadoConsulta.get("cod_perfil");
+//                    System.out.println("LOGINNome: " + nome);
+//                    System.out.println("LOGINEmail: " + email);
+//                    System.out.println("LOGINCodPerfil: " + codPerfil);
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             new RW.forms.LoginLoadTela(null, true).setVisible(true);
-                            TelaHome telaHome = new TelaHome();
+                            TelaHome telaHome = new TelaHome(nome, email, codPerfil);
                             telaHome.setVisible(true);
                         }
                     });
-                }else if(dao.existeNaoVerificado(usuario)){
+                } else if (dao.existeNaoVerificado(usuario)) {
                     inicioTela.dispose();
                     SwingUtilities.getWindowAncestor(this).dispose();
                     JFrame frame = new JFrame("Confirmação de Usuário");
@@ -80,8 +89,9 @@ public class LoginTela extends JPanel {
                     frame.pack();
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");}
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário/senha inválido. Verifique e tente novamente.");
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
             }
@@ -126,5 +136,5 @@ public class LoginTela extends JPanel {
     }
     private JTextField emailTextField;
     private JPasswordField senhaPasswordField;
-    
+
 }

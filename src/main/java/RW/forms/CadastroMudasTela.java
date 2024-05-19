@@ -99,19 +99,6 @@ public class CadastroMudasTela extends TabbedForm {
         codigoLabel.setText(null);
     }
 
-    private void resetBuscar() {
-        CaracteristicasTextArea.setText(null);
-        EstadoComboBox.setSelectedItem(null);
-        ImagemMudaLabel.setIcon(new ImageIcon(CadastroMudasTela.class.getResource("/imagens/camera (1).png")));
-        NomeCientificoTextField.setText(null);
-        NomeComercialTextField.setText(null);
-        StatusComboBox.setSelectedItem(null);
-        UsosTextArea.setText(null);
-        ValorTextField.setText(null);
-        BuscarTextField.requestFocus();
-        codigoLabel.setText(null);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -445,8 +432,8 @@ public class CadastroMudasTela extends TabbedForm {
 
     private void AtualizarMudaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarMudaButtonActionPerformed
         atualizar();
-        resetBuscar();
-        buscar();
+        reset();
+    
     }//GEN-LAST:event_AtualizarMudaButtonActionPerformed
 
     private void CarregarImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarImagemButtonActionPerformed
