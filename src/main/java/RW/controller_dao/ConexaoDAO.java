@@ -130,7 +130,7 @@ public class ConexaoDAO {
             resultadoConsulta.put("cod_estado", estado);
             resultadoConsulta.put("caracteristicas_gerais", caracteristicasGerais);
             resultadoConsulta.put("usos_comuns", usosComuns);
-            resultadoConsulta.put("cod_muda", codigoMuda);            
+            resultadoConsulta.put("cod_muda", codigoMuda);
             resultadoConsulta.put("imagem_muda", imagem);
             rs.close();
             p.close();
@@ -139,16 +139,33 @@ public class ConexaoDAO {
         return resultadoConsulta;
     }
 
-    public boolean existeVerificado(LoginController u) throws Exception {
+    public Map<String, String> existeVerificado(LoginController u) throws Exception {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement("SELECT * FROM users WHERE email = ? AND  senha = ? AND status_verificacao='Verificado';");
         p.setString(1, u.login);
         p.setString(2, u.senha);
+        System.out.println("DAO Login: " + u.login);
+        System.out.println("DAO Senha: " + u.senha);
         var rs = p.executeQuery();
-        var usuarioExiste = rs.next();
-        p.close();
-        conexao.close();
-        return usuarioExiste;
+        Map<String, String> resultadoConsulta = new HashMap<>();
+        if (rs.next()) {
+            String nome = rs.getString("nome");
+            String email = rs.getString("email");
+            String codPerfil = rs.getString("cod_perfil");
+//            System.out.println("DAO Nome: " + nome);
+//            System.out.println("DAO Email: " + email);
+//            System.out.println("DAO CodPerfil: " + codPerfil);
+            resultadoConsulta.put("nome", nome);
+            resultadoConsulta.put("email", email);
+            resultadoConsulta.put("cod_perfil", codPerfil);
+            rs.close();
+            p.close();
+            conexao.close();
+        } else {
+            resultadoConsulta = null;
+            System.out.println("DAO: Nenhum usuário encontrado com as credenciais fornecidas.");
+        }
+        return resultadoConsulta;
     }
 
     public boolean existeNaoVerificado(LoginController u) throws Exception {

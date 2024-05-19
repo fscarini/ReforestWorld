@@ -12,10 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import raven.drawer.Drawer;
 
-/**
- *
- * @author RAVEN
- */
 public class WindowsTabbed {
 
     private static WindowsTabbed instance;
