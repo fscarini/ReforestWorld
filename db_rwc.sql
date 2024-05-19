@@ -10,7 +10,7 @@ primary key (id)
 insert into users(id, nome, email, senha) values (null, 'admin', 'admin@reforestworld,com.br','admin');
 select * from users;
 select * from eventos;
-update users set status_verificacao= 'Verificado' where id = 1;
+update users set cod_perfil= '2' where id = 1;
 ALTER TABLE `db_rwc`.`users` 
 ADD COLUMN `dt_nascimento` VARCHAR(10) NOT NULL AFTER `senha`,
 ADD COLUMN `sexo` VARCHAR(1) NOT NULL AFTER `dt_nascimento`,
@@ -30,7 +30,7 @@ DELETE FROM users WHERE id NOT IN(1,26);
 SELECT * FROM estado;
 SELECT * FROM muda WHERE cod_muda = 149;
 SELECT CURRENT_TIMESTAMP;
-describe muda;
+describe users;
 select * from muda where nome_cientifico = 'arroz mexicanos';
 update muda set nome_cientifico='arroz mexicanos',
 nome_comercial='arroz mexicanos',
