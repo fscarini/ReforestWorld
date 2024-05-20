@@ -9,20 +9,67 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Fernando
  */
 public class SobreNosTela extends TabbedForm {
-
-    /**
-     * Creates new form CadastroEventosTela
-     */
+    private int currentIndex = 0;
+    JLabel[] labels = new JLabel[8];
+    private String[] links = new String[8];
+    
     public SobreNosTela() {
         initComponents();
+        referenceLabels();
+        iniciarLinks();
+        updateLabelsVisibility();
+        updateLinkButton();
     }
 
+     private void updateLabelsVisibility() {
+      for (int i = 0; i < labels.length; i++) {
+        labels[i].setVisible(i == currentIndex);
+        }
+    }
+    
+    private void updateLinkButton() {
+        linkButton.setText(links[currentIndex]);
+    }
+
+    private void referenceLabels() {
+
+        labels[0] = Foto1;
+        //add(labels[0]);
+
+        labels[1] = Foto2;
+        //add(labels[1]);
+
+        labels[2] = Foto3;
+        //add(labels[2]);
+        
+        labels[3] = Foto4;
+        
+        labels[4] = Foto5;
+        
+        labels[5] = Foto6;
+        
+        labels[6] = Foto7;
+        
+        labels[7] = Foto8;
+    }
+    
+    private void iniciarLinks() {
+        links[0] = "https://br.linkedin.com/in/raul-santos-199923119";
+        links[1] = "https://www.linkedin.com/in/gabriel-souza-a758782a9/";
+        links[2] = "https://www.linkedin.com/in/guilherme-alves-55a68a273/";
+        links[3] ="https://www.linkedin.com/in/gustavo-scalambrini/";
+        links[4] = "https://www.linkedin.com/in/lucas-belentani";
+        links[5] = "https://www.linkedin.com/in/fscarini/";
+        links[6] = "https://www.linkedin.com/in/victor-de-brito-27b7bb207/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app";
+        links[7] ="https://www.linkedin.com/in/pedro-eli-30a2372ba/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app";
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,33 +80,111 @@ public class SobreNosTela extends TabbedForm {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Prev = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
+        linkButton = new javax.swing.JButton();
+        Foto8 = new javax.swing.JLabel();
+        Foto7 = new javax.swing.JLabel();
+        Foto6 = new javax.swing.JLabel();
+        Foto5 = new javax.swing.JLabel();
+        Foto4 = new javax.swing.JLabel();
+        Foto3 = new javax.swing.JLabel();
         Foto2 = new javax.swing.JLabel();
         Foto1 = new javax.swing.JLabel();
-        NEXT = new javax.swing.JButton();
-        PREV = new javax.swing.JButton();
         emailButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 768));
         jPanel1.setLayout(null);
 
+        Prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/PREV3.png"))); // NOI18N
+        Prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PrevMouseClicked(evt);
+            }
+        });
+        Prev.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                PrevPropertyChange(evt);
+            }
+        });
+        jPanel1.add(Prev);
+        Prev.setBounds(898, 360, 52, 40);
+
+        Next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/NEXT3.png"))); // NOI18N
+        Next.setActionCommand("Next");
+        Next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextMouseClicked(evt);
+            }
+        });
+        Next.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                NextPropertyChange(evt);
+            }
+        });
+        jPanel1.add(Next);
+        Next.setBounds(940, 360, 50, 40);
+        Next.getAccessibleContext().setAccessibleName("Next");
+
+        linkButton.setText("linkButton");
+        linkButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkButtonMouseClicked(evt);
+            }
+        });
+        linkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkButtonActionPerformed(evt);
+            }
+        });
+        linkButton.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                linkButtonPropertyChange(evt);
+            }
+        });
+        jPanel1.add(linkButton);
+        linkButton.setBounds(320, 420, 40, 40);
+
+        Foto8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Pedro3.png"))); // NOI18N
+        Foto8.setText("Foto8");
+        jPanel1.add(Foto8);
+        Foto8.setBounds(20, 240, 980, 260);
+
+        Foto7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Laranjeira3.png"))); // NOI18N
+        Foto7.setText("Foto7");
+        jPanel1.add(Foto7);
+        Foto7.setBounds(20, 240, 980, 260);
+
+        Foto6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Fernando3.png"))); // NOI18N
+        Foto6.setText("Foto6");
+        jPanel1.add(Foto6);
+        Foto6.setBounds(20, 240, 980, 260);
+
+        Foto5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Lucas3.png"))); // NOI18N
+        Foto5.setText("Foto5");
+        jPanel1.add(Foto5);
+        Foto5.setBounds(20, 240, 980, 260);
+
+        Foto4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Gustavo3.png"))); // NOI18N
+        Foto4.setText("Foto4");
+        jPanel1.add(Foto4);
+        Foto4.setBounds(20, 240, 980, 260);
+
+        Foto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Guilherme3.png"))); // NOI18N
+        Foto3.setText("Foto3");
+        jPanel1.add(Foto3);
+        Foto3.setBounds(20, 240, 980, 260);
+
         Foto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Gabriel3.png"))); // NOI18N
         Foto2.setText("Foto2");
         jPanel1.add(Foto2);
-        Foto2.setBounds(20, 260, 980, 220);
+        Foto2.setBounds(20, 240, 980, 270);
 
         Foto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Raul3.png"))); // NOI18N
         Foto1.setText("Foto1");
         jPanel1.add(Foto1);
         Foto1.setBounds(20, 240, 980, 260);
-
-        NEXT.setText("NEXT");
-        jPanel1.add(NEXT);
-        NEXT.setBounds(465, 163, 70, 50);
-
-        PREV.setText("PREV");
-        jPanel1.add(PREV);
-        PREV.setBounds(460, 530, 70, 40);
 
         emailButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,16 +232,75 @@ public class SobreNosTela extends TabbedForm {
         }
     }//GEN-LAST:event_emailButtonMouseClicked
 
+    private void NextPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_NextPropertyChange
+            Next.setOpaque(false);
+            Next.setContentAreaFilled(false);
+            Next.setBorderPainted(false);
+    }//GEN-LAST:event_NextPropertyChange
+
+    private void PrevPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_PrevPropertyChange
+        Prev.setOpaque(false);
+            Prev.setContentAreaFilled(false);
+            Prev.setBorderPainted(false);
+    }//GEN-LAST:event_PrevPropertyChange
+
+    private void NextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextMouseClicked
+                // TODO add your handling code here:
+            currentIndex++;
+            if (currentIndex >= labels.length) {
+                currentIndex = 0;
+            }
+            updateLabelsVisibility();
+            updateLinkButton();
+    }//GEN-LAST:event_NextMouseClicked
+
+    private void PrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrevMouseClicked
+                // TODO add your handling code here:
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = labels.length - 1;
+
+        }
+        updateLabelsVisibility();
+        updateLinkButton();
+    }//GEN-LAST:event_PrevMouseClicked
+
+    private void linkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_linkButtonActionPerformed
+
+    private void linkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkButtonMouseClicked
+        try {
+            URI uri = new URI(links[currentIndex]);
+            java.awt.Desktop.getDesktop().browse(uri);
+        } catch (IOException | URISyntaxException ex) {
+            // Tratar erro, se necessário
+        }
+    }//GEN-LAST:event_linkButtonMouseClicked
+
+    private void linkButtonPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_linkButtonPropertyChange
+            linkButton.setOpaque(false);
+            linkButton.setContentAreaFilled(false);
+            linkButton.setBorderPainted(false);
+    }//GEN-LAST:event_linkButtonPropertyChange
+
    
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Foto1;
     private javax.swing.JLabel Foto2;
-    private javax.swing.JButton NEXT;
-    private javax.swing.JButton PREV;
+    private javax.swing.JLabel Foto3;
+    private javax.swing.JLabel Foto4;
+    private javax.swing.JLabel Foto5;
+    private javax.swing.JLabel Foto6;
+    private javax.swing.JLabel Foto7;
+    private javax.swing.JLabel Foto8;
+    private javax.swing.JButton Next;
+    private javax.swing.JButton Prev;
     private javax.swing.JButton emailButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton linkButton;
     // End of variables declaration//GEN-END:variables
 }
