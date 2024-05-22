@@ -4,8 +4,10 @@ import RW.connection.Conexao;
 import RW.forms.CadastroTela;
 import RW.forms.CadastroEventosTela;
 import RW.forms.CadastroMudasTela;
+import RW.forms.GestaoUsuariosTela;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +16,42 @@ import java.util.Map;
 import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ConexaoController {
+    
+    public void buscaUsuarios(GestaoUsuariosTela tela) {
+        try {
+            Conexao conexao = new Conexao(); // Crie uma conexão com o banco de dados
+            PreparedStatement ps = conexao.conectar().prepareStatement("SELECT * FROM users"); // Consulta SQL para selecionar todos os usuários
+            ResultSet rs = ps.executeQuery(); // Execute a consulta
+
+            DefaultTableModel model = (DefaultTableModel) tela.getTabela().getModel(); // Obtenha o modelo da tabela
+
+            // Limpe os dados existentes na tabela
+            model.setRowCount(0);
+
+            // Preencha a tabela com os dados do ResultSet
+            while (rs.next()) {
+                Object[] rowData = {
+                    rs.getString("ID"),
+                    rs.getString("Nome"),
+                    rs.getString("Email"),
+                    rs.getString("CPF"),
+                    "Ação" // Ação será preenchida pelos renderizadores e editores de célula
+                };
+                model.addRow(rowData); // Adicione a linha à tabela
+            }
+
+            // Feche os recursos
+            rs.close();
+            ps.close();
+            conexao.conectar().close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(tela, "Erro ao carregar dados da tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public String cadastroUsuario(CadastroTela view) throws SQLException {
 
@@ -139,17 +175,18 @@ public class ConexaoController {
         return code;
     }
 
-    private boolean checkDuplicateCode(String code) throws SQLException {
+     private boolean checkDuplicateCode(String code) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        PreparedStatement p = conexao.prepareStatement("select id from `users` where cod_verificacao=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        p.setString(1, code);
-        ResultSet r = p.executeQuery();
-        if (r.first()) {
-            duplicate = true;
+        try (PreparedStatement p = conexao.prepareStatement("select id from `users` where cod_verificacao=? limit 1")) {
+            p.setString(1, code);
+            try (ResultSet r = p.executeQuery()) {
+                if (r.first()) {
+                    duplicate = true;
+                }
+            }
         }
-        r.close();
-        p.close();
         return duplicate;
     }
+
 }

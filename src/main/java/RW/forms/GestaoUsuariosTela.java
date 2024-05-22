@@ -29,6 +29,8 @@ public class GestaoUsuariosTela extends TabbedForm {
      */
     public GestaoUsuariosTela() {
         initComponents();
+
+        // Configura a tabela (renderização de células, edição e eventos)
         TableActionEvent event = new TableActionEvent() {
             public void onEdit(int row) {
                 System.out.println("Edit row : " + row);
@@ -46,8 +48,32 @@ public class GestaoUsuariosTela extends TabbedForm {
                 System.out.println("View row : " + row);
             }
         };
+        
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {
+        {null, null, null, null, null},
+        {null, null, null, null, null},
+        {null, null, null, null, null},
+        {null, null, null, null, null}
+    },
+    new String [] {
+        "ID", "Nome", "Email", "CPF", "Ação"
+    }
+    ) {
+    boolean[] canEdit = new boolean [] {
+        false, false, false, false, true // Ajustado para coluna 4
+    };
+
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+    }
+    });
+
+        // Define o renderizador e editor para a coluna de ação
         Tabela.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         Tabela.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        
+        // Define o alinhamento para a coluna ID (alinhamento à direita)
         Tabela.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
@@ -55,6 +81,24 @@ public class GestaoUsuariosTela extends TabbedForm {
                 return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
             }
         });
+
+        // Chama o método para buscar os dados do banco de dados
+        carregarDadosTabela();
+        
+        
+    }
+
+    private void carregarDadosTabela() {
+        try {
+            ConexaoController controller = new ConexaoController();
+            controller.buscaUsuarios(this); // Chama o método para buscar os usuários
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public JTable getTabela() {
+        return Tabela;
     }
 
     /**
@@ -80,15 +124,7 @@ public class GestaoUsuariosTela extends TabbedForm {
             new String [] {
                 "ID", "Nome", "Email", "CPF", "Ação"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         Tabela.setRowHeight(40);
         jScrollPane2.setViewportView(Tabela);
 

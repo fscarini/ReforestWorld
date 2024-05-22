@@ -4,10 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import RW.cell.TableActionEvent;
 
-/**
- *
- * @author RAVEN
- */
+
 public class PanelAction extends javax.swing.JPanel {
 
     /**
