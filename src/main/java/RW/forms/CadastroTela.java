@@ -200,6 +200,7 @@ public class CadastroTela extends JPanel {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            ex.printStackTrace();
         }
     }
 

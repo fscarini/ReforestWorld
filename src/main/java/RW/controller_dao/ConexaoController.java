@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConexaoController {
-    
+
     public void buscaUsuarios(GestaoUsuariosTela tela) {
         try {
             Conexao conexao = new Conexao(); // Crie uma conexão com o banco de dados
@@ -97,10 +97,10 @@ public class ConexaoController {
         );
         return retorno;
     }
-    
-    public int atualizaMuda(CadastroMudasTela view) throws Exception{
+
+    public int atualizaMuda(CadastroMudasTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
-        
+
         int retorno = cadastro.atualizaMuda(
                 view.getNomeCientificoTextField().getText(),
                 view.getNomeComercialTextField().getText(),
@@ -138,7 +138,7 @@ public class ConexaoController {
             view.setStatusComboBox(Integer.parseInt(status));
             view.setValorTextField(valorMuda);
             view.setCodigoLabel(codigo);
-            
+
             if (imagemMudaBytes != null) {
                 ImageIcon imagemIcon = new ImageIcon(imagemMudaBytes);
                 Icon foto = new ImageIcon(imagemIcon.getImage().getScaledInstance(
@@ -175,10 +175,11 @@ public class ConexaoController {
         return code;
     }
 
-     private boolean checkDuplicateCode(String code) throws SQLException {
+    private boolean checkDuplicateCode(String code) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        try (PreparedStatement p = conexao.prepareStatement("select id from `users` where cod_verificacao=? limit 1")) {
+        try (PreparedStatement p = conexao.prepareStatement("SELECT id FROM users WHERE cod_verificacao=? limit 1",
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             p.setString(1, code);
             try (ResultSet r = p.executeQuery()) {
                 if (r.first()) {
