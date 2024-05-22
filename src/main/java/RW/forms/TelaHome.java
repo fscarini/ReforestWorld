@@ -91,7 +91,7 @@ public class TelaHome extends javax.swing.JFrame {
                 {"Minhas Contribuições"},
                 {"~CONFIGURAÇÕES~"},
                 {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
-                {"Configurações"},
+                {"Configurações", "Dark Theme", "Light Theme"},
                 {"Gestão de Usuários"},
                 {"Dark Theme"},
                 {"Light Theme"},
@@ -186,11 +186,17 @@ public class TelaHome extends javax.swing.JFrame {
                                 if (index == 7 && subIndex == 3) {
                                     WindowsTabbed.getInstance().addTab("Ajuda", new AjudaTela());
                                 }
-                                if (index == 8) {
-                                    WindowsTabbed.getInstance().addTab("Configurações", new ConfiguracoesTela());
-                                }
+//                                if (index == 8) {
+//                                    WindowsTabbed.getInstance().addTab("Configurações", new ConfiguracoesTela());
+//                                }
                                 if (index == 9) {
                                     WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela());
+                                }
+                                if (index == 8 && subIndex == 1 ) {
+                                    changeMode(true);
+                                }
+                                if (index == 8 && subIndex == 2 ) {
+                                    changeMode(false);
                                 }
                                 if (index == 10) {
                                     changeMode(true);
