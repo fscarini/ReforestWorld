@@ -33,94 +33,34 @@ public class AjudaTela extends TabbedForm {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        localTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descricaoTextArea = new javax.swing.JTextArea();
-        nomeEventoTextField = new javax.swing.JTextField();
-        dataEventoTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cadastrarEventoButton = new javax.swing.JButton();
-        limparButton = new javax.swing.JButton();
+        jTextArea1 = new javax.swing.JTextArea();
 
-        descricaoTextArea.setColumns(20);
-        descricaoTextArea.setRows(5);
-        jScrollPane1.setViewportView(descricaoTextArea);
-
-        jLabel1.setText("Nome do evento");
-
-        jLabel2.setText("Local do evento");
-
-        jLabel3.setText("Data do evento");
-
-        jLabel4.setText("Descrição do evento");
-
-        cadastrarEventoButton.setText("Cadastrar evento");
-        cadastrarEventoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarEventoButtonActionPerformed(evt);
-            }
-        });
-
-        limparButton.setText("Limpar");
-        limparButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparButtonActionPerformed(evt);
-            }
-        });
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("jzlklçkghçlkhlkhlkhlkhflajhflkjahfjafhajfahlfjhalfkjhaljkfhalkjfhlkjahfkjlahfkjlahfjahfjahflkjahflahfljahflkjahflajhflkjahflkasdkjlk\nPagamentos\n\n\t1.\tComo posso realizar um pagamento?\n\t•\tOs pagamentos podem ser realizados utilizando cartão de crédito, débito, ou transferência bancária. Basta acessar a seção de doações nos eventos ativos, ou a área de \t\t\tdoações livres e seguir os passos indicados.\n\n\t2.\tQuais métodos de pagamento são aceitos?\n\t•\tAceitamos cartões de crédito e débito das bandeiras Visa, Mastercard, American Express, além de transferências bancárias via PIX.\n\n\t3.\tMeu pagamento não foi processado. O que devo fazer?\n\t•\tVerifique se os dados do seu cartão estão corretos e se há saldo disponível. Caso o problema persista, entre em contato com o nosso suporte pela aba \"Fale conosco\" no menu \t\tlateral.\n\n\txxxxxx 4.\tPosso parcelar meus pagamentos?\n\t•\tSim, oferecemos a opção de parcelamento para cartões de crédito, em até 6 vezes sem juros.\n\nAcesso à Conta\n\n\t1.\tEsqueci minha senha. Como posso recuperá-la?\n\t•\tClique no link “Esqueci minha senha” na página de login e siga as instruções para receber um e-mail com o passo a passo para redefinir a senha de acesso.\n\n\t2.\tComo posso alterar os dados cadastrais do meu perfil?\n\t•\tAcesse as configurações da sua conta na seção \"Meu perfil\", e selecione a opção xxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nProblemas de Acesso\n\n\t1.\tNão consigo acessar minha conta. O que devo fazer?\n\t•\tVerifique se está utilizando o e-mail e a senha corretos. Se ainda tiver problemas, tente redefinir sua senha. Caso o problema persista, entre em contato com nosso suporte.\n\n\t2.\tA página não está carregando corretamente. Como resolver?\n\t•\tTente limpar o cache do seu navegador e recarregar a página. Se o problema continuar, tente acessar a partir de outro navegador ou dispositivo para verificar se o problemas \t\tpersiste.\n\n\t3.\tRecebi uma mensagem de erro ao tentar acessar uma funcionalidade. O que devo fazer?\n\t•\tAnote a mensagem de erro recebida e entre em contato com nosso suporte técnico para assistência.\n\nDoações\n\n\t1.\tComo posso realizar doações?\n\t•\tAs doações podem ser realizadas através dos eventos disponíveis, neles estarão descritas as metas de doação e os valores de contribuição mínimos. Além disso, nossa \t\t\taplicação conta com a seção de doações livres, que permite realizar doações de valores avulsos que serão redistribuídos conforme necessidade dos grupos de plantio \t\t\tbeneficiários.\n\t\n\t2.\tComo posso acompanhar minhas contribuições?\n\t•\tAs doações realizadas podem ser conferidas na seção \"Minhas contribuições\" no menu da aplicação. Nesta área será possível visualizar todo o histórico de doações realizadas, \t\tassim como valores de cada contribuição.\n\n\t3.\tQuais os eventos disponíveis para doações?\n\t•\tÉ possível verificar quais os eventos disponíveis no momento, assim como os prazos para seu encerramento. Basta acessar a seção de \"Consulta de eventos\" para verificar os \t\teventos disponíveis e informações sobre eles.\n\nOutros\n\n\n");
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setBorder(null);
+        jTextArea1.setFocusable(false);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(525, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(limparButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(cadastrarEventoButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                    .addComponent(dataEventoTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(localTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomeEventoTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(113, 113, 113))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeEventoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(localTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dataEventoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarEventoButton)
-                    .addComponent(limparButton))
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -135,48 +75,15 @@ public class AjudaTela extends TabbedForm {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    // chama a ação do botão cadastrar
-    private void cadastrarEventoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventoButtonActionPerformed
-
-    }//GEN-LAST:event_cadastrarEventoButtonActionPerformed
-
-    private void limparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_limparButtonActionPerformed
-
-    
 
 
 // getters
-    public javax.swing.JTextField getDataEventoTextField() {
-        return dataEventoTextField;
-    }
-
-    public javax.swing.JTextArea getDescricaoTextArea() {
-        return descricaoTextArea;
-    }
-
-    public javax.swing.JTextField getLocalTextField() {
-        return localTextField;
-    }
-
-    public javax.swing.JTextField getNomeEventoTextField() {
-        return nomeEventoTextField;
-    }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarEventoButton;
-    private javax.swing.JTextField dataEventoTextField;
-    private javax.swing.JTextArea descricaoTextArea;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton limparButton;
-    private javax.swing.JTextField localTextField;
-    private javax.swing.JTextField nomeEventoTextField;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
