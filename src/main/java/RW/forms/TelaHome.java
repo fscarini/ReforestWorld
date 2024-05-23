@@ -9,6 +9,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.sun.jna.NativeLibrary;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import raven.drawer.Drawer;
 import raven.drawer.component.footer.SimpleFooterData;
 import raven.drawer.component.header.SimpleHeaderData;
@@ -209,12 +210,12 @@ public class TelaHome extends javax.swing.JFrame {
                                 }
                                 if (index == 8) {
                                     if ("2".equals(codPerfil)) {
-                                    String userDir = System.getProperty("user.dir");
-                                    NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16");
-                                    NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16/vlc-3.0.16");
-                                    Main main = new Main();
-                                    main.setVisible(true);
-                                    dispose();
+                                        String userDir = System.getProperty("user.dir");
+                                        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16");
+                                        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16/vlc-3.0.16");
+                                        Main main = new Main();
+                                        main.setVisible(true);
+                                        dispose();
                                     }
                                 }
                                 if (index == 9) {
@@ -259,9 +260,7 @@ public class TelaHome extends javax.swing.JFrame {
         Drawer.getInstance().setDrawerBuilder(myDrawerbuilder);
         initComponents();
         WindowsTabbed.getInstance().install(this, body);
-//        System.out.println("TelaHome - Nome: " + nome);
-//        System.out.println("TelaHome - Email: " + email);
-//        System.out.println("TelaHome - CodPerfil: " + codPerfil);
+        this.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
