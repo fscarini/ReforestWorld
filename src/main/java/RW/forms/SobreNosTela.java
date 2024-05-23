@@ -3,26 +3,73 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package RW.forms;
-
+ 
 import RW.Tabbed.TabbedForm;
-import RW.controller_dao.ConexaoController;
-import java.sql.SQLException;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JOptionPane;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Fernando
  */
 public class SobreNosTela extends TabbedForm {
-
-    /**
-     * Creates new form CadastroEventosTela
-     */
+    private int currentIndex = 0;
+    JLabel[] labels = new JLabel[8];
+    private String[] links = new String[8];
+    
     public SobreNosTela() {
         initComponents();
+        referenceLabels();
+        iniciarLinks();
+        updateLabelsVisibility();
+        updateLinkButton();
     }
 
+     private void updateLabelsVisibility() {
+      for (int i = 0; i < labels.length; i++) {
+        labels[i].setVisible(i == currentIndex);
+        }
+    }
+    
+    private void updateLinkButton() {
+        linkButton.setText(links[currentIndex]);
+    }
+
+    private void referenceLabels() {
+
+        labels[0] = Foto1;
+        //add(labels[0]);
+
+        labels[1] = Foto2;
+        //add(labels[1]);
+
+        labels[2] = Foto3;
+        //add(labels[2]);
+        
+        labels[3] = Foto4;
+        
+        labels[4] = Foto5;
+        
+        labels[5] = Foto6;
+        
+        labels[6] = Foto7;
+        
+        labels[7] = Foto8;
+    }
+    
+    private void iniciarLinks() {
+        links[0] = "https://br.linkedin.com/in/raul-santos-199923119";
+        links[1] = "https://www.linkedin.com/in/gabriel-souza-a758782a9/";
+        links[2] = "https://www.linkedin.com/in/guilherme-alves-55a68a273/";
+        links[3] ="https://www.linkedin.com/in/gustavo-scalambrini/";
+        links[4] = "https://www.linkedin.com/in/lucas-belentani";
+        links[5] = "https://www.linkedin.com/in/fscarini/";
+        links[6] = "https://www.linkedin.com/in/victor-de-brito-27b7bb207/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app";
+        links[7] ="https://www.linkedin.com/in/pedro-eli-30a2372ba/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app";
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,182 +80,227 @@ public class SobreNosTela extends TabbedForm {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        localTextField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        descricaoTextArea = new javax.swing.JTextArea();
-        nomeEventoTextField = new javax.swing.JTextField();
-        dataEventoTextField = new javax.swing.JTextField();
+        Prev = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
+        linkButton = new javax.swing.JButton();
+        Foto8 = new javax.swing.JLabel();
+        Foto7 = new javax.swing.JLabel();
+        Foto6 = new javax.swing.JLabel();
+        Foto5 = new javax.swing.JLabel();
+        Foto4 = new javax.swing.JLabel();
+        Foto3 = new javax.swing.JLabel();
+        Foto2 = new javax.swing.JLabel();
+        Foto1 = new javax.swing.JLabel();
+        emailButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cadastrarEventoButton = new javax.swing.JButton();
-        limparButton = new javax.swing.JButton();
 
-        descricaoTextArea.setColumns(20);
-        descricaoTextArea.setRows(5);
-        jScrollPane1.setViewportView(descricaoTextArea);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1024, 768));
+        jPanel1.setLayout(null);
 
-        jLabel1.setText("Nome do evento");
-
-        jLabel2.setText("Local do evento");
-
-        jLabel3.setText("Data do evento");
-
-        jLabel4.setText("Descrição do evento");
-
-        cadastrarEventoButton.setText("Cadastrar evento");
-        cadastrarEventoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarEventoButtonActionPerformed(evt);
+        Prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/PREV3.png"))); // NOI18N
+        Prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PrevMouseClicked(evt);
             }
         });
-
-        limparButton.setText("Limpar");
-        limparButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparButtonActionPerformed(evt);
+        Prev.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                PrevPropertyChange(evt);
             }
         });
+        jPanel1.add(Prev);
+        Prev.setBounds(898, 360, 52, 40);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(525, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(limparButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(cadastrarEventoButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                    .addComponent(dataEventoTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(localTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomeEventoTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(113, 113, 113))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeEventoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(localTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dataEventoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarEventoButton)
-                    .addComponent(limparButton))
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
+        Next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/NEXT3.png"))); // NOI18N
+        Next.setActionCommand("Next");
+        Next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextMouseClicked(evt);
+            }
+        });
+        Next.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                NextPropertyChange(evt);
+            }
+        });
+        jPanel1.add(Next);
+        Next.setBounds(940, 360, 50, 40);
+        Next.getAccessibleContext().setAccessibleName("Next");
+
+        linkButton.setText("linkButton");
+        linkButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkButtonMouseClicked(evt);
+            }
+        });
+        linkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkButtonActionPerformed(evt);
+            }
+        });
+        linkButton.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                linkButtonPropertyChange(evt);
+            }
+        });
+        jPanel1.add(linkButton);
+        linkButton.setBounds(320, 420, 40, 40);
+
+        Foto8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Pedro3.png"))); // NOI18N
+        Foto8.setText("Foto8");
+        jPanel1.add(Foto8);
+        Foto8.setBounds(20, 240, 980, 260);
+
+        Foto7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Laranjeira3.png"))); // NOI18N
+        Foto7.setText("Foto7");
+        jPanel1.add(Foto7);
+        Foto7.setBounds(20, 240, 980, 260);
+
+        Foto6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Fernando3.png"))); // NOI18N
+        Foto6.setText("Foto6");
+        jPanel1.add(Foto6);
+        Foto6.setBounds(20, 240, 980, 260);
+
+        Foto5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Lucas3.png"))); // NOI18N
+        Foto5.setText("Foto5");
+        jPanel1.add(Foto5);
+        Foto5.setBounds(20, 240, 980, 260);
+
+        Foto4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Gustavo3.png"))); // NOI18N
+        Foto4.setText("Foto4");
+        jPanel1.add(Foto4);
+        Foto4.setBounds(20, 240, 980, 260);
+
+        Foto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Guilherme3.png"))); // NOI18N
+        Foto3.setText("Foto3");
+        jPanel1.add(Foto3);
+        Foto3.setBounds(20, 240, 980, 260);
+
+        Foto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Gabriel3.png"))); // NOI18N
+        Foto2.setText("Foto2");
+        jPanel1.add(Foto2);
+        Foto2.setBounds(20, 240, 980, 270);
+
+        Foto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout Raul3.png"))); // NOI18N
+        Foto1.setText("Foto1");
+        jPanel1.add(Foto1);
+        Foto1.setBounds(20, 240, 980, 260);
+
+        emailButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emailButtonMouseClicked(evt);
+            }
+        });
+        emailButton.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                emailButtonPropertyChange(evt);
+            }
+        });
+        jPanel1.add(emailButton);
+        emailButton.setBounds(410, 720, 240, 20);
+        emailButton.getAccessibleContext().setAccessibleName("emailButton");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/BackgroundTheForest.png"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1024, 766);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    // chama a ação do botão cadastrar
-    private void cadastrarEventoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventoButtonActionPerformed
+    private void emailButtonPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_emailButtonPropertyChange
+            emailButton.setOpaque(false);
+            emailButton.setContentAreaFilled(false);
+            emailButton.setBorderPainted(false);
+    }//GEN-LAST:event_emailButtonPropertyChange
 
-    }//GEN-LAST:event_cadastrarEventoButtonActionPerformed
+    private void emailButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailButtonMouseClicked
+     
+                String email = "contato@reforestworld.com.br"; // Endereço de e-mail desejado
+        try {
+            URI uri = new URI("mailto:" + email);
+            Desktop.getDesktop().mail(uri);
+        } catch (IOException | URISyntaxException ex) {
+        }
+    }//GEN-LAST:event_emailButtonMouseClicked
 
-    private void limparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparButtonActionPerformed
+    private void NextPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_NextPropertyChange
+            Next.setOpaque(false);
+            Next.setContentAreaFilled(false);
+            Next.setBorderPainted(false);
+    }//GEN-LAST:event_NextPropertyChange
+
+    private void PrevPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_PrevPropertyChange
+        Prev.setOpaque(false);
+            Prev.setContentAreaFilled(false);
+            Prev.setBorderPainted(false);
+    }//GEN-LAST:event_PrevPropertyChange
+
+    private void NextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextMouseClicked
+                // TODO add your handling code here:
+            currentIndex++;
+            if (currentIndex >= labels.length) {
+                currentIndex = 0;
+            }
+            updateLabelsVisibility();
+            updateLinkButton();
+    }//GEN-LAST:event_NextMouseClicked
+
+    private void PrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrevMouseClicked
+                // TODO add your handling code here:
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = labels.length - 1;
+
+        }
+        updateLabelsVisibility();
+        updateLinkButton();
+    }//GEN-LAST:event_PrevMouseClicked
+
+    private void linkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_limparButtonActionPerformed
-    
-    // Validar preenchimento dos campos
-    private String verificarCamposCadastro() {
-        StringBuilder mensagemErro = new StringBuilder();
-        String nome = nomeEventoTextField.getText().trim();
-        if (nome.isEmpty() || !nome.contains(" ")) {
-            mensagemErro.append("Por favor, preencha o campo: Nome do evento. \n");
+    }//GEN-LAST:event_linkButtonActionPerformed
+
+    private void linkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkButtonMouseClicked
+        try {
+            URI uri = new URI(links[currentIndex]);
+            java.awt.Desktop.getDesktop().browse(uri);
+        } catch (IOException | URISyntaxException ex) {
+            // Tratar erro, se necessário
         }
-        if (dataEventoTextField.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo: Data do evento.\n");
-        }
-        if (localTextField.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo: Local do evento.\n");
-        }
-          if (descricaoTextArea.getText().isEmpty()) {
-            mensagemErro.append("Por favor, preencha o campo: Descricao do evento.\n");
-        }
-          return mensagemErro.toString();
-    }
+    }//GEN-LAST:event_linkButtonMouseClicked
 
+    private void linkButtonPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_linkButtonPropertyChange
+            linkButton.setOpaque(false);
+            linkButton.setContentAreaFilled(false);
+            linkButton.setBorderPainted(false);
+    }//GEN-LAST:event_linkButtonPropertyChange
 
-//     Cria um formatador de máscara de data
-//    private MaskFormatter createDateMaskFormatter() {
-//        try {
-//            return new MaskFormatter("##/##/####");
-//        } catch (java.text.ParseException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
-// getters
-    public javax.swing.JTextField getDataEventoTextField() {
-        return dataEventoTextField;
-    }
-
-    public javax.swing.JTextArea getDescricaoTextArea() {
-        return descricaoTextArea;
-    }
-
-    public javax.swing.JTextField getLocalTextField() {
-        return localTextField;
-    }
-
-    public javax.swing.JTextField getNomeEventoTextField() {
-        return nomeEventoTextField;
-    }
-    
-    @Override
-    public boolean formClose() {
-        int opt = JOptionPane.showConfirmDialog(this, "Evento cadastrado com sucesso, deseja realizar outro cadastro?", "Sucesso", JOptionPane.YES_NO_OPTION);
-        return opt == JOptionPane.NO_OPTION;
-    }
+   
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarEventoButton;
-    private javax.swing.JTextField dataEventoTextField;
-    private javax.swing.JTextArea descricaoTextArea;
+    private javax.swing.JLabel Foto1;
+    private javax.swing.JLabel Foto2;
+    private javax.swing.JLabel Foto3;
+    private javax.swing.JLabel Foto4;
+    private javax.swing.JLabel Foto5;
+    private javax.swing.JLabel Foto6;
+    private javax.swing.JLabel Foto7;
+    private javax.swing.JLabel Foto8;
+    private javax.swing.JButton Next;
+    private javax.swing.JButton Prev;
+    private javax.swing.JButton emailButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton limparButton;
-    private javax.swing.JTextField localTextField;
-    private javax.swing.JTextField nomeEventoTextField;
+    private javax.swing.JButton linkButton;
     // End of variables declaration//GEN-END:variables
 }
