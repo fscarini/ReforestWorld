@@ -16,17 +16,17 @@ import java.awt.geom.Ellipse2D;
 import java.util.List;
 
 public class InicioOverlay extends JWindow {
-    
+
     private JFrame mainWindow;
     private InicioTela inicioTela;
     private LoadingPanel loadingPanel;
     private PanelOverlay overlay;
     private List<VideosOverlay> videosOverlay;
-    
+
     public enum AnimationType {
         CLOSE_VIDEO, SHOW_VIDEO, NONE
     }
-    
+
     public PanelOverlay getOverlay() {
         return overlay;
     }
@@ -38,6 +38,7 @@ public class InicioOverlay extends JWindow {
         this.videosOverlay = locations;
         init();
     }
+
     public void closeMainWindow() {
         mainWindow.dispose();
     }
@@ -53,8 +54,8 @@ public class InicioOverlay extends JWindow {
         add(overlay);
     }
 
-    public class PanelOverlay extends JPanel {
-        
+    class PanelOverlay extends JPanel {
+
         private MigLayout migLayout;
         private EventHomeOverlay eventHomeOverlay;
         private AnimationType animationType = AnimationType.NONE;
@@ -76,13 +77,13 @@ public class InicioOverlay extends JWindow {
         private CadastroTela panelCadastro;
         private RecuperaSenhaTela panelRecuperarSenha;
         private JLabel logo;
-        
+
         public PanelOverlay() {
             init();
         }
 
         private void init() {
-            
+
             setOpaque(false);
             migLayout = new MigLayout("fill,insets 10 180 10 180", "fill", "[grow 0][]");
             setLayout(migLayout);
@@ -98,26 +99,26 @@ public class InicioOverlay extends JWindow {
             sobreNosJButton = new JButton("Sobre nós");
             textTitle.setOpaque(false);
             textTitle.setEditable(false);
-            textTitle.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:montserrat +40;" +
-                    "border:0,0,0,0");
+            textTitle.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "font:montserrat +40;"
+                    + "border:0,0,0,0");
             textDescription.setOpaque(false);
             textDescription.setEditable(false);
-            textDescription.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:montserrat +2;" +
-                    "foreground:$Component.accentColor;" +
-                    "border:0,0,0,0");
-            sobreNosJButton.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "background:$Component.accentColor;" +
-                    "borderWidth:0;" +
-                    "margin:5,15,5,15;" +
-                    "focusWidth:0;" +
-                    "innerFocusWidth:0;" +
-                    "arc:999");
+            textDescription.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "font:montserrat +2;"
+                    + "foreground:$Component.accentColor;"
+                    + "border:0,0,0,0");
+            sobreNosJButton.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "background:$Component.accentColor;"
+                    + "borderWidth:0;"
+                    + "margin:5,15,5,15;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+                    + "arc:999");
             logo = new JLabel();
             logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Reforest World Logo.png")));
-            logo.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:montserrat +10");
+            logo.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "font:montserrat +10");
             //panel.add(textTitle);
             panel.add(logo);
             panel.add(textDescription);
@@ -135,7 +136,7 @@ public class InicioOverlay extends JWindow {
                     runCadastroAnimation(false);
                 }
             });
-                        addMouseListener(new MouseAdapter() {
+            addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     runRecuperarSenhaAnimation(false);
@@ -170,7 +171,7 @@ public class InicioOverlay extends JWindow {
                     revalidate();
                 }
             });
-             cadastroAnimator = new Animator(500, new Animator.TimingTarget() {
+            cadastroAnimator = new Animator(500, new Animator.TimingTarget() {
                 @Override
                 public void timingEvent(float v) {
                     float f = showCadastro ? v : 1f - v;
@@ -192,9 +193,9 @@ public class InicioOverlay extends JWindow {
             loginAnimator.setInterpolator(CubicBezierEasing.EASE);
             cadastroAnimator.setInterpolator(CubicBezierEasing.EASE);
             recuperarSenhaAnimator.setInterpolator(CubicBezierEasing.EASE);
-            
+
         }
-        
+
         public void setInicioTela(InicioTela inicioTela) {
             this.inicioTela = inicioTela;
         }
@@ -202,7 +203,7 @@ public class InicioOverlay extends JWindow {
         public void setEventHomeOverlay(EventHomeOverlay eventHomeOverlay) {
             this.eventHomeOverlay = eventHomeOverlay;
         }
-        
+
         public void setIndex(int index) {
             this.index = index;
             VideosOverlay location = videosOverlay.get(index);
@@ -223,8 +224,8 @@ public class InicioOverlay extends JWindow {
             header.setOpaque(false);
             JLabel title = new JLabel();
             title.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
-            title.putClientProperty(FlatClientProperties.STYLE, "" +
-                    "font:montserrat +10");
+            title.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "font:montserrat +10");
             HeaderButton sairHeaderButton = new HeaderButton("Sair");
             HeaderButton recuperarSenhaHeaderButton = new HeaderButton("Recuperar Senha");
             HeaderButton cadastrarHeaderButton = new HeaderButton("Cadastrar-se");
@@ -233,13 +234,12 @@ public class InicioOverlay extends JWindow {
             recuperarSenhaHeaderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/senha-incorreta.png")));
             cadastrarHeaderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastro.png")));
             entrarHeaderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/escudo-de-seguranca.png")));
-            sairHeaderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/poder.png")));            
+            sairHeaderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/poder.png")));
             //cor da fonte
-            recuperarSenhaHeaderButton.setForeground(new Color(0,128,128));
-            cadastrarHeaderButton.setForeground(new Color(0,128,128));
-            entrarHeaderButton.setForeground(new Color(0,128,128));
-            sairHeaderButton.setForeground(new Color(0,128,128));
-            
+            recuperarSenhaHeaderButton.setForeground(new Color(0, 128, 128));
+            cadastrarHeaderButton.setForeground(new Color(0, 128, 128));
+            entrarHeaderButton.setForeground(new Color(0, 128, 128));
+            sairHeaderButton.setForeground(new Color(0, 128, 128));
 
             entrarHeaderButton.addActionListener(e -> {
                 loginAction();
@@ -254,9 +254,9 @@ public class InicioOverlay extends JWindow {
                 runRecuperarSenhaAnimation(true);
                 runCadastroAnimation(false);
                 runLoginAnimation(false);
-                
+
             });
-            sairHeaderButton.addActionListener(e->{
+            sairHeaderButton.addActionListener(e -> {
                 //System.exit(0);
                 inicioTela.dispose();
             });
@@ -268,6 +268,7 @@ public class InicioOverlay extends JWindow {
             header.add(entrarHeaderButton);
             add(header, "wrap");
         }
+
         public void loginAction() {
             panelLogin.setInicioTela(inicioTela);
             runLoginAnimation(true);
@@ -280,11 +281,12 @@ public class InicioOverlay extends JWindow {
             panelLogin.setInicioTela(inicioTela);
             add(panelLogin, "pos 100% 0.5al,w 350");
         }
-        
+
         private void createCadastro() {
             panelCadastro = new CadastroTela();
             add(panelCadastro, "pos 100% 0.5al,w 350");
         }
+
         private void createRecuperarSenha() {
             panelRecuperarSenha = new RecuperaSenhaTela();
             add(panelRecuperarSenha, "pos 100% 0.5al,w 350");
@@ -295,17 +297,15 @@ public class InicioOverlay extends JWindow {
             panel.setOpaque(false);
             for (int i = 0; i < videosOverlay.size(); i++) {
                 JButton cmd = new JButton("");
-                cmd.putClientProperty(FlatClientProperties.STYLE, "" +
-                        "margin:5,5,5,5;" +
-                        "arc:999;" +
-                        "borderWidth:0;" +
-                        "focusWidth:0;" +
-                        "innerFocusWidth:0;"// +
-                        //"selectedBackground:$Component.accentColor"
+                cmd.putClientProperty(FlatClientProperties.STYLE, ""
+                        + "margin:5,5,5,5;"
+                        + "arc:999;"
+                        + "borderWidth:0;"
+                        + "focusWidth:0;"
+                        + "innerFocusWidth:0;" +
+                "selectedBackground:$Component.accentColor"
                 );
-                //troca da cor das bolinhas da transição
-                cmd.setBackground(new Color(149, 175, 66));
-                
+
                 cmd.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 final int index = i;
                 cmd.addActionListener(e -> {
@@ -354,8 +354,8 @@ public class InicioOverlay extends JWindow {
                 }
             }
         }
-        
-         public void runCadastroAnimation(boolean show) {
+
+        public void runCadastroAnimation(boolean show) {
             if (showCadastro != show) {
                 if (!cadastroAnimator.isRunning()) {
                     showCadastro = show;
@@ -363,6 +363,7 @@ public class InicioOverlay extends JWindow {
                 }
             }
         }
+
         private void runRecuperarSenhaAnimation(boolean show) {
             if (showRecuperarSenha != show) {
                 if (!recuperarSenhaAnimator.isRunning()) {
@@ -379,8 +380,8 @@ public class InicioOverlay extends JWindow {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 int width = getWidth();
                 int height = getHeight();
-               //troca cor da transição
-                g2.setColor(new Color (149, 175, 66));
+                //troca cor da transição
+                g2.setColor(new Color(149, 175, 66));
                 Rectangle rec = new Rectangle(0, 0, width, height);
                 if (animationType == AnimationType.CLOSE_VIDEO) {
                     g2.setComposite(AlphaComposite.SrcOver.derive(animate));
