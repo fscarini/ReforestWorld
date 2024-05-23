@@ -77,58 +77,41 @@ public class TelaHome extends javax.swing.JFrame {
             @Override
             public SimpleMenuOption getSimpleMenuOption() {
                 String[][] menus;
-        if ("1".equals(codPerfil)) { // Perfil de administrador
-            menus = new String[][] {
-                {"~ÁREA DO USUÁRIO~"},
-                {"Meu Perfil"},
-                {"~COMUNIDADE~"},
-                {"Chat"},
-                {"Forum"},
-                {"~DOAÇÕES~"},
-                {"Gestão de Mudas"},
-                {"Doações Livres"},
-                {"Eventos", "Cadastro de Eventos", "Consulta de Eventos"},
-                {"Minhas Contribuições"},
-                {"~CONFIGURAÇÕES~"},
-                {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
-                {"Configurações", "Dark Theme", "Light Theme"},
-                {"Gestão de Usuários"},
-                {"Dark Theme"},
-                {"Light Theme"},
-                {"Logout"}
-            };
-        } else if ("2".equals(codPerfil)) { // Perfil de usuário comun
-            menus = new String[][] {
-                {"~ÁREA DO USUÁRIO~"},
-                {"Meu Perfil"},
-                {"~COMUNIDADE~"},
-                {"Chat"},
-                {"Forum"},
-                {"~DOAÇÕES~"},
-                {"Doações Livres"},
-                {"Eventos", "Consulta de Eventos"},
-                {"Minhas Contribuições"},
-                {"~CONFIGURAÇÕES~"},
-                {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
-                {"Configurações"},
-                {"Dark Theme"},
-                {"Light Theme"},
-                {"Logout"}
-            };
-        }else{ // Perfil de usuário não registrado
-            menus = new String[][] {
-                {"~ÁREA DO USUÁRIO~"},
-                {"Meu Perfil"},
-                {"~COMUNIDADE~"},
-                {"~DOAÇÕES~"},
-                {"~CONFIGURAÇÕES~"},
-                {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
-                {"Configurações"},
-                {"Dark Theme"},
-                {"Light Theme"},
-                {"Logout"}
-            };
-        }
+                if ("1".equals(codPerfil)) { // Perfil de administrador
+                    menus = new String[][]{
+                        {"~ÁREA DO USUÁRIO~"},
+                        {"Meu Perfil"},
+                        {"~COMUNIDADE~"},
+                        {"Chat"},
+                        {"Forum"},
+                        {"~DOAÇÕES~"},
+                        {"Gestão de Mudas"},
+                        {"Doações Livres"},
+                        {"Eventos", "Cadastro de Eventos", "Consulta de Eventos"},
+                        {"Minhas Contribuições"},
+                        {"~CONFIGURAÇÕES~"},
+                        {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
+                        {"Configurações", "Dark Theme", "Light Theme"},
+                        {"Gestão de Usuários"},
+                        {"Logout"}
+                    };
+                } else {
+                    menus = new String[][]{
+                        {"~ÁREA DO USUÁRIO~"},
+                        {"Meu Perfil"},
+                        {"~COMUNIDADE~"},
+                        {"Chat"},
+                        {"Forum"},
+                        {"~DOAÇÕES~"},
+                        {"Doações Livres"},
+                        {"Eventos", "Consulta de Eventos"},
+                        {"Minhas Contribuições"},
+                        {"~CONFIGURAÇÕES~"},
+                        {"Ajuda", "Fale conosco", "Sobre nós", "Ajuda"},
+                        {"Configurações", "Dark Theme", "Light Theme"},
+                        {"Logout"}
+                    };
+                };
 
                 String icons[] = {
                     "dashboard.svg",
@@ -141,8 +124,6 @@ public class TelaHome extends javax.swing.JFrame {
                     "icon.svg",
                     "page.svg",
                     "page.svg",
-                    "dark.svg",
-                    "light.svg",
                     "logout.svg"};
 
                 return new SimpleMenuOption()
@@ -163,10 +144,25 @@ public class TelaHome extends javax.swing.JFrame {
                                     WindowsTabbed.getInstance().addTab("Forum", new ForumTela());
                                 }
                                 if (index == 3) {
-                                    WindowsTabbed.getInstance().addTab("Gestão de Mudas", new CadastroMudasTela());
+                                    if ("1".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Gestão de Mudas", new CadastroMudasTela());
+                                    } else {
+                                        WindowsTabbed.getInstance().addTab("Doações Livres", new DoacaoLivreTela());
+                                    }
                                 }
                                 if (index == 4) {
-                                    WindowsTabbed.getInstance().addTab("Doações Livres", new DoacaoLivreTela());
+                                    if ("1".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Doações Livres", new DoacaoLivreTela());
+                                    }
+                                }
+
+                                if (index == 4 && subIndex == 1) {
+                                    WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());
+                                }
+                                if (index == 5) {
+                                    if ("2".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Minhas Contribuições", new MinhasContribuicoesTela());
+                                    }
                                 }
                                 if (index == 5 && subIndex == 1) {
                                     WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
@@ -175,36 +171,62 @@ public class TelaHome extends javax.swing.JFrame {
                                     WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());
                                 }
                                 if (index == 6) {
-                                    WindowsTabbed.getInstance().addTab("Minhas Contribuições", new MinhasContribuicoesTela());
+                                    if ("1".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Minhas Contribuições", new MinhasContribuicoesTela());
+                                    }
+                                }
+                                if (index == 6 && subIndex == 1) {
+                                    if ("2".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                                    }
+                                }
+                                if (index == 6 && subIndex == 2) {
+                                    if ("2".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Sobre nós", new SobreNosTela());
+                                    }
+                                }
+                                if (index == 6 && subIndex == 3) {
+                                    if ("2".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Ajuda", new AjudaTela());
+                                    }
                                 }
                                 if (index == 7 && subIndex == 1) {
-                                    WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                                    if ("1".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                                    } else {
+                                        changeMode(true);
+                                    }
                                 }
                                 if (index == 7 && subIndex == 2) {
-                                    WindowsTabbed.getInstance().addTab("Sobre nós", new SobreNosTela());
+                                    if ("1".equals(codPerfil)) {
+                                        WindowsTabbed.getInstance().addTab("Sobre nós", new SobreNosTela());
+                                    } else {
+                                        changeMode(false);
+                                    }
                                 }
                                 if (index == 7 && subIndex == 3) {
                                     WindowsTabbed.getInstance().addTab("Ajuda", new AjudaTela());
                                 }
-//                                if (index == 8) {
-//                                    WindowsTabbed.getInstance().addTab("Configurações", new ConfiguracoesTela());
-//                                }
+                                if (index == 8) {
+                                    if ("2".equals(codPerfil)) {
+                                    String userDir = System.getProperty("user.dir");
+                                    NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16");
+                                    NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16/vlc-3.0.16");
+                                    Main main = new Main();
+                                    main.setVisible(true);
+                                    dispose();
+                                    }
+                                }
                                 if (index == 9) {
                                     WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela());
                                 }
-                                if (index == 8 && subIndex == 1 ) {
+                                if (index == 8 && subIndex == 1) {
                                     changeMode(true);
                                 }
-                                if (index == 8 && subIndex == 2 ) {
+                                if (index == 8 && subIndex == 2) {
                                     changeMode(false);
                                 }
                                 if (index == 10) {
-                                    changeMode(true);
-                                }
-                                if (index == 11) {
-                                    changeMode(false);
-                                }
-                                if (index == 12) {
 
                                     String userDir = System.getProperty("user.dir");
                                     NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), userDir + "/src/vlc-3.0.16");
@@ -226,6 +248,7 @@ public class TelaHome extends javax.swing.JFrame {
             }
 
             @Override
+
             public SimpleFooterData getSimpleFooterData() {
                 return new SimpleFooterData()
                         .setTitle("Reforest World")

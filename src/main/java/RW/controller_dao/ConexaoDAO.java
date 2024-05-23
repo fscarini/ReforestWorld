@@ -194,7 +194,8 @@ public class ConexaoDAO {
     public boolean verificacaoUsuarioCodigo(String email, String cod_verificacao) throws SQLException {
         boolean verify = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT * FROM users WHERE email=? and cod_verificacao=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        var p = conexao.prepareStatement("SELECT * FROM users WHERE email=? and cod_verificacao=? limit 1", 
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, email);
         p.setString(2, cod_verificacao);
         ResultSet r = p.executeQuery();
@@ -210,7 +211,8 @@ public class ConexaoDAO {
     public boolean checkCPFDuplicado(String cpf) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM users WHERE CPF=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        var p = conexao.prepareStatement("SELECT id FROM users WHERE CPF=? limit 1",
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, cpf);
         ResultSet r = p.executeQuery();
         if (r.first()) {
@@ -225,7 +227,8 @@ public class ConexaoDAO {
     public boolean checkEmailDuplicado(String email) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM users WHERE email=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        var p = conexao.prepareStatement("SELECT id FROM users WHERE email=? limit 1",
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, email);
         ResultSet r = p.executeQuery();
         if (r.first()) {
@@ -240,7 +243,8 @@ public class ConexaoDAO {
     public boolean checkMudaDuplicada(String nome_cientifico) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM muda WHERE nome_cientifico=? limit 1", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        var p = conexao.prepareStatement("SELECT id FROM muda WHERE nome_cientifico=? limit 1",
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, nome_cientifico);
         ResultSet r = p.executeQuery();
         if (r.first()) {
@@ -251,20 +255,20 @@ public class ConexaoDAO {
         conexao.close();
         return duplicate;
     }
-    
+
     private boolean checkDuplicateCode(String code) throws SQLException {
-    boolean duplicate = false;
-    Conexao conexao = new Conexao();
-    Connection conn = conexao.conectar();
-    PreparedStatement p = conn.prepareStatement("SELECT id FROM users WHERE cod_verificacao = ? LIMIT 1");
-    p.setString(1, code);
-    ResultSet r = p.executeQuery();
-    if (r.next()) {
-        duplicate = true;
+        boolean duplicate = false;
+        Conexao conexao = new Conexao();
+        Connection conn = conexao.conectar();
+        PreparedStatement p = conn.prepareStatement("SELECT id FROM users WHERE cod_verificacao = ? LIMIT 1");
+        p.setString(1, code);
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            duplicate = true;
+        }
+        r.close();
+        p.close();
+        conn.close();
+        return duplicate;
     }
-    r.close();
-    p.close();
-    conn.close();
-    return duplicate;
-}
 }
