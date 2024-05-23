@@ -31,71 +31,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="525" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="limparButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cadastrarEventoButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" alignment="0" pref="262" max="32767" attributes="0"/>
-                      <Component id="dataEventoTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="localTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="nomeEventoTextField" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="1149" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomeEventoTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="localTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="dataEventoTextField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="109" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cadastrarEventoButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="limparButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="298" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="697" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="localTextField">
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -103,54 +56,22 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="descricaoTextArea">
+            <Component class="javax.swing.JTextArea" name="jTextArea1">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="jzlkl&#xe7;kgh&#xe7;lkhlkhlkhlkhflajhflkjahfjafhajfahlfjhalfkjhaljkfhalkjfhlkjahfkjlahfkjlahfjahfjahflkjahflahfljahflkjahflajhflkjahflkasdkjlk&#xa;Pagamentos&#xa;&#xa;&#x9;1.&#x9;Como posso realizar um pagamento?&#xa;&#x9;&#x2022;&#x9;Os pagamentos podem ser realizados utilizando cart&#xe3;o de cr&#xe9;dito, d&#xe9;bito, ou transfer&#xea;ncia banc&#xe1;ria. Basta acessar a se&#xe7;&#xe3;o de doa&#xe7;&#xf5;es nos eventos ativos, ou a &#xe1;rea de &#x9;&#x9;&#x9;doa&#xe7;&#xf5;es livres e seguir os passos indicados.&#xa;&#xa;&#x9;2.&#x9;Quais m&#xe9;todos de pagamento s&#xe3;o aceitos?&#xa;&#x9;&#x2022;&#x9;Aceitamos cart&#xf5;es de cr&#xe9;dito e d&#xe9;bito das bandeiras Visa, Mastercard, American Express, al&#xe9;m de transfer&#xea;ncias banc&#xe1;rias via PIX.&#xa;&#xa;&#x9;3.&#x9;Meu pagamento n&#xe3;o foi processado. O que devo fazer?&#xa;&#x9;&#x2022;&#x9;Verifique se os dados do seu cart&#xe3;o est&#xe3;o corretos e se h&#xe1; saldo dispon&#xed;vel. Caso o problema persista, entre em contato com o nosso suporte pela aba &quot;Fale conosco&quot; no menu &#x9;&#x9;lateral.&#xa;&#xa;&#x9;xxxxxx 4.&#x9;Posso parcelar meus pagamentos?&#xa;&#x9;&#x2022;&#x9;Sim, oferecemos a op&#xe7;&#xe3;o de parcelamento para cart&#xf5;es de cr&#xe9;dito, em at&#xe9; 6 vezes sem juros.&#xa;&#xa;Acesso &#xe0; Conta&#xa;&#xa;&#x9;1.&#x9;Esqueci minha senha. Como posso recuper&#xe1;-la?&#xa;&#x9;&#x2022;&#x9;Clique no link &#x201c;Esqueci minha senha&#x201d; na p&#xe1;gina de login e siga as instru&#xe7;&#xf5;es para receber um e-mail com o passo a passo para redefinir a senha de acesso.&#xa;&#xa;&#x9;2.&#x9;Como posso alterar os dados cadastrais do meu perfil?&#xa;&#x9;&#x2022;&#x9;Acesse as configura&#xe7;&#xf5;es da sua conta na se&#xe7;&#xe3;o &quot;Meu perfil&quot;, e selecione a op&#xe7;&#xe3;o xxxxxxxxxxxxxxxxxxxxxxxxxxx&#xa;&#xa;Problemas de Acesso&#xa;&#xa;&#x9;1.&#x9;N&#xe3;o consigo acessar minha conta. O que devo fazer?&#xa;&#x9;&#x2022;&#x9;Verifique se est&#xe1; utilizando o e-mail e a senha corretos. Se ainda tiver problemas, tente redefinir sua senha. Caso o problema persista, entre em contato com nosso suporte.&#xa;&#xa;&#x9;2.&#x9;A p&#xe1;gina n&#xe3;o est&#xe1; carregando corretamente. Como resolver?&#xa;&#x9;&#x2022;&#x9;Tente limpar o cache do seu navegador e recarregar a p&#xe1;gina. Se o problema continuar, tente acessar a partir de outro navegador ou dispositivo para verificar se o problemas &#x9;&#x9;persiste.&#xa;&#xa;&#x9;3.&#x9;Recebi uma mensagem de erro ao tentar acessar uma funcionalidade. O que devo fazer?&#xa;&#x9;&#x2022;&#x9;Anote a mensagem de erro recebida e entre em contato com nosso suporte t&#xe9;cnico para assist&#xea;ncia.&#xa;&#xa;Doa&#xe7;&#xf5;es&#xa;&#xa;&#x9;1.&#x9;Como posso realizar doa&#xe7;&#xf5;es?&#xa;&#x9;&#x2022;&#x9;As doa&#xe7;&#xf5;es podem ser realizadas atrav&#xe9;s dos eventos dispon&#xed;veis, neles estar&#xe3;o descritas as metas de doa&#xe7;&#xe3;o e os valores de contribui&#xe7;&#xe3;o m&#xed;nimos. Al&#xe9;m disso, nossa &#x9;&#x9;&#x9;aplica&#xe7;&#xe3;o conta com a se&#xe7;&#xe3;o de doa&#xe7;&#xf5;es livres, que permite realizar doa&#xe7;&#xf5;es de valores avulsos que ser&#xe3;o redistribu&#xed;dos conforme necessidade dos grupos de plantio &#x9;&#x9;&#x9;benefici&#xe1;rios.&#xa;&#x9;&#xa;&#x9;2.&#x9;Como posso acompanhar minhas contribui&#xe7;&#xf5;es?&#xa;&#x9;&#x2022;&#x9;As doa&#xe7;&#xf5;es realizadas podem ser conferidas na se&#xe7;&#xe3;o &quot;Minhas contribui&#xe7;&#xf5;es&quot; no menu da aplica&#xe7;&#xe3;o. Nesta &#xe1;rea ser&#xe1; poss&#xed;vel visualizar todo o hist&#xf3;rico de doa&#xe7;&#xf5;es realizadas, &#x9;&#x9;assim como valores de cada contribui&#xe7;&#xe3;o.&#xa;&#xa;&#x9;3.&#x9;Quais os eventos dispon&#xed;veis para doa&#xe7;&#xf5;es?&#xa;&#x9;&#x2022;&#x9;&#xc9; poss&#xed;vel verificar quais os eventos dispon&#xed;veis no momento, assim como os prazos para seu encerramento. Basta acessar a se&#xe7;&#xe3;o de &quot;Consulta de eventos&quot; para verificar os &#x9;&#x9;eventos dispon&#xed;veis e informa&#xe7;&#xf5;es sobre eles.&#xa;&#xa;Outros&#xa;&#xa;&#xa;"/>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="nomeEventoTextField">
-        </Component>
-        <Component class="javax.swing.JTextField" name="dataEventoTextField">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nome do evento"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Local do evento"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Data do evento"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o do evento"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="cadastrarEventoButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar evento"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarEventoButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="limparButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Limpar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limparButtonActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -249,4 +251,20 @@ public class ConexaoDAO {
         conexao.close();
         return duplicate;
     }
+    
+    private boolean checkDuplicateCode(String code) throws SQLException {
+    boolean duplicate = false;
+    Conexao conexao = new Conexao();
+    Connection conn = conexao.conectar();
+    PreparedStatement p = conn.prepareStatement("SELECT id FROM users WHERE cod_verificacao = ? LIMIT 1");
+    p.setString(1, code);
+    ResultSet r = p.executeQuery();
+    if (r.next()) {
+        duplicate = true;
+    }
+    r.close();
+    p.close();
+    conn.close();
+    return duplicate;
+}
 }
