@@ -20,7 +20,7 @@ public class ConexaoDAO {
             String nome, String email, String senha, String dt_nascimento, String sexo, String cpf, String code) throws SQLException {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement(
-                "INSERT INTO users(id, nome, email, senha, dt_nascimento, sexo, cpf, cod_verificacao) values (null,?,?,?,?,?,?,?);");
+                "INSERT INTO users(nome, email, senha, dt_nascimento, sexo, cpf, cod_verificacao) values (?,?,?,?,?,?,?);");
         p.setString(1, nome);
         p.setString(2, email);
         p.setString(3, senha);
@@ -211,7 +211,7 @@ public class ConexaoDAO {
     public boolean checkCPFDuplicado(String cpf) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM users WHERE CPF=? limit 1",
+        var p = conexao.prepareStatement("SELECT cod_usuario FROM users WHERE CPF=? limit 1",
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, cpf);
         ResultSet r = p.executeQuery();
@@ -227,7 +227,7 @@ public class ConexaoDAO {
     public boolean checkEmailDuplicado(String email) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM users WHERE email=? limit 1",
+        var p = conexao.prepareStatement("SELECT cod_usuario FROM users WHERE email=? limit 1",
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, email);
         ResultSet r = p.executeQuery();
@@ -243,7 +243,7 @@ public class ConexaoDAO {
     public boolean checkMudaDuplicada(String nome_cientifico) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT id FROM muda WHERE nome_cientifico=? limit 1",
+        var p = conexao.prepareStatement("SELECT cod_muda FROM muda WHERE nome_cientifico=? limit 1",
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, nome_cientifico);
         ResultSet r = p.executeQuery();
@@ -260,7 +260,7 @@ public class ConexaoDAO {
         boolean duplicate = false;
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
-        PreparedStatement p = conn.prepareStatement("SELECT id FROM users WHERE cod_verificacao = ? LIMIT 1");
+        PreparedStatement p = conn.prepareStatement("SELECT cod_usuario FROM users WHERE cod_verificacao = ? LIMIT 1");
         p.setString(1, code);
         ResultSet r = p.executeQuery();
         if (r.next()) {

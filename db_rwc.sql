@@ -120,3 +120,5 @@ CREATE TABLE `users` (
   `foto_usuario` longblob,
   PRIMARY KEY (`cod_usuario`)
   );
+  SELECT * FROM users;
+  DELETE FROM users WHERE cod_usuario = 118;
