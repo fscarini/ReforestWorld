@@ -7,7 +7,6 @@ import RW.forms.CadastroMudasTela;
 import RW.forms.GestaoUsuariosTela;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class ConexaoController {
             // Preencha a tabela com os dados do ResultSet
             while (rs.next()) {
                 Object[] rowData = {
-                    rs.getString("ID"),
+                    rs.getString("Cod_usuario"),
                     rs.getString("Nome"),
                     rs.getString("Email"),
                     rs.getString("CPF"),
