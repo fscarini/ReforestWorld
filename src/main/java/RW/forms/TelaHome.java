@@ -136,7 +136,7 @@ public class TelaHome extends javax.swing.JFrame {
                             public void selected(MenuAction action, int index, int subIndex) {
 
                                 if (index == 0) {
-                                    WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela());
+                                    WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil));
                                 }
                                 if (index == 1) {
                                     WindowsTabbed.getInstance().addTab("Chat", new ChatTela());
