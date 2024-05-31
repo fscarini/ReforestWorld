@@ -33,6 +33,19 @@ public class ConexaoDAO {
         conexao.close();
     }
 
+    public int cadastrarMensagem(String assunto, String mensagem, int cod_usuario) throws Exception {
+        var conexao = new Conexao().conectar();
+        var p = conexao.prepareStatement(
+                "INSERT INTO mensagens_suporte (assunto_mensagem, mensagens_suporte, cod_usuario, data_alteracao) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+        p.setString(1, assunto);
+        p.setString(2, mensagem);
+        p.setInt(3, cod_usuario);
+        int confirma = p.executeUpdate();
+        p.close();
+        conexao.close();
+        return confirma;
+    }
+
     public void cadastrarEvento(String nome, String local, String data, String descricao, int id_usuario) throws SQLException {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement(
@@ -154,12 +167,14 @@ public class ConexaoDAO {
             String nome = rs.getString("nome");
             String email = rs.getString("email");
             String codPerfil = rs.getString("cod_perfil");
+            String codUsuario = rs.getString("cod_usuario");
 //            System.out.println("DAO Nome: " + nome);
 //            System.out.println("DAO Email: " + email);
 //            System.out.println("DAO CodPerfil: " + codPerfil);
             resultadoConsulta.put("nome", nome);
             resultadoConsulta.put("email", email);
             resultadoConsulta.put("cod_perfil", codPerfil);
+            resultadoConsulta.put("cod_usuario", codUsuario);
             rs.close();
             p.close();
             conexao.close();
@@ -194,7 +209,7 @@ public class ConexaoDAO {
     public boolean verificacaoUsuarioCodigo(String email, String cod_verificacao) throws SQLException {
         boolean verify = false;
         var conexao = new Conexao().conectar();
-        var p = conexao.prepareStatement("SELECT * FROM users WHERE email=? and cod_verificacao=? limit 1", 
+        var p = conexao.prepareStatement("SELECT * FROM users WHERE email=? and cod_verificacao=? limit 1",
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         p.setString(1, email);
         p.setString(2, cod_verificacao);
