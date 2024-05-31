@@ -34,16 +34,21 @@ public class TelaHome extends javax.swing.JFrame {
     public String getCodPerfil() {
         return codPerfil;
     }
+    public String getCodUsuario() {
+        return codUsuario;
+    }
     private String nome;
+    private String codUsuario;
     private String email;
     private String codPerfil;
 
-    public TelaHome(String nome, String email, String codPerfil) {
+    public TelaHome(String nome, String email, String codPerfil, String codUsuario) {
         this.nome = nome;
         this.email = email;
         this.codPerfil = codPerfil;
+        this.codUsuario = codUsuario;
         GlassPanePopup.install(this);
-        MyDrawerBuilder myDrawerbuilder = new MyDrawerBuilder(nome, email, codPerfil) {
+        MyDrawerBuilder myDrawerbuilder = new MyDrawerBuilder(nome, email, codPerfil, codUsuario) {
             private void changeMode(boolean dark) {
                 if (FlatLaf.isLafDark() != dark) {
                     if (dark) {
@@ -178,7 +183,7 @@ public class TelaHome extends javax.swing.JFrame {
                                 }
                                 if (index == 6 && subIndex == 1) {
                                     if ("2".equals(codPerfil)) {
-                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela(codUsuario));
                                     }
                                 }
                                 if (index == 6 && subIndex == 2) {
@@ -193,7 +198,7 @@ public class TelaHome extends javax.swing.JFrame {
                                 }
                                 if (index == 7 && subIndex == 1) {
                                     if ("1".equals(codPerfil)) {
-                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela());
+                                        WindowsTabbed.getInstance().addTab("Fale conosco", new FaleConoscoTela(codUsuario));
                                     } else {
                                         changeMode(true);
                                     }
