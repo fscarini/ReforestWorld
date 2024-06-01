@@ -6,6 +6,7 @@ import RW.forms.CadastroEventosTela;
 import RW.forms.CadastroMudasTela;
 import RW.forms.FaleConoscoTela;
 import RW.forms.GestaoUsuariosTela;
+import RW.forms.MeuPerfilTela;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.sql.PreparedStatement;
@@ -82,14 +83,14 @@ public class ConexaoController {
 
     public int cadastroMensagem(FaleConoscoTela view) throws Exception {
         ConexaoDAO enviar = new ConexaoDAO();
-        
+
         int retorno = enviar.cadastrarMensagem(
                 view.getAssuntoComboBox(),
                 view.getMensagemTextArea(),
                 Integer.parseInt(view.getCodUsuario()));
-                return retorno; 
+        return retorno;
     }
-    
+
     public int cadastroMuda(CadastroMudasTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
 
@@ -122,6 +123,14 @@ public class ConexaoController {
                 view.getFis(),
                 view.getTamanho(),
                 1,
+                view.getCodigoLabel()
+        );
+        return retorno;
+    }
+
+    public int tornarAdm(MeuPerfilTela view) throws Exception {
+        ConexaoDAO tornarAdm = new ConexaoDAO();
+        int retorno = tornarAdm.tornarAdm(
                 view.getCodigoLabel()
         );
         return retorno;

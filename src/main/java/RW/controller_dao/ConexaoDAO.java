@@ -119,6 +119,17 @@ public class ConexaoDAO {
         return confirma;
     }
 
+    public int tornarAdm(Integer cod_usuario) throws Exception {
+        var conexao = new Conexao().conectar();
+        var p = conexao.prepareStatement(
+                "UPDATE users SET cod_perfil = 1 WHERE cod_usuario = ?");
+        p.setInt(1, cod_usuario);
+        int confirma = p.executeUpdate();
+        p.close();
+        conexao.close();
+        return confirma;
+    }
+
     public Map<String, Object> buscaCadastroMuda(String nome_cientifico) throws Exception {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement("SELECT * FROM muda WHERE lower(nome_cientifico) = ? limit 1;");

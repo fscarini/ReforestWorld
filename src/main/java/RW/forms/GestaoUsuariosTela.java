@@ -282,13 +282,6 @@ public class GestaoUsuariosTela extends TabbedForm {
     sorter.setRowFilter(combinedFilter);
     }//GEN-LAST:event_PesquisarjButtonActionPerformed
 
-    
-    @Override
-    public boolean formClose() {
-        int opt = JOptionPane.showConfirmDialog(this, "Evento cadastrado com sucesso, deseja realizar outro cadastro?", "Sucesso", JOptionPane.YES_NO_OPTION);
-        return opt == JOptionPane.NO_OPTION;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CPFjTextField;
     private javax.swing.JTextField EmailjTextField;
