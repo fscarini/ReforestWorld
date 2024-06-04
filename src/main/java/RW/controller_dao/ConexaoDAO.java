@@ -88,18 +88,26 @@ public class ConexaoDAO {
         }
         return resultadoConsulta;
     }
-
-    public void cadastrarEvento(String nome, String local, String data, String descricao, int id_usuario) throws SQLException {
+    
+    public int cadastrarEvento(String nome, String inicio, String termino, String descricao,
+            int meta_doacao, int cod_estado, String cidade, String codUsuario, FileInputStream fis, int tamanho) throws SQLException {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement(
-                "INSERT INTO eventos(nome, local, data, descricao, id_usuario) values (?,?,?,?, 1);");
+                "INSERT INTO eventos(nome, inicio, termino, descricao, meta_doacao, cod_estado, cidade, id_usuario, foto) "
+                        + "values (?,?,?,?,?,?,?,?,?);");
         p.setString(1, nome);
-        p.setString(2, local);
-        p.setString(3, data);
+        p.setString(2, inicio);
+        p.setString(3, termino);
         p.setString(4, descricao);
-        p.execute();
+        p.setInt(5, meta_doacao);
+        p.setInt(6, cod_estado);
+        p.setString(7, cidade);
+        p.setString(8, codUsuario);
+        p.setBlob(9, fis, tamanho);
+        int confirma = p.executeUpdate();
         p.close();
         conexao.close();
+        return confirma;
     }
 
     public int cadastrarMuda(String nome_cientifico, String nome_comercial, double valor_muda,

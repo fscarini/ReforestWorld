@@ -171,7 +171,7 @@ public class TelaHome extends javax.swing.JFrame {
                                     }
                                 }
                                 if (index == 5 && subIndex == 1) {
-                                    WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela());
+                                    WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela(codUsuario));
                                 }
                                 if (index == 5 && subIndex == 2) {
                                     WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());

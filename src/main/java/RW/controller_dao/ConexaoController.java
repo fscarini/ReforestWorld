@@ -122,15 +122,23 @@ public class ConexaoController {
         return resultadoConsulta;
     }
 
-    public void cadastroEvento(CadastroEventosTela view) throws SQLException {
+    public int cadastroEvento(CadastroEventosTela view) throws SQLException {
         ConexaoDAO cadastro = new ConexaoDAO();
-        cadastro.cadastrarEvento(
+        int retorno = cadastro.cadastrarEvento(
                 view.getNomeEventoTextField().getText(),
-                view.getDataEventoTextField().getText(),
-                view.getLocalTextField().getText(),
+                view.getInicioTextField().getText(),
+                view.getTerminoTextField().getText(),
                 view.getDescricaoTextArea().getText(),
-                1
+                view.getDoacoesSlider().getValue(),
+                view.getEstadoComboBox(),
+                view.getCidadeTextField(),
+                view.getCodUsuario(),
+                view.getFis(),
+                view.getTamanho()
         );
+        
+        return retorno;
+       
     }
 
     public int cadastroMensagem(FaleConoscoTela view) throws Exception {
