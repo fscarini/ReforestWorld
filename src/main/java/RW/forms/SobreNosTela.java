@@ -11,14 +11,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Fernando
- */
 public class SobreNosTela extends TabbedForm {
     private int currentIndex = 0;
-    JLabel[] labels = new JLabel[8];
-    private String[] links = new String[8];
+    JLabel[] labels = new JLabel[9];
+    private String[] links = new String[9];
     
     public SobreNosTela() {
         initComponents();
@@ -39,36 +35,40 @@ public class SobreNosTela extends TabbedForm {
     }
 
     private void referenceLabels() {
-
-        labels[0] = Foto1;
+        
+        labels[0] = Foto9;
+        
+        labels[1] = Foto1;
         //add(labels[0]);
 
-        labels[1] = Foto2;
-        //add(labels[1]);
+        labels[2] = Foto2;
+        //add(labels[1])
 
-        labels[2] = Foto3;
+        labels[3] = Foto3;
         //add(labels[2]);
         
-        labels[3] = Foto4;
+        labels[4] = Foto4;
         
-        labels[4] = Foto5;
+        labels[5] = Foto5;
         
-        labels[5] = Foto6;
+        labels[6] = Foto6;
         
-        labels[6] = Foto7;
+        labels[7] = Foto7;
         
-        labels[7] = Foto8;
+        labels[8] = Foto8;
     }
     
     private void iniciarLinks() {
-        links[0] = "https://br.linkedin.com/in/raul-santos-199923119";
-        links[1] = "https://www.linkedin.com/in/gabriel-souza-a758782a9/";
-        links[2] = "https://www.linkedin.com/in/guilherme-alves-55a68a273/";
-        links[3] ="https://www.linkedin.com/in/gustavo-scalambrini/";
-        links[4] = "https://www.linkedin.com/in/lucas-belentani";
-        links[5] = "https://www.linkedin.com/in/fscarini/";
-        links[6] = "https://www.linkedin.com/in/victor-de-brito-27b7bb207/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app";
-        links[7] ="https://www.linkedin.com/in/pedro-eli-30a2372ba/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app";
+        
+        links[0] = "https://youtube.com";
+        links[1] = "https://br.linkedin.com/in/raul-santos-199923119";
+        links[2] = "https://www.linkedin.com/in/gabriel-souza-a758782a9/";
+        links[3] = "https://www.linkedin.com/in/guilherme-alves-55a68a273/";
+        links[4] ="https://www.linkedin.com/in/gustavo-scalambrini/";
+        links[5] = "https://www.linkedin.com/in/lucas-belentani";
+        links[6] = "https://www.linkedin.com/in/fscarini/";
+        links[7] = "https://www.linkedin.com/in/victor-de-brito-27b7bb207/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app";
+        links[8] ="https://www.linkedin.com/in/pedro-eli-30a2372ba/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app";
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,6 +91,7 @@ public class SobreNosTela extends TabbedForm {
         Foto3 = new javax.swing.JLabel();
         Foto2 = new javax.swing.JLabel();
         Foto1 = new javax.swing.JLabel();
+        Foto9 = new javax.swing.JLabel();
         emailButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -185,6 +186,11 @@ public class SobreNosTela extends TabbedForm {
         Foto1.setText("Foto1");
         jPanel1.add(Foto1);
         Foto1.setBounds(20, 240, 980, 260);
+
+        Foto9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Layout INTEGRANTES.png"))); // NOI18N
+        jPanel1.add(Foto9);
+        Foto9.setBounds(20, 230, 1000, 280);
+        Foto9.getAccessibleContext().setAccessibleName("Foto9");
 
         emailButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -296,6 +302,7 @@ public class SobreNosTela extends TabbedForm {
     private javax.swing.JLabel Foto6;
     private javax.swing.JLabel Foto7;
     private javax.swing.JLabel Foto8;
+    private javax.swing.JLabel Foto9;
     private javax.swing.JButton Next;
     private javax.swing.JButton Prev;
     private javax.swing.JButton emailButton;
