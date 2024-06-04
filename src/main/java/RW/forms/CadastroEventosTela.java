@@ -15,23 +15,25 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class CadastroEventosTela extends TabbedForm {
+
     private FileInputStream fis;
     private int tamanho;
     private boolean fotoCarregada = false;
     private String codUsuario;
-    
+    private int resultadoSlider;
+    private int resultadoSliderClick;
+
     public CadastroEventosTela(String codUsuario) {
         this.codUsuario = codUsuario;
-        initComponents(); 
-        cidadeTextField.setEnabled(false); 
+        initComponents();
+        cidadeTextField.setEnabled(false);
         estadoComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(estadoComboBox.getSelectedIndex() != 0){
+                if (estadoComboBox.getSelectedIndex() != 0) {
                     cidadeTextField.setEnabled(true);
-                }else{
+                } else {
                     cidadeTextField.setEnabled(false);
                 }
             }
@@ -44,7 +46,7 @@ public class CadastroEventosTela extends TabbedForm {
 
         jPanel1 = new javax.swing.JPanel();
         ImagemPanel = new javax.swing.JPanel();
-        ImagemMudaLabel = new javax.swing.JLabel();
+        ImagemEventoLabel = new javax.swing.JLabel();
         ImagemLabel = new javax.swing.JLabel();
         CarregarImagemButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -66,11 +68,11 @@ public class CadastroEventosTela extends TabbedForm {
         jLabel7 = new javax.swing.JLabel();
         inicioTextField = new javax.swing.JTextField();
 
-        ImagemMudaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImagemMudaLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png"))); // NOI18N
-        ImagemMudaLabel.setAlignmentY(0.0F);
+        ImagemEventoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ImagemEventoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png"))); // NOI18N
+        ImagemEventoLabel.setAlignmentY(0.0F);
 
-        ImagemLabel.setText("Imagem da espécie");
+        ImagemLabel.setText("Imagem do Evento");
 
         CarregarImagemButton.setText("Anexar Imagem");
         CarregarImagemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +88,7 @@ public class CadastroEventosTela extends TabbedForm {
             .addGroup(ImagemPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ImagemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ImagemEventoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagemPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(ImagemLabel)
@@ -102,7 +104,7 @@ public class CadastroEventosTela extends TabbedForm {
                 .addGap(12, 12, 12)
                 .addComponent(ImagemLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ImagemMudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ImagemEventoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(CarregarImagemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -268,14 +270,13 @@ public class CadastroEventosTela extends TabbedForm {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void carregarCidadesPorEstado(){
+    public void carregarCidadesPorEstado() {
         int codigoEstado = getEstadoComboBox();
-        if(codigoEstado == 1){
-            
+        if (codigoEstado == 1) {
+
         }
     }
-    
+
     private void carregarFoto() {
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Selecionar arquivo");
@@ -285,17 +286,17 @@ public class CadastroEventosTela extends TabbedForm {
             try {
                 fis = new FileInputStream(jfc.getSelectedFile());
                 tamanho = (int) jfc.getSelectedFile().length();
-                Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(ImagemMudaLabel.getWidth(),
-                        ImagemMudaLabel.getHeight(), Image.SCALE_SMOOTH);
-                ImagemMudaLabel.setIcon(new ImageIcon(foto));
-                ImagemMudaLabel.updateUI();
+                Image foto = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(ImagemEventoLabel.getWidth(),
+                        ImagemEventoLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImagemEventoLabel.setIcon(new ImageIcon(foto));
+                ImagemEventoLabel.updateUI();
                 fotoCarregada = true;
             } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
     }
-    
+
     // Função Cadastrar
     private void cadastrar() {
         ConexaoController cadastro = new ConexaoController();
@@ -305,14 +306,16 @@ public class CadastroEventosTela extends TabbedForm {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
         }
-    }    
-    
+    }
+
     // Chama a ação do botão cadastrar
     private void cadastrarEventoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEventoButtonActionPerformed
         String mensagemErro = verificarCamposCadastro();
         if (mensagemErro.isEmpty()) {
-        cadastrar();
-        } else{
+            cadastrar();
+            limparCampos();
+            JOptionPane.showMessageDialog(null, "Parabéns, seu evento foi cadastrado com sucesso!");
+        } else {
             JOptionPane.showMessageDialog(null, mensagemErro);
         }
     }//GEN-LAST:event_cadastrarEventoButtonActionPerformed
@@ -323,14 +326,12 @@ public class CadastroEventosTela extends TabbedForm {
 
     private void doacoesSliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doacoesSliderMouseDragged
         //  Insere ou remove valores exibidos enquanto deslizado
-        int resultadoSlider;
         resultadoSlider = doacoesSlider.getValue();
-        doacoesSlider.setBorder(javax.swing.BorderFactory.createTitledBorder("R$ " + resultadoSlider));  
+        doacoesSlider.setBorder(javax.swing.BorderFactory.createTitledBorder("R$ " + resultadoSlider));
     }//GEN-LAST:event_doacoesSliderMouseDragged
 
     private void doacoesSliderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doacoesSliderMouseClicked
         // Pega o valor do slider quando for dado um click
-        int resultadoSliderClick;
         resultadoSliderClick = doacoesSlider.getValue();
         doacoesSlider.setBorder(javax.swing.BorderFactory.createTitledBorder("R$ " + resultadoSliderClick));
     }//GEN-LAST:event_doacoesSliderMouseClicked
@@ -338,7 +339,7 @@ public class CadastroEventosTela extends TabbedForm {
     private void CarregarImagemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarImagemButtonActionPerformed
         carregarFoto();
     }//GEN-LAST:event_CarregarImagemButtonActionPerformed
-    
+
     // Validar preenchimento dos campos
     private String verificarCamposCadastro() {
         StringBuilder mensagemErro = new StringBuilder();
@@ -357,21 +358,23 @@ public class CadastroEventosTela extends TabbedForm {
         if (descricaoTextArea.getText().isEmpty()) {
             mensagemErro.append("Por favor, preencha o campo: Descricao do evento.\n");
         }
-        if(doacoesSlider.getValue() == 0){
+        if (doacoesSlider.getValue() == 0) {
             mensagemErro.append("Por favor, coloque uma meta para doações. \n");
         }
-          return mensagemErro.toString();
+        return mensagemErro.toString();
     }
-    
-    public void limparCampos(){
+
+    public void limparCampos() {
         nomeEventoTextField.setText("");
+        inicioTextField.setText("");
         terminoTextField.setText("");
         descricaoTextArea.setText("");
         estadoComboBox.setSelectedIndex(0);
         cidadeTextField.setText("");
         doacoesSlider.setValue(0);
+        ImagemEventoLabel.setIcon(new ImageIcon(CadastroMudasTela.class.getResource("/imagens/camera (1).png")));
+        doacoesSlider.setBorder(javax.swing.BorderFactory.createTitledBorder("R$ " + 0));
     }
-    
 
 //     Cria um formatador de máscara de data
 //    private MaskFormatter createDateMaskFormatter() {
@@ -382,12 +385,11 @@ public class CadastroEventosTela extends TabbedForm {
 //            return null;
 //        }
 //    }
-
 // getters
     public javax.swing.JTextField getInicioTextField() {
         return inicioTextField;
     }
-    
+
     public javax.swing.JTextField getTerminoTextField() {
         return terminoTextField;
     }
@@ -399,9 +401,9 @@ public class CadastroEventosTela extends TabbedForm {
     public javax.swing.JTextField getNomeEventoTextField() {
         return nomeEventoTextField;
     }
-    
+
     @SuppressWarnings("empty-statement")
-    public int getEstadoComboBox(){
+    public int getEstadoComboBox() {
         int codigoEstado = 0;
 
         if ("AC".equals(estadoComboBox.getSelectedItem())) {
@@ -485,26 +487,31 @@ public class CadastroEventosTela extends TabbedForm {
 
         return codigoEstado;
     }
-    
-    public String getCidadeTextField(){
+
+    public String getCidadeTextField() {
         return cidadeTextField.getText();
     }
-        
-    
-    public javax.swing.JSlider getDoacoesSlider(){
+
+    public javax.swing.JSlider getDoacoesSlider() {
         return doacoesSlider;
     }
+
+    public FileInputStream getFis() {
+        return fis;
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
     
-    @Override
-    public boolean formClose() {
-        int opt = JOptionPane.showConfirmDialog(this, "Dados não enviados podem ser perdidos, deseja fechar esta aba?", "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
-        return opt == JOptionPane.YES_OPTION;
+    public String getCodUsuario(){
+        return codUsuario;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CarregarImagemButton;
+    private javax.swing.JLabel ImagemEventoLabel;
     private javax.swing.JLabel ImagemLabel;
-    private javax.swing.JLabel ImagemMudaLabel;
     private javax.swing.JPanel ImagemPanel;
     private javax.swing.JButton cadastrarEventoButton;
     private javax.swing.JTextField cidadeTextField;
@@ -526,7 +533,5 @@ public class CadastroEventosTela extends TabbedForm {
     private javax.swing.JTextField nomeEventoTextField;
     private javax.swing.JTextField terminoTextField;
     // End of variables declaration//GEN-END:variables
-     
+
 }
-
-

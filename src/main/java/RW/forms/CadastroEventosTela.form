@@ -67,7 +67,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ImagemMudaLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="ImagemEventoLabel" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="ImagemLabel" min="-2" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="ImagemLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ImagemMudaLabel" min="-2" pref="273" max="-2" attributes="0"/>
+                      <Component id="ImagemEventoLabel" min="-2" pref="273" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CarregarImagemButton" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="ImagemMudaLabel">
+            <Component class="javax.swing.JLabel" name="ImagemEventoLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -108,7 +108,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="ImagemLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Imagem da esp&#xe9;cie"/>
+                <Property name="text" type="java.lang.String" value="Imagem do Evento"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="CarregarImagemButton">
