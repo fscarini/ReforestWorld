@@ -22,8 +22,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Gui de login sem funcionalidades
 - [x] Script do banco de dados
 - [x] Login funcional
-- [ ] Cadastro de eventos
-- [ ] Criação de contas
+- [x] Cadastro de eventos
+- [x] Criação de contas
 - [ ] Listagem de eventos
 
 ## 🛠️ O Reforest World foi construído com:
