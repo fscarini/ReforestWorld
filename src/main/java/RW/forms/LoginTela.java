@@ -67,6 +67,7 @@ public class LoginTela extends JPanel {
                     var nome = (String) resultadoConsulta.get("nome");
                     var email = (String) resultadoConsulta.get("email");
                     var codPerfil = (String) resultadoConsulta.get("cod_perfil");
+                    var codUsuario = (String) resultadoConsulta.get("cod_usuario");
 //                    System.out.println("LOGINNome: " + nome);
 //                    System.out.println("LOGINEmail: " + email);
 //                    System.out.println("LOGINCodPerfil: " + codPerfil);
@@ -75,7 +76,7 @@ public class LoginTela extends JPanel {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             new RW.forms.LoginLoadTela(null, true).setVisible(true);
-                            TelaHome telaHome = new TelaHome(nome, email, codPerfil);
+                            TelaHome telaHome = new TelaHome(nome, email, codPerfil, codUsuario);
                             telaHome.setVisible(true);
                         }
                     });
