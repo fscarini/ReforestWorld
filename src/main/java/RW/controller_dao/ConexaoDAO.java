@@ -46,6 +46,49 @@ public class ConexaoDAO {
         return confirma;
     }
 
+    public Map<String, Object> buscaPerfilUsuario(int codUsuario) throws Exception {
+        var conexao = new Conexao().conectar();
+        var p = conexao.prepareStatement("SELECT * FROM users WHERE cod_usuario = ? limit 1;");
+        p.setInt(1, codUsuario);
+        var rs = p.executeQuery();
+        Map<String, Object> resultadoConsulta = new HashMap<>();
+        if (rs.next()) {
+            String nome = rs.getString("nome");
+            String email = rs.getString ("email");
+            String dtNascimento = rs.getString("dt_nascimento");
+            String sexo = rs.getString("sexo");
+            String cpf = rs.getString("cpf");
+            String tipoPagamento = rs.getString("cod_tipo_pagamento");
+            String numeroCartao = rs.getString("numero_cartao");
+            String dataVencimentoCartao = rs.getString("data_vencimento");
+            String cvv = rs.getString("cvv_cartao");
+            String nomeTitular = rs.getString("nome_titular");
+            String cfpCartao = rs.getString("cpf_cartao");
+            String statusUsuario = rs.getString("status_usuario");
+            Blob blob = (Blob) rs.getBlob("foto_usuario");
+            byte[] img = blob.getBytes(1, (int) blob.length());
+            BufferedImage imagem = null;
+            imagem = ImageIO.read(new ByteArrayInputStream(img));
+            resultadoConsulta.put("nome", nome);
+            resultadoConsulta.put("email", email);
+            resultadoConsulta.put("dt_nascimento", dtNascimento);
+            resultadoConsulta.put("sexo", sexo);
+            resultadoConsulta.put("cpf", cpf);
+            resultadoConsulta.put("cod_tipo_pagamento", tipoPagamento);
+            resultadoConsulta.put("numero_cartao", numeroCartao);
+            resultadoConsulta.put("data_vencimento", dataVencimentoCartao);
+            resultadoConsulta.put("cvv_cartao", cvv);
+            resultadoConsulta.put("nome_titular", nomeTitular);
+            resultadoConsulta.put("cpf_cartao", cfpCartao);
+            resultadoConsulta.put("status_usuario", statusUsuario);
+            resultadoConsulta.put("foto_usuario", imagem);
+            rs.close();
+            p.close();
+            conexao.close();
+        }
+        return resultadoConsulta;
+    }
+
     public void cadastrarEvento(String nome, String local, String data, String descricao, int id_usuario) throws SQLException {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement(

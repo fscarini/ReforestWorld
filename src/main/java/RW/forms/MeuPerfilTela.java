@@ -5,6 +5,8 @@ import RW.controller_dao.ConexaoController;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Image;
 import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -30,6 +32,7 @@ public class MeuPerfilTela extends TabbedForm {
         estilizarSenha();
         acessarPerfil();
         carregarDados();
+        //buscarPerfilUsuario();
     }
 
     private void carregarDados() {
@@ -97,6 +100,16 @@ public class MeuPerfilTela extends TabbedForm {
             }
         }
     }
+    private void buscarPerfilUsuario(){
+        ConexaoController cadastro = new ConexaoController();
+        try {
+            cadastro.buscaPerfilUsuario(this);
+      
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            Logger.getLogger(CadastroMudasTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
 
     private void tornarAdm() {
         try {
@@ -557,6 +570,7 @@ public class MeuPerfilTela extends TabbedForm {
         tornarAdm();
     }//GEN-LAST:event_tornarAdminButtonActionPerformed
 
+    
     public FileInputStream getFis() {
         return fis;
     }
@@ -701,7 +715,18 @@ public class MeuPerfilTela extends TabbedForm {
     public void setTitularCartaoTextField(JTextField titularCartaoTextField) {
         this.titularCartaoTextField = titularCartaoTextField;
     }
-
+    public void setSexoComboBox(String sexo) {
+        sexoComboBox.setSelectedItem(sexo);
+    }
+    public void setNomeTextField(String nome) {
+      nomeTextField.setText(nome);
+    }
+    public void setEmailTextField(String email) {
+      emailTextField.setText(email);
+    }
+    public void setDataNascimentoTextField(String dtNascimento) {
+      dataNascimentoTextField.setText(dtNascimento);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FormasPagamentoPanel;
