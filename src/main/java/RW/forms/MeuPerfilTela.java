@@ -1,30 +1,42 @@
 package RW.forms;
 
 import RW.Tabbed.TabbedForm;
+import RW.controller_dao.ConexaoController;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Image;
 import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MeuPerfilTela extends TabbedForm {
 
+    private String codUsuario;
     private String codPerfil;
     private FileInputStream fis;
     private int tamanho;
     private boolean fotoCarregada = false;
 
-    public MeuPerfilTela(String codPerfil) {
+    public MeuPerfilTela(String codPerfil, String codUsuario) {
         this.codPerfil = codPerfil;
+        this.codUsuario = codUsuario;
         initComponents();
         estilizarSenha();
-        padronizacaoPerfil();
+        acessarPerfil();
+        carregarDados();
+        //buscarPerfilUsuario();
+    }
+
+    private void carregarDados() {
+        codigoLabel.setText(codUsuario);
     }
 
     private void estilizarSenha() {
@@ -49,7 +61,7 @@ public class MeuPerfilTela extends TabbedForm {
         statusForcaSenha.initPasswordField(senhaNovaPasswordField);
     }
 
-    private void padronizacaoPerfil() {
+    private void acessarPerfil() {
         if ("1".equals(codPerfil)) {
             atualizarCadastroButton.setVisible(true);
             inativarCadastroButton.setVisible(true);
@@ -88,17 +100,32 @@ public class MeuPerfilTela extends TabbedForm {
             }
         }
     }
+    private void buscarPerfilUsuario(){
+        ConexaoController cadastro = new ConexaoController();
+        try {
+            cadastro.buscaPerfilUsuario(this);
+      
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            Logger.getLogger(CadastroMudasTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
 
-//    private void atualizar() {
-//        ConexaoController cadastro = new ConexaoController();
-//        try {
-//            //cadastro.atualizaMuda(this);
-//
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
-//            Logger.getLogger(MeuPerfilTela.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    private void tornarAdm() {
+        try {
+            ConexaoController adm = new ConexaoController();
+            int retorno = adm.tornarAdm(this);
+            if (retorno > 0) {
+                JOptionPane.showMessageDialog(null, "Permissões atualizadas com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível realizar as permissões do usuário.");
+            };
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            ex.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -438,6 +465,11 @@ public class MeuPerfilTela extends TabbedForm {
         atualizarCadastroButton.setText("Atualizar Cadastro");
 
         tornarAdminButton.setText("Tornar Adm");
+        tornarAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tornarAdminButtonActionPerformed(evt);
+            }
+        });
 
         inativarCadastroButton.setText("Inativar Cadastro");
 
@@ -534,6 +566,11 @@ public class MeuPerfilTela extends TabbedForm {
         carregarFoto();
     }//GEN-LAST:event_carregarImagemButtonActionPerformed
 
+    private void tornarAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tornarAdminButtonActionPerformed
+        tornarAdm();
+    }//GEN-LAST:event_tornarAdminButtonActionPerformed
+
+    
     public FileInputStream getFis() {
         return fis;
     }
@@ -579,8 +616,8 @@ public class MeuPerfilTela extends TabbedForm {
         return cpfTextField;
     }
 
-    public void setCpfTextField(JTextField cpfTextField) {
-        this.cpfTextField = cpfTextField;
+    public void setCpfTextField(String cpf) {
+        cpfTextField.setText(cpf);
     }
 
     public JTextField getCpfTitularCartaoTextField() {
@@ -678,7 +715,18 @@ public class MeuPerfilTela extends TabbedForm {
     public void setTitularCartaoTextField(JTextField titularCartaoTextField) {
         this.titularCartaoTextField = titularCartaoTextField;
     }
-    
+    public void setSexoComboBox(String sexo) {
+        sexoComboBox.setSelectedItem(sexo);
+    }
+    public void setNomeTextField(String nome) {
+      nomeTextField.setText(nome);
+    }
+    public void setEmailTextField(String email) {
+      emailTextField.setText(email);
+    }
+    public void setDataNascimentoTextField(String dtNascimento) {
+      dataNascimentoTextField.setText(dtNascimento);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FormasPagamentoPanel;

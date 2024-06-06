@@ -6,6 +6,7 @@ import RW.forms.CadastroEventosTela;
 import RW.forms.CadastroMudasTela;
 import RW.forms.FaleConoscoTela;
 import RW.forms.GestaoUsuariosTela;
+import RW.forms.MeuPerfilTela;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.sql.PreparedStatement;
@@ -68,6 +69,58 @@ public class ConexaoController {
         return code;
 
     }
+    public Map<String, Object> buscaPerfilUsuario(MeuPerfilTela view) throws Exception {
+        ConexaoDAO cadastro = new ConexaoDAO();
+        Map<String, Object> resultadoConsulta = cadastro.buscaPerfilUsuario(view.getCodigoLabel());
+        if (resultadoConsulta != null) {
+            
+            var nome = (String) resultadoConsulta.get("nome");
+            var email = (String) resultadoConsulta.get ("email");
+            var dtNascimento = (String) resultadoConsulta.get("dt_nascimento");
+            var sexo = (String) resultadoConsulta.get("sexo");
+            var cpf = (String) resultadoConsulta.get("cpf");
+            var tipoPagamento = (String) resultadoConsulta.get("cod_tipo_pagamento");
+            var numeroCartao = (String) resultadoConsulta.get("numero_cartao");
+            var dataVencimentoCartao = (String) resultadoConsulta.get("data_vencimento");
+            var cvv = (String) resultadoConsulta.get("cvv_cartao");
+            var nomeTitular = (String) resultadoConsulta.get("nome_titular");
+            var cfpCartao = (String) resultadoConsulta.get("cpf_cartao");
+            var statusUsuario = (String) resultadoConsulta.get("status_usuario");
+            var imagemUsuarioBytes = (BufferedImage) resultadoConsulta.get("foto_usuario");
+            view.setNomeTextField(nome);
+            view.setEmailTextField(email);
+            view.setDataNascimentoTextField(dtNascimento);
+            view.setSexoComboBox(sexo);
+            view.setCpfTextField(cpf);
+            //view.setStatusComboBox(Integer.parseInt(status));
+            //view.setValorTextField(valorMuda);
+            //view.setCodigoLabel(codigo);
+
+            if (imagemUsuarioBytes != null) {
+                ImageIcon imagemIcon = new ImageIcon(imagemUsuarioBytes);
+                Icon foto = new ImageIcon(imagemIcon.getImage().getScaledInstance(
+                        view.getImagemUsuarioLabel().getWidth(),
+                        view.getImagemUsuarioLabel().getHeight(),
+                        Image.SCALE_SMOOTH));
+                // Define o ImageIcon como o ícone da JLabel
+                view.getImagemUsuarioLabel().setIcon(foto);
+            } else {
+                // Se não houver imagem, limpa o ícone da JLabel
+                view.getImagemUsuarioLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png")));
+            }
+        } else {
+            // Se a consulta não retornou nenhum resultado, limpa os campos
+            //view.setNomeCientificoTextField("");
+            //view.setNomeComercialTextField("");
+            //view.setValorTextField("");
+            //view.setEstadoComboBox(0);
+            view.getImagemUsuarioLabel().setIcon(null);
+            view.setCodigoLabel("");
+        }
+
+        // Retorna o mapa contendo os valores
+        return resultadoConsulta;
+    }
 
     public int cadastroEvento(CadastroEventosTela view) throws SQLException {
         ConexaoDAO cadastro = new ConexaoDAO();
@@ -90,14 +143,14 @@ public class ConexaoController {
 
     public int cadastroMensagem(FaleConoscoTela view) throws Exception {
         ConexaoDAO enviar = new ConexaoDAO();
-        
+
         int retorno = enviar.cadastrarMensagem(
                 view.getAssuntoComboBox(),
                 view.getMensagemTextArea(),
                 Integer.parseInt(view.getCodUsuario()));
-                return retorno; 
+        return retorno;
     }
-    
+
     public int cadastroMuda(CadastroMudasTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
 
@@ -130,6 +183,14 @@ public class ConexaoController {
                 view.getFis(),
                 view.getTamanho(),
                 1,
+                view.getCodigoLabel()
+        );
+        return retorno;
+    }
+
+    public int tornarAdm(MeuPerfilTela view) throws Exception {
+        ConexaoDAO tornarAdm = new ConexaoDAO();
+        int retorno = tornarAdm.tornarAdm(
                 view.getCodigoLabel()
         );
         return retorno;

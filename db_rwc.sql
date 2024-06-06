@@ -122,3 +122,5 @@ CREATE TABLE `users` (
   );
   SELECT * FROM users;
   DELETE FROM users WHERE cod_usuario = 118;
+UPDATE users SET cod_perfil = 2 WHERE cod_usuario = 26;
+UPDATE users SET status_usuario = 'Ativo'
