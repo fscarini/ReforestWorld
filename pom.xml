@@ -71,5 +71,10 @@
             <artifactId>timingframework</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>raven.datetime</groupId>
+            <artifactId>swing-datetime-picker</artifactId>
+            <version>1.2.0</version>
+        </dependency>   
     </dependencies>
 </project>

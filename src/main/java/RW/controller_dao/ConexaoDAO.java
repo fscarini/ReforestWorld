@@ -1,6 +1,7 @@
 package RW.controller_dao;
 
 import RW.connection.Conexao;
+import RW.forms.Evento;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -9,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
@@ -109,6 +112,26 @@ public class ConexaoDAO {
         conexao.close();
         return confirma;
     }
+    
+//    public List<Evento> consultarEvento(String nome, String inicio, String termino,
+//            int metaDoacao, int estado, String cidade) throws SQLException{
+//        List <Evento> eventos = new ArrayList<>();
+//        var conexao = new Conexao().conectar();
+//        var p = conexao.prepareStatement(
+//                "SELECT nome, inicio, termino, meta_doacao, cod_estado, cidade FROM eventos WHERE termino >= CURDATE()");
+//        var rs = p.executeQuery();
+//        while (rs.next()) {
+//                nome = rs.getString("nome");
+//                inicio = rs.getString("inicio");
+//                termino = rs.getString("termino");
+//                metaDoacao = rs.getInt("meta_doacao");
+//                estado = rs.getInt("cod_estado");
+//                cidade = rs.getString("cidade");  
+//                
+//                eventos.add(new Evento(nome, inicio, termino, metaDoacao, cod_estado, cidade, fis, tamanho));
+//            }
+//        return eventos;
+//    }
 
     public int cadastrarMuda(String nome_cientifico, String nome_comercial, double valor_muda,
             int cod_estado, int status_muda, String caracteristicas_gerais, String usos_comuns,
