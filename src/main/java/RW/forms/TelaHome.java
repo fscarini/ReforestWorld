@@ -224,7 +224,7 @@ public class TelaHome extends javax.swing.JFrame {
                                     }
                                 }
                                 if (index == 9) {
-                                    WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela());
+                                    WindowsTabbed.getInstance().addTab("Gestão de Usuários", new GestaoUsuariosTela(codPerfil));
                                 }
                                 if (index == 8 && subIndex == 1) {
                                     changeMode(true);

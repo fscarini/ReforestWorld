@@ -91,7 +91,7 @@ public class ConexaoController {
             view.setEmailTextField(email);
             view.setDataNascimentoTextField(dtNascimento);
             view.setSexoComboBox(sexo);
-            //view.setCpfTextField(cpf);
+            view.setCpfTextField(cpf);
             //view.setStatusComboBox(Integer.parseInt(status));
             //view.setValorTextField(valorMuda);
             //view.setCodigoLabel(codigo);

@@ -3,6 +3,7 @@ package RW.forms;
 import RW.cell.TableActionCellRender;
 import RW.cell.TableActionCellEditor;
 import RW.Tabbed.TabbedForm;
+import RW.Tabbed.WindowsTabbed;
 import RW.cell.TableActionEvent;
 import RW.controller_dao.ConexaoController;
 import java.awt.Component;
@@ -21,16 +22,20 @@ import javax.swing.table.TableRowSorter;
 
 public class GestaoUsuariosTela extends TabbedForm {
 
-    /**
-     * Creates new form CadastroEventosTela
-     */
-    public GestaoUsuariosTela() {
+    private String codUsuario;
+    private String codPerfil;
+
+    public GestaoUsuariosTela(String codPerfil) {
+
+        this.codPerfil = codPerfil;
         initComponents();
 
         // Configura a tabela (renderização de células, edição e eventos)
         TableActionEvent event = new TableActionEvent() {
             public void onEdit(int row) {
                 System.out.println("Edit row : " + row);
+                codUsuario = Tabela.getValueAt(row, 0).toString();
+                WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil, codUsuario));
             }
 
             public void onDelete(int row) {
@@ -45,31 +50,31 @@ public class GestaoUsuariosTela extends TabbedForm {
                 System.out.println("View row : " + row);
             }
         };
-        
-        Tabela.setModel(new javax.swing.table.DefaultTableModel(
-    new Object [][] {
-        {null, null, null, null, null},
-        {null, null, null, null, null},
-        {null, null, null, null, null},
-        {null, null, null, null, null}
-    },
-    new String [] {
-        "ID", "Nome", "Email", "CPF", "Ação"
-    }
-    ) {
-    boolean[] canEdit = new boolean [] {
-        false, false, false, false, true // Ajustado para coluna 4
-    };
 
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return canEdit [columnIndex];
-    }
-    });
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}
+                },
+                new String[]{
+                    "ID", "Nome", "Email", "CPF", "Ação"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, true // Ajustado para coluna 4
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
 
         // Define o renderizador e editor para a coluna de ação
         Tabela.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         Tabela.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
-        
+
         // Define o alinhamento para a coluna ID (alinhamento à direita)
         Tabela.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
@@ -111,7 +116,7 @@ public class GestaoUsuariosTela extends TabbedForm {
             }
         });
     }
-    
+
     private void pesquisar() {
         PesquisarjButton.doClick(); // Simula o clique no botão "Pesquisar"
     }
@@ -152,6 +157,7 @@ public class GestaoUsuariosTela extends TabbedForm {
         CPFjTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
+        Tabela.setAutoCreateRowSorter(true);
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -255,32 +261,33 @@ public class GestaoUsuariosTela extends TabbedForm {
 
     private void PesquisarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarjButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    Tabela.setRowSorter(sorter);
-    
-    List<RowFilter<Object, Object>> filters = new ArrayList<>();
-    
-    // Adiciona filtro para cada campo de texto preenchido
-    if (!IDjTextField.getText().isEmpty()) {
-        filters.add(RowFilter.regexFilter(IDjTextField.getText(), 0)); // 0 é o índice da coluna ID
-    }
-    if (!NomejTextField.getText().isEmpty()) {
-        String nomeFilter = "(?i)" + Pattern.quote(NomejTextField.getText()); // Ignora o caso
-        filters.add(RowFilter.regexFilter(nomeFilter, 1)); // 1 é o índice da coluna Nome
-    }
-    if (!EmailjTextField.getText().isEmpty()) {
-        filters.add(RowFilter.regexFilter(EmailjTextField.getText(), 2)); // 2 é o índice da coluna Email
-    }
-    if (!CPFjTextField.getText().isEmpty()) {
-        filters.add(RowFilter.regexFilter(CPFjTextField.getText(), 3)); // 3 é o índice da coluna CPF
-    }
-    
-    // Combina os filtros com um operador AND
-    RowFilter<Object, Object> combinedFilter = RowFilter.andFilter(filters);
-    
-    // Aplica o filtro à tabela
-    sorter.setRowFilter(combinedFilter);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        Tabela.setRowSorter(sorter);
+
+        List<RowFilter<Object, Object>> filters = new ArrayList<>();
+
+        // Adiciona filtro para cada campo de texto preenchido
+        if (!IDjTextField.getText().isEmpty()) {
+            filters.add(RowFilter.regexFilter(IDjTextField.getText(), 0)); // 0 é o índice da coluna ID
+        }
+        if (!NomejTextField.getText().isEmpty()) {
+            String nomeFilter = "(?i)" + Pattern.quote(NomejTextField.getText()); // Ignora o caso
+            filters.add(RowFilter.regexFilter(nomeFilter, 1)); // 1 é o índice da coluna Nome
+        }
+        if (!EmailjTextField.getText().isEmpty()) {
+            filters.add(RowFilter.regexFilter(EmailjTextField.getText(), 2)); // 2 é o índice da coluna Email
+        }
+        if (!CPFjTextField.getText().isEmpty()) {
+            filters.add(RowFilter.regexFilter(CPFjTextField.getText(), 3)); // 3 é o índice da coluna CPF
+        }
+
+        // Combina os filtros com um operador AND
+        RowFilter<Object, Object> combinedFilter = RowFilter.andFilter(filters);
+
+        // Aplica o filtro à tabela
+        sorter.setRowFilter(combinedFilter);
     }//GEN-LAST:event_PesquisarjButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CPFjTextField;

@@ -616,8 +616,8 @@ public class MeuPerfilTela extends TabbedForm {
         return cpfTextField;
     }
 
-    public void setCpfTextField(JTextField cpfTextField) {
-        this.cpfTextField = cpfTextField;
+    public void setCpfTextField(String cpf) {
+        cpfTextField.setText(cpf);
     }
 
     public JTextField getCpfTitularCartaoTextField() {
