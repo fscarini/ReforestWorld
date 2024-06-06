@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -24,15 +25,17 @@ public class MeuPerfilTela extends TabbedForm {
     private FileInputStream fis;
     private int tamanho;
     private boolean fotoCarregada = false;
+    private String codOrigem;
 
-    public MeuPerfilTela(String codPerfil, String codUsuario) {
+    public MeuPerfilTela(String codPerfil, String codUsuario, String codOrigem) {
         this.codPerfil = codPerfil;
         this.codUsuario = codUsuario;
+        this.codOrigem = codOrigem;
         initComponents();
         estilizarSenha();
         acessarPerfil();
         carregarDados();
-        //buscarPerfilUsuario();
+        buscarPerfilUsuario();
     }
 
     private void carregarDados() {
@@ -79,6 +82,11 @@ public class MeuPerfilTela extends TabbedForm {
             nomeTextField.setEditable(false);
             dataNascimentoTextField.setEditable(false);
         }
+        if ("1".equals(codOrigem)) {
+            SenhaPanel.setVisible(true);
+        }else{
+            SenhaPanel.setVisible(false);
+        }
     }
 
     private void carregarFoto() {
@@ -104,6 +112,22 @@ public class MeuPerfilTela extends TabbedForm {
         ConexaoController cadastro = new ConexaoController();
         try {
             cadastro.buscaPerfilUsuario(this);
+      
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
+            Logger.getLogger(CadastroMudasTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
+    
+        private void atualizarPerfilUsuario(){
+        ConexaoController atualiza = new ConexaoController();
+        try {
+            int retorno = atualiza.atualizaCadastroUsuario(this);
+            if (retorno > 0) {
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível realizar atualizar os dados do usuário.");
+            };
       
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu algum erro. Por favor, tente novamente em alguns instantes.\n Caso o erro persista acione o suporte.");
@@ -463,6 +487,11 @@ public class MeuPerfilTela extends TabbedForm {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         atualizarCadastroButton.setText("Atualizar Cadastro");
+        atualizarCadastroButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarCadastroButtonActionPerformed(evt);
+            }
+        });
 
         tornarAdminButton.setText("Tornar Adm");
         tornarAdminButton.addActionListener(new java.awt.event.ActionListener() {
@@ -570,6 +599,10 @@ public class MeuPerfilTela extends TabbedForm {
         tornarAdm();
     }//GEN-LAST:event_tornarAdminButtonActionPerformed
 
+    private void atualizarCadastroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarCadastroButtonActionPerformed
+        atualizarPerfilUsuario();
+    }//GEN-LAST:event_atualizarCadastroButtonActionPerformed
+
     
     public FileInputStream getFis() {
         return fis;
@@ -591,7 +624,7 @@ public class MeuPerfilTela extends TabbedForm {
         return imagemUsuarioLabel;
     }
 
-    public void setImagemUsuarioLabel(ImageIcon icon) {
+    public void setImagemUsuarioLabel(Icon icon) {
         imagemUsuarioLabel.setIcon(icon);
     }
 
@@ -608,8 +641,8 @@ public class MeuPerfilTela extends TabbedForm {
         return validadeCartaoTextField;
     }
 
-    public void setValidadeCartaoTextField(JTextField validadeCartaoTextField) {
-        this.validadeCartaoTextField = validadeCartaoTextField;
+    public void setValidadeCartaoTextField(String dataVencimentoCartao) {
+        validadeCartaoTextField.setText(dataVencimentoCartao);
     }
 
     public JTextField getCpfTextField() {
@@ -624,16 +657,16 @@ public class MeuPerfilTela extends TabbedForm {
         return cpfTitularCartaoTextField;
     }
 
-    public void setCpfTitularCartaoTextField(JTextField cpfTitularCartaoTextField) {
-        this.cpfTitularCartaoTextField = cpfTitularCartaoTextField;
+    public void setCpfTitularCartaoTextField(String cfpCartao) {
+        cpfTitularCartaoTextField.setText(cfpCartao);
     }
 
     public JTextField getCvvCartaoTextField() {
         return cvvCartaoTextField;
     }
 
-    public void setCvvCartaoTextField(JTextField cvvCartaoTextField) {
-        this.cvvCartaoTextField = cvvCartaoTextField;
+    public void setCvvCartaoTextField(String cvv) {
+        cvvCartaoTextField.setText(cvv);
     }
 
     public JTextField getDataNascimentoTextField() {
@@ -664,8 +697,8 @@ public class MeuPerfilTela extends TabbedForm {
         return numeroCartaoTextField;
     }
 
-    public void setNumeroCartaoTextField(JTextField numeroCartaoTextField) {
-        this.numeroCartaoTextField = numeroCartaoTextField;
+    public void setNumeroCartaoTextField(String numeroCartao) {
+        numeroCartaoTextField.setText(numeroCartao);
     }
 
     public JPasswordField getSenhaAntigaPasswordField() {
@@ -696,24 +729,24 @@ public class MeuPerfilTela extends TabbedForm {
         return statusLabel;
     }
 
-    public void setStatusLabel(JLabel statusLabel) {
-        this.statusLabel = statusLabel;
+    public void setStatusLabel(String statusUsuario) {
+        statusLabel.setText(statusUsuario);
     }
 
     public JComboBox<String> getTipoCartaoComboBox() {
         return tipoCartaoComboBox;
     }
 
-    public void setTipoCartaoComboBox(JComboBox<String> tipoCartaoComboBox) {
-        this.tipoCartaoComboBox = tipoCartaoComboBox;
+    public void setTipoCartaoComboBox(String tipoPagamento) {
+        tipoCartaoComboBox.setSelectedItem(tipoPagamento);
     }
 
     public JTextField getTitularCartaoTextField() {
         return titularCartaoTextField;
     }
 
-    public void setTitularCartaoTextField(JTextField titularCartaoTextField) {
-        this.titularCartaoTextField = titularCartaoTextField;
+    public void setTitularCartaoTextField(String nomeTitular) {
+        titularCartaoTextField.setText(nomeTitular);
     }
     public void setSexoComboBox(String sexo) {
         sexoComboBox.setSelectedItem(sexo);

@@ -41,6 +41,7 @@ public class TelaHome extends javax.swing.JFrame {
     private String codUsuario;
     private String email;
     private String codPerfil;
+    private String codOrigem;
 
     public TelaHome(String nome, String email, String codPerfil, String codUsuario) {
         this.nome = nome;
@@ -73,7 +74,7 @@ public class TelaHome extends javax.swing.JFrame {
             public SimpleHeaderData getSimpleHeaderData() {
                 return new SimpleHeaderData()
                         //adicionar a foto para mudar de acordo o o usurio
-                        .setIcon(new AvatarIcon(getClass().getResource("/imagens/Reforest World Logo.png"), 60, 60, 999))
+                        .setIcon(new AvatarIcon(getClass().getResource("/Imagens/camera (1).png"), 60, 60, 999))
                         //adicionar o nome da pessoa conforme ela logar, puxando do banco de dados
                         .setTitle(nome)
                         //adicionar o e-mail da pessoa que entrar
@@ -141,7 +142,8 @@ public class TelaHome extends javax.swing.JFrame {
                             public void selected(MenuAction action, int index, int subIndex) {
 
                                 if (index == 0) {
-                                    WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil, codUsuario));
+                                    codOrigem ="1";
+                                    WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil, codUsuario, "1"));
                                 }
                                 if (index == 1) {
                                     WindowsTabbed.getInstance().addTab("Chat", new ChatTela());
