@@ -54,11 +54,11 @@ public class ConexaoDAO {
         Map<String, Object> resultadoConsulta = new HashMap<>();
         if (rs.next()) {
             String nome = rs.getString("nome");
-            String email = rs.getString ("email");
+            String email = rs.getString("email");
             String dtNascimento = rs.getString("dt_nascimento");
             String sexo = rs.getString("sexo");
             String cpf = rs.getString("cpf");
-            String tipoPagamento = rs.getString("cod_tipo_pagamento");
+            String tipoPagamento = rs.getString("tipo_pagamento");
             String numeroCartao = rs.getString("numero_cartao");
             String dataVencimentoCartao = rs.getString("data_vencimento");
             String cvv = rs.getString("cvv_cartao");
@@ -88,13 +88,53 @@ public class ConexaoDAO {
         }
         return resultadoConsulta;
     }
-    
+
+    public int atualizaCadastroUsuario(String nome, String email, String dtNascimento,
+            String sexo, String cpf, String tipoPagamento, int numeroCartao, String dataVencimento,
+            int cvv, String nomeTitular, String cpfCartao, FileInputStream fis, int tamanho, int codUsuario) throws Exception {
+
+        var conexao = new Conexao().conectar();
+        var p = conexao.prepareStatement(
+                "UPDATE users SET nome = ?,"
+                        + "email= ?,"
+                        + "dt_nascimento= ?,"
+                        + "sexo= ?,"
+                        + "cpf= ?,"
+                        + "tipo_pagamento= ?,"
+                        + "numero_cartao= ?,"
+                        + "data_vencimento= ?,"
+                        + "cvv_cartao= ?,"
+                        + "nome_titular= ?,"
+                        + "cpf_cartao= ?,"
+                        + "foto_usuario= ?"
+                        + "WHERE cod_usuario = ?");
+
+        p.setString(1, nome);
+        p.setString(2, email);
+        p.setString(3, dtNascimento);
+        p.setString(4, sexo);
+        p.setString(5, cpf);
+        p.setString(6, tipoPagamento);
+        p.setInt(7, numeroCartao);
+        p.setString(8, dataVencimento);
+        p.setInt(9, cvv);
+        p.setString(10, nomeTitular);
+        p.setString(11, cpfCartao);
+        p.setBlob(12, fis, tamanho);
+        p.setInt(13, codUsuario);
+
+        int confirma = p.executeUpdate();
+        p.close();
+        conexao.close();
+        return confirma;
+    }
+
     public int cadastrarEvento(String nome, String inicio, String termino, String descricao,
             int meta_doacao, int cod_estado, String cidade, String codUsuario, FileInputStream fis, int tamanho) throws SQLException {
         var conexao = new Conexao().conectar();
         var p = conexao.prepareStatement(
                 "INSERT INTO eventos(nome, inicio, termino, descricao, meta_doacao, cod_estado, cidade, id_usuario, foto) "
-                        + "values (?,?,?,?,?,?,?,?,?);");
+                + "values (?,?,?,?,?,?,?,?,?);");
         p.setString(1, nome);
         p.setString(2, inicio);
         p.setString(3, termino);

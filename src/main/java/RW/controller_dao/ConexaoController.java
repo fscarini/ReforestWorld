@@ -69,13 +69,35 @@ public class ConexaoController {
         return code;
 
     }
+
+    public int atualizaCadastroUsuario(MeuPerfilTela view) throws Exception {
+        ConexaoDAO cadastro = new ConexaoDAO();
+
+        int retorno = cadastro.atualizaCadastroUsuario(
+                view.getNomeTextField().getText(),
+                view.getEmailTextField().getText(),
+                view.getDataNascimentoTextField().getText(),
+                (String) view.getSexoComboBox().getSelectedItem(),
+                view.getCpfTextField().getText(),
+                (String) view.getTipoCartaoComboBox().getSelectedItem(),
+                Integer.parseInt(view.getNumeroCartaoTextField().getText()),
+                view.getValidadeCartaoTextField().getText(),
+                Integer.parseInt(view.getCvvCartaoTextField().getText()),
+                view.getTitularCartaoTextField().getText(),
+                view.getCpfTitularCartaoTextField().getText(),
+                view.getFis(),
+                view.getTamanho(),
+                view.getCodigoLabel()
+        );
+        return retorno;
+    }
+
     public Map<String, Object> buscaPerfilUsuario(MeuPerfilTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
         Map<String, Object> resultadoConsulta = cadastro.buscaPerfilUsuario(view.getCodigoLabel());
         if (resultadoConsulta != null) {
-            
             var nome = (String) resultadoConsulta.get("nome");
-            var email = (String) resultadoConsulta.get ("email");
+            var email = (String) resultadoConsulta.get("email");
             var dtNascimento = (String) resultadoConsulta.get("dt_nascimento");
             var sexo = (String) resultadoConsulta.get("sexo");
             var cpf = (String) resultadoConsulta.get("cpf");
@@ -92,10 +114,13 @@ public class ConexaoController {
             view.setDataNascimentoTextField(dtNascimento);
             view.setSexoComboBox(sexo);
             view.setCpfTextField(cpf);
-            //view.setStatusComboBox(Integer.parseInt(status));
-            //view.setValorTextField(valorMuda);
-            //view.setCodigoLabel(codigo);
-
+            view.setTipoCartaoComboBox(tipoPagamento);
+            view.setValidadeCartaoTextField(dataVencimentoCartao);
+            view.setNumeroCartaoTextField(numeroCartao);
+            view.setCvvCartaoTextField(cvv);
+            view.setTitularCartaoTextField(nomeTitular);
+            view.setCpfTitularCartaoTextField(cfpCartao);
+            view.setStatusLabel(statusUsuario);
             if (imagemUsuarioBytes != null) {
                 ImageIcon imagemIcon = new ImageIcon(imagemUsuarioBytes);
                 Icon foto = new ImageIcon(imagemIcon.getImage().getScaledInstance(
@@ -103,18 +128,26 @@ public class ConexaoController {
                         view.getImagemUsuarioLabel().getHeight(),
                         Image.SCALE_SMOOTH));
                 // Define o ImageIcon como o ícone da JLabel
-                view.getImagemUsuarioLabel().setIcon(foto);
+                view.setImagemUsuarioLabel(foto);
             } else {
                 // Se não houver imagem, limpa o ícone da JLabel
-                view.getImagemUsuarioLabel().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png")));
+                view.setImagemUsuarioLabel(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png")));
             }
         } else {
             // Se a consulta não retornou nenhum resultado, limpa os campos
-            //view.setNomeCientificoTextField("");
-            //view.setNomeComercialTextField("");
-            //view.setValorTextField("");
-            //view.setEstadoComboBox(0);
-            view.getImagemUsuarioLabel().setIcon(null);
+            view.setNomeTextField("");
+            view.setEmailTextField("");
+            view.setDataNascimentoTextField("");
+            view.setSexoComboBox("");
+            view.setCpfTextField("");
+            view.setTipoCartaoComboBox("");
+            view.setValidadeCartaoTextField("");
+            view.setNumeroCartaoTextField("");
+            view.setCvvCartaoTextField("");
+            view.setTitularCartaoTextField("");
+            view.setCpfTitularCartaoTextField("");
+            view.setStatusLabel("");
+            view.setImagemUsuarioLabel(new javax.swing.ImageIcon(getClass().getResource("/Imagens/camera (1).png")));
             view.setCodigoLabel("");
         }
 
@@ -136,9 +169,9 @@ public class ConexaoController {
                 view.getFis(),
                 view.getTamanho()
         );
-        
+
         return retorno;
-       
+
     }
 
     public int cadastroMensagem(FaleConoscoTela view) throws Exception {
