@@ -4,6 +4,7 @@ import RW.connection.Conexao;
 import RW.forms.CadastroTela;
 import RW.forms.CadastroEventosTela;
 import RW.forms.CadastroMudasTela;
+import RW.forms.ConsultaEventosTela;
 import RW.forms.FaleConoscoTela;
 import RW.forms.GestaoUsuariosTela;
 import RW.forms.MeuPerfilTela;
@@ -53,6 +54,40 @@ public class ConexaoController {
             JOptionPane.showMessageDialog(tela, "Erro ao carregar dados da tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+       public void buscaEventos(ConsultaEventosTela tela) {
+        try {
+            Conexao conexao = new Conexao(); // Crie uma conexão com o banco de dados
+            PreparedStatement ps = conexao.conectar().prepareStatement("SELECT * FROM eventos"); // Consulta SQL para selecionar todos os usuários
+            ResultSet rs = ps.executeQuery(); // Execute a consulta
+
+            DefaultTableModel model = (DefaultTableModel) tela.getTabela().getModel(); // Obtenha o modelo da tabela
+
+            // Limpe os dados existentes na tabela
+            model.setRowCount(0);
+
+            // Preencha a tabela com os dados do ResultSet
+            while (rs.next()) {
+                Object[] rowData = {
+                    rs.getString("nome"),
+                    rs.getString("inicio"),
+                    rs.getString("termino"),
+                    rs.getString("cidade"),
+                    rs.getInt("meta_doacao"),
+                    "Ação" // Ação será preenchida pelos renderizadores e editores de célula
+                };
+                model.addRow(rowData); // Adicione a linha à tabela
+            }
+
+            // Feche os recursos
+            rs.close();
+            ps.close();
+            conexao.conectar().close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(tela, "Erro ao carregar dados da tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     public String cadastroUsuario(CadastroTela view) throws SQLException {
 
@@ -69,6 +104,7 @@ public class ConexaoController {
         return code;
 
     }
+
 
     public int atualizaCadastroUsuario(MeuPerfilTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
@@ -91,6 +127,7 @@ public class ConexaoController {
         );
         return retorno;
     }
+
 
     public Map<String, Object> buscaPerfilUsuario(MeuPerfilTela view) throws Exception {
         ConexaoDAO cadastro = new ConexaoDAO();
@@ -159,8 +196,8 @@ public class ConexaoController {
         ConexaoDAO cadastro = new ConexaoDAO();
         int retorno = cadastro.cadastrarEvento(
                 view.getNomeEventoTextField().getText(),
-                view.getInicioTextField().getText(),
-                view.getTerminoTextField().getText(),
+                view.getDataInicio(),
+                view.getDataTermino(),
                 view.getDescricaoTextArea().getText(),
                 view.getDoacoesSlider().getValue(),
                 view.getEstadoComboBox(),
@@ -173,6 +210,39 @@ public class ConexaoController {
         return retorno;
 
     }
+
+//    public void consultaEventos(ConsultaEventosTela view) throws SQLException {
+//        try {
+//            ConexaoDAO conexao = new ConexaoDAO();
+//            var consultar = conexao.consultarEvento();
+//
+//            DefaultTableModel model = (DefaultTableModel) view.getTabela().getModel();
+//
+//            // Limpe os dados existentes na tabela
+//            model.setRowCount(0);
+//
+//            // Preencha a tabela com os dados do ResultSet
+//            while (rs.next()) {
+//                Object[] rowData = {
+//                    rs.getString("Cod_usuario"),
+//                    rs.getString("Nome"),
+//                    rs.getString("Email"),
+//                    rs.getString("CPF"),
+//                    "Ação" // Ação será preenchida pelos renderizadores e editores de célula
+//                };
+//                model.addRow(rowData); // Adicione a linha à tabela
+//            }
+//
+//            // Feche os recursos
+//            rs.close();
+//            ps.close();
+//            conexao.conectar().close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(tela, "Erro ao carregar dados da tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+//        }
+//        )
+//       return retorno;
+//    }
 
     public int cadastroMensagem(FaleConoscoTela view) throws Exception {
         ConexaoDAO enviar = new ConexaoDAO();

@@ -165,7 +165,7 @@ public class TelaHome extends javax.swing.JFrame {
                                 }
 
                                 if (index == 4 && subIndex == 1) {
-                                    WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());
+                                    WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela(codPerfil));
                                 }
                                 if (index == 5) {
                                     if ("2".equals(codPerfil)) {
@@ -176,7 +176,7 @@ public class TelaHome extends javax.swing.JFrame {
                                     WindowsTabbed.getInstance().addTab("Criar Evento", new CadastroEventosTela(codUsuario));
                                 }
                                 if (index == 5 && subIndex == 2) {
-                                    WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela());
+                                    WindowsTabbed.getInstance().addTab("Consultar Eventos", new ConsultaEventosTela(codPerfil));
                                 }
                                 if (index == 6) {
                                     if ("1".equals(codPerfil)) {
