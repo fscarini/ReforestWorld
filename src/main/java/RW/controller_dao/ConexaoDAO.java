@@ -69,9 +69,11 @@ public class ConexaoDAO {
             String cfpCartao = rs.getString("cpf_cartao");
             String statusUsuario = rs.getString("status_usuario");
             Blob blob = (Blob) rs.getBlob("foto_usuario");
-            byte[] img = blob.getBytes(1, (int) blob.length());
             BufferedImage imagem = null;
+            if (blob != null) {
+            byte[] img = blob.getBytes(1, (int) blob.length());
             imagem = ImageIO.read(new ByteArrayInputStream(img));
+            }
             resultadoConsulta.put("nome", nome);
             resultadoConsulta.put("email", email);
             resultadoConsulta.put("dt_nascimento", dtNascimento);
