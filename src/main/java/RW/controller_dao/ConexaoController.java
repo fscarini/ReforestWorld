@@ -360,7 +360,7 @@ public class ConexaoController {
     private boolean checkDuplicateCode(String code) throws SQLException {
         boolean duplicate = false;
         var conexao = new Conexao().conectar();
-        try (PreparedStatement p = conexao.prepareStatement("SELECT id FROM users WHERE cod_verificacao=? limit 1",
+        try (PreparedStatement p = conexao.prepareStatement("SELECT cod_usuario FROM users WHERE cod_verificacao=? limit 1",
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             p.setString(1, code);
             try (ResultSet r = p.executeQuery()) {

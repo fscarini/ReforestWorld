@@ -74,7 +74,7 @@
         <dependency>
             <groupId>raven.datetime</groupId>
             <artifactId>swing-datetime-picker</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.3</version>
         </dependency>   
     </dependencies>
 </project>

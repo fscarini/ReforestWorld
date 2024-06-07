@@ -33,7 +33,7 @@ public class ConsultaEventosTela extends TabbedForm {
             public void onEdit(int row) {
                 System.out.println("Edit row : " + row);
                 codUsuario = Tabela.getValueAt(row, 0).toString();
-                WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil, codUsuario));
+                //WindowsTabbed.getInstance().addTab("Meu Perfil", new MeuPerfilTela(codPerfil, codUsuario));
             }
 
             public void onDelete(int row) {
